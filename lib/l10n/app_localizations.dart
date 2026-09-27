@@ -223,6 +223,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'pieces'**
   String get piecesCount;
+
+  /// No description provided for @orderNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Order #'**
+  String get orderNumber;
+
+  /// No description provided for @orderReceived.
+  ///
+  /// In en, this message translates to:
+  /// **'Received'**
+  String get orderReceived;
+
+  /// No description provided for @orderPreparing.
+  ///
+  /// In en, this message translates to:
+  /// **'Packaging'**
+  String get orderPreparing;
+
+  /// No description provided for @orderShipping.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipped'**
+  String get orderShipping;
+
+  /// No description provided for @orderDelivered.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivered'**
+  String get orderDelivered;
+
+  /// No description provided for @items.
+  ///
+  /// In en, this message translates to:
+  /// **'items'**
+  String get items;
+
+  /// No description provided for @viewDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'View Details'**
+  String get viewDetails;
 }
 
 class _AppLocalizationsDelegate

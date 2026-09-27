@@ -20,5 +20,12 @@
   "twoDozens": "2 Dozens (24)",
   "unitWholesalePrice": "Piece wholesale",
   "totalPrice": "Total Price",
-  "piecesCount": "pieces"
+  "piecesCount": "pieces",
+  "orderNumber": "Order #",
+  "orderReceived": "Received",
+  "orderPreparing": "Packaging",
+  "orderShipping": "Shipped",
+  "orderDelivered": "Delivered",
+  "items": "items",
+  "viewDetails": "View Details"
 }

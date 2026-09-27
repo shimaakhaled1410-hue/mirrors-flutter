@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mirrors_app/l10n/app_localizations.dart';
 import '../../data/models/mirror_ui_model.dart';
-import '../catalog/widgets/category_toggle_filter.dart';
-import '../catalog/widgets/wholesale_product_card.dart';
+import '../widgets/catalog/category_toggle_filter.dart';
+import '../widgets/catalog/wholesale_product_card.dart';
 
 class WholesaleView extends StatefulWidget {
   const WholesaleView({super.key});

@@ -70,4 +70,25 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get piecesCount => 'قطع';
+
+  @override
+  String get orderNumber => 'طلب رقم #';
+
+  @override
+  String get orderReceived => 'تم الاستلام';
+
+  @override
+  String get orderPreparing => 'تجهيز وتغليف';
+
+  @override
+  String get orderShipping => 'مع الشحن';
+
+  @override
+  String get orderDelivered => 'تم التوصيل';
+
+  @override
+  String get items => 'منتجات';
+
+  @override
+  String get viewDetails => 'تفاصيل الطلب';
 }

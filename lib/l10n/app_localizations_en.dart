@@ -70,4 +70,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get piecesCount => 'pieces';
+
+  @override
+  String get orderNumber => 'Order #';
+
+  @override
+  String get orderReceived => 'Received';
+
+  @override
+  String get orderPreparing => 'Packaging';
+
+  @override
+  String get orderShipping => 'Shipped';
+
+  @override
+  String get orderDelivered => 'Delivered';
+
+  @override
+  String get items => 'items';
+
+  @override
+  String get viewDetails => 'View Details';
 }

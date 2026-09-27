@@ -20,5 +20,12 @@
   "twoDozens": "دستتين (24)",
   "unitWholesalePrice": "سعر القطعة جملة",
   "totalPrice": "الإجمالي",
-  "piecesCount": "قطع"
+  "piecesCount": "قطع",
+  "orderNumber": "طلب رقم #",
+  "orderReceived": "تم الاستلام",
+  "orderPreparing": "تجهيز وتغليف",
+  "orderShipping": "مع الشحن",
+  "orderDelivered": "تم التوصيل",
+  "items": "منتجات",
+  "viewDetails": "تفاصيل الطلب"
 }

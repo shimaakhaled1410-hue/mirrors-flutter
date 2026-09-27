@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mirrors_app/l10n/app_localizations.dart';
-import 'package:mirrors_app/presentation/catalog/widgets/category_toggle_filter.dart';
-import 'package:mirrors_app/presentation/catalog/widgets/mirror_product_card.dart';
+import 'package:mirrors_app/presentation/widgets/catalog/category_toggle_filter.dart';
+import 'package:mirrors_app/presentation/widgets/catalog/mirror_product_card.dart';
 import '../../data/models/mirror_ui_model.dart';
 
 class RetailView extends StatefulWidget {

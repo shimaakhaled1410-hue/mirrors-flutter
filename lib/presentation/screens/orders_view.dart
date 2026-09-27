@@ -1,17 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:mirrors_app/l10n/app_localizations.dart';
-import '../../../../core/utils/app_styles.dart';
+import 'package:mirrors_app/presentation/widgets/orders/order_card.dart';
+import '../../data/models/order_ui_model.dart';
 
 class OrdersView extends StatelessWidget {
   const OrdersView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        AppLocalizations.of(context)!.ordersTab,
-        style: AppStyles.bold18(context),
+    return ListView.builder(
+      padding: const EdgeInsets.only(
+        left: 16,
+        right: 16,
+        top: 14,
+        bottom: 100,
       ),
+      itemCount: kDummyOrders.length,
+      itemBuilder: (context, index) {
+        final order = kDummyOrders[index];
+        return OrderCard(
+          order: order,
+          onTap: () {
+            // TODO: Navigate to Order Details View
+          },
+        );
+      },
     );
   }
 }
