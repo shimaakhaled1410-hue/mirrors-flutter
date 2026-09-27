@@ -27,5 +27,15 @@
   "orderShipping": "مع الشحن",
   "orderDelivered": "تم التوصيل",
   "items": "منتجات",
-  "viewDetails": "تفاصيل الطلب"
+  "viewDetails": "تفاصيل الطلب",
+  "userAccount": "بيانات الحساب",
+  "storeOwnerOrCustomer": "عميل قطاعي / صاحب محل",
+  "safetyAndGuide": "دليل التركيب وإرشادات الزجاج",
+  "safetyTip1": "التعامل بحذر. افتح التغليف على سطح مستوٍ ومبطن.",
+  "safetyTip2": "نظّف الجدار جيداً بالكحول وجففه قبل تثبيت شريط اللصق.",
+  "safetyTip3": "استخدم خطافات حائط متينة ومناسبة لتعليق مرايات الخيط.",
+  "contactSupport": "تواصل مع المتجر عبر الواتساب",
+  "appSettings": "الإعدادات",
+  "darkMode": "الوضع الداكن",
+  "changeLanguage": "اللغة"
 }

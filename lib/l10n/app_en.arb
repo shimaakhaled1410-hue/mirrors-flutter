@@ -27,5 +27,15 @@
   "orderShipping": "Shipped",
   "orderDelivered": "Delivered",
   "items": "items",
-  "viewDetails": "View Details"
+  "viewDetails": "View Details",
+  "userAccount": "Account Info",
+  "storeOwnerOrCustomer": "Customer / Store Owner",
+  "safetyAndGuide": "Glass Handling & Installation Guide",
+  "safetyTip1": "Handle with care. Unbox on a soft flat surface.",
+  "safetyTip2": "Clean wall thoroughly with alcohol before sticking adhesive mirrors.",
+  "safetyTip3": "Use sturdy wall anchors for hanging rope-framed mirrors.",
+  "contactSupport": "Chat with Store via WhatsApp",
+  "appSettings": "Settings",
+  "darkMode": "Dark Mode",
+  "changeLanguage": "Language"
 }

@@ -265,6 +265,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'View Details'**
   String get viewDetails;
+
+  /// No description provided for @userAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Account Info'**
+  String get userAccount;
+
+  /// No description provided for @storeOwnerOrCustomer.
+  ///
+  /// In en, this message translates to:
+  /// **'Customer / Store Owner'**
+  String get storeOwnerOrCustomer;
+
+  /// No description provided for @safetyAndGuide.
+  ///
+  /// In en, this message translates to:
+  /// **'Glass Handling & Installation Guide'**
+  String get safetyAndGuide;
+
+  /// No description provided for @safetyTip1.
+  ///
+  /// In en, this message translates to:
+  /// **'Handle with care. Unbox on a soft flat surface.'**
+  String get safetyTip1;
+
+  /// No description provided for @safetyTip2.
+  ///
+  /// In en, this message translates to:
+  /// **'Clean wall thoroughly with alcohol before sticking adhesive mirrors.'**
+  String get safetyTip2;
+
+  /// No description provided for @safetyTip3.
+  ///
+  /// In en, this message translates to:
+  /// **'Use sturdy wall anchors for hanging rope-framed mirrors.'**
+  String get safetyTip3;
+
+  /// No description provided for @contactSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Chat with Store via WhatsApp'**
+  String get contactSupport;
+
+  /// No description provided for @appSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get appSettings;
+
+  /// No description provided for @darkMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark Mode'**
+  String get darkMode;
+
+  /// No description provided for @changeLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get changeLanguage;
 }
 
 class _AppLocalizationsDelegate

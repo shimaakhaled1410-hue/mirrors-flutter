@@ -91,4 +91,36 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get viewDetails => 'View Details';
+
+  @override
+  String get userAccount => 'Account Info';
+
+  @override
+  String get storeOwnerOrCustomer => 'Customer / Store Owner';
+
+  @override
+  String get safetyAndGuide => 'Glass Handling & Installation Guide';
+
+  @override
+  String get safetyTip1 => 'Handle with care. Unbox on a soft flat surface.';
+
+  @override
+  String get safetyTip2 =>
+      'Clean wall thoroughly with alcohol before sticking adhesive mirrors.';
+
+  @override
+  String get safetyTip3 =>
+      'Use sturdy wall anchors for hanging rope-framed mirrors.';
+
+  @override
+  String get contactSupport => 'Chat with Store via WhatsApp';
+
+  @override
+  String get appSettings => 'Settings';
+
+  @override
+  String get darkMode => 'Dark Mode';
+
+  @override
+  String get changeLanguage => 'Language';
 }

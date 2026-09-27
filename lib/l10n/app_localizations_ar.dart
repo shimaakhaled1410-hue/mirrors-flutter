@@ -91,4 +91,36 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get viewDetails => 'تفاصيل الطلب';
+
+  @override
+  String get userAccount => 'بيانات الحساب';
+
+  @override
+  String get storeOwnerOrCustomer => 'عميل قطاعي / صاحب محل';
+
+  @override
+  String get safetyAndGuide => 'دليل التركيب وإرشادات الزجاج';
+
+  @override
+  String get safetyTip1 => 'التعامل بحذر. افتح التغليف على سطح مستوٍ ومبطن.';
+
+  @override
+  String get safetyTip2 =>
+      'نظّف الجدار جيداً بالكحول وجففه قبل تثبيت شريط اللصق.';
+
+  @override
+  String get safetyTip3 =>
+      'استخدم خطافات حائط متينة ومناسبة لتعليق مرايات الخيط.';
+
+  @override
+  String get contactSupport => 'تواصل مع المتجر عبر الواتساب';
+
+  @override
+  String get appSettings => 'الإعدادات';
+
+  @override
+  String get darkMode => 'الوضع الداكن';
+
+  @override
+  String get changeLanguage => 'اللغة';
 }
