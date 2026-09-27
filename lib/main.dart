@@ -1,19 +1,38 @@
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:mirrors_app/presentation/home_view.dart';
+import 'core/theme/app_theme.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    DevicePreview(
+      enabled: !kReleaseMode, // مفعل في الـ Debug فقط
+      builder: (context) => const MirrorsApp(),
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MirrorsApp extends StatelessWidget {
+  const MirrorsApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Mirrors App',
       debugShowCheckedModeBanner: false,
-      title: 'Mirros',
-      home: const HomeView(),
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: ThemeMode.system,
+      home: const Scaffold(
+        body: Center(
+          child: Text(
+            'Welcome to Mirrors App!',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+        ),
+      ),
     );
   }
 }
