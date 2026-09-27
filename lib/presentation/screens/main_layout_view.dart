@@ -30,6 +30,7 @@ class _MainLayoutViewState extends State<MainLayoutView> {
     return Scaffold(
       extendBody: true, // Allows content to show gracefully behind the floating bar
       appBar: AppBar(
+        scrolledUnderElevation: 0,
         title: Text(l10n.appTitle),
         actions: [
           IconButton(

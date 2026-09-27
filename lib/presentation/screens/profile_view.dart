@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mirrors_app/presentation/widgets/profile_and_support.dart/glass_safety_guide_widget.dart';
-import 'package:mirrors_app/presentation/widgets/profile_and_support.dart/support_and_settings_widget.dart';
-import 'package:mirrors_app/presentation/widgets/profile_and_support.dart/user_profile_card.dart';
+import 'package:mirrors_app/presentation/widgets/profile_and_support/glass_safety_guide_widget.dart';
+import 'package:mirrors_app/presentation/widgets/profile_and_support/support_and_settings_widget.dart';
+import 'package:mirrors_app/presentation/widgets/profile_and_support/user_profile_card.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
