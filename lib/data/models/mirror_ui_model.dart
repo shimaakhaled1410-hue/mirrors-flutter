@@ -36,3 +36,14 @@ const List<MirrorUiModel> kDummyMirrors = [
   MirrorUiModel(id: 'a5', dimensions: '15 × 15', category: MirrorCategory.adhesive, retailPrice: 25, wholesalePrice: 15),
   MirrorUiModel(id: 'a6', dimensions: '12 × 12', category: MirrorCategory.adhesive, retailPrice: 18, wholesalePrice: 11),
 ];
+
+enum WholesaleTier {
+  quarterDozen(3),
+  halfDozen(6),
+  oneDozen(12),
+  oneAndHalfDozen(18),
+  twoDozens(24);
+
+  final int quantity;
+  const WholesaleTier(this.quantity);
+}

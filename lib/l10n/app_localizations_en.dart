@@ -43,4 +43,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get viewInRoom => 'Preview';
+
+  @override
+  String get selectQuantity => 'Select Quantity';
+
+  @override
+  String get quarterDozen => '1/4 Dozen (3)';
+
+  @override
+  String get halfDozen => '1/2 Dozen (6)';
+
+  @override
+  String get oneDozen => '1 Dozen (12)';
+
+  @override
+  String get oneAndHalfDozen => '1.5 Dozen (18)';
+
+  @override
+  String get twoDozens => '2 Dozens (24)';
+
+  @override
+  String get unitWholesalePrice => 'Piece wholesale';
+
+  @override
+  String get totalPrice => 'Total Price';
+
+  @override
+  String get piecesCount => 'pieces';
 }

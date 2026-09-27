@@ -169,6 +169,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Preview'**
   String get viewInRoom;
+
+  /// No description provided for @selectQuantity.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Quantity'**
+  String get selectQuantity;
+
+  /// No description provided for @quarterDozen.
+  ///
+  /// In en, this message translates to:
+  /// **'1/4 Dozen (3)'**
+  String get quarterDozen;
+
+  /// No description provided for @halfDozen.
+  ///
+  /// In en, this message translates to:
+  /// **'1/2 Dozen (6)'**
+  String get halfDozen;
+
+  /// No description provided for @oneDozen.
+  ///
+  /// In en, this message translates to:
+  /// **'1 Dozen (12)'**
+  String get oneDozen;
+
+  /// No description provided for @oneAndHalfDozen.
+  ///
+  /// In en, this message translates to:
+  /// **'1.5 Dozen (18)'**
+  String get oneAndHalfDozen;
+
+  /// No description provided for @twoDozens.
+  ///
+  /// In en, this message translates to:
+  /// **'2 Dozens (24)'**
+  String get twoDozens;
+
+  /// No description provided for @unitWholesalePrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Piece wholesale'**
+  String get unitWholesalePrice;
+
+  /// No description provided for @totalPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Price'**
+  String get totalPrice;
+
+  /// No description provided for @piecesCount.
+  ///
+  /// In en, this message translates to:
+  /// **'pieces'**
+  String get piecesCount;
 }
 
 class _AppLocalizationsDelegate

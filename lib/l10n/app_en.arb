@@ -11,5 +11,14 @@
   "addToCart": "Add to Cart",
   "cm": "cm",
   "egp": "EGP",
-  "viewInRoom": "Preview"
+  "viewInRoom": "Preview",
+  "selectQuantity": "Select Quantity",
+  "quarterDozen": "1/4 Dozen (3)",
+  "halfDozen": "1/2 Dozen (6)",
+  "oneDozen": "1 Dozen (12)",
+  "oneAndHalfDozen": "1.5 Dozen (18)",
+  "twoDozens": "2 Dozens (24)",
+  "unitWholesalePrice": "Piece wholesale",
+  "totalPrice": "Total Price",
+  "piecesCount": "pieces"
 }

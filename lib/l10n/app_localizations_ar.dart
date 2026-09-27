@@ -43,4 +43,31 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get viewInRoom => 'معاينة';
+
+  @override
+  String get selectQuantity => 'اختر الكمية';
+
+  @override
+  String get quarterDozen => 'ربع دستة (3)';
+
+  @override
+  String get halfDozen => 'نص دستة (6)';
+
+  @override
+  String get oneDozen => 'دستة (12)';
+
+  @override
+  String get oneAndHalfDozen => 'دستة ونص (18)';
+
+  @override
+  String get twoDozens => 'دستتين (24)';
+
+  @override
+  String get unitWholesalePrice => 'سعر القطعة جملة';
+
+  @override
+  String get totalPrice => 'الإجمالي';
+
+  @override
+  String get piecesCount => 'قطع';
 }

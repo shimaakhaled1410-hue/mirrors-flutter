@@ -11,5 +11,14 @@
   "addToCart": "إضافة للسلة",
   "cm": "سم",
   "egp": "ج.م",
-  "viewInRoom": "معاينة"
+  "viewInRoom": "معاينة",
+  "selectQuantity": "اختر الكمية",
+  "quarterDozen": "ربع دستة (3)",
+  "halfDozen": "نص دستة (6)",
+  "oneDozen": "دستة (12)",
+  "oneAndHalfDozen": "دستة ونص (18)",
+  "twoDozens": "دستتين (24)",
+  "unitWholesalePrice": "سعر القطعة جملة",
+  "totalPrice": "الإجمالي",
+  "piecesCount": "قطع"
 }
