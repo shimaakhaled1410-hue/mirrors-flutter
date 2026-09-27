@@ -25,4 +25,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profileTab => 'Profile';
+
+  @override
+  String get framedMirrors => 'Framed Mirrors';
+
+  @override
+  String get adhesiveMirrors => 'Adhesive Mirrors';
+
+  @override
+  String get addToCart => 'Add to Cart';
+
+  @override
+  String get cm => 'cm';
+
+  @override
+  String get egp => 'EGP';
+
+  @override
+  String get viewInRoom => 'Preview';
 }

@@ -5,5 +5,11 @@
   "retailTab": "قطاعي",
   "wholesaleTab": "جملة",
   "ordersTab": "طلباتي",
-  "profileTab": "حسابي"
+  "profileTab": "حسابي",
+  "framedMirrors": "مرايات بإطار",
+  "adhesiveMirrors": "مرايات لصق دبل",
+  "addToCart": "إضافة للسلة",
+  "cm": "سم",
+  "egp": "ج.م",
+  "viewInRoom": "معاينة"
 }

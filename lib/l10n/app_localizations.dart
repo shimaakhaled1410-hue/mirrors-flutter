@@ -133,6 +133,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Profile'**
   String get profileTab;
+
+  /// No description provided for @framedMirrors.
+  ///
+  /// In en, this message translates to:
+  /// **'Framed Mirrors'**
+  String get framedMirrors;
+
+  /// No description provided for @adhesiveMirrors.
+  ///
+  /// In en, this message translates to:
+  /// **'Adhesive Mirrors'**
+  String get adhesiveMirrors;
+
+  /// No description provided for @addToCart.
+  ///
+  /// In en, this message translates to:
+  /// **'Add to Cart'**
+  String get addToCart;
+
+  /// No description provided for @cm.
+  ///
+  /// In en, this message translates to:
+  /// **'cm'**
+  String get cm;
+
+  /// No description provided for @egp.
+  ///
+  /// In en, this message translates to:
+  /// **'EGP'**
+  String get egp;
+
+  /// No description provided for @viewInRoom.
+  ///
+  /// In en, this message translates to:
+  /// **'Preview'**
+  String get viewInRoom;
 }
 
 class _AppLocalizationsDelegate

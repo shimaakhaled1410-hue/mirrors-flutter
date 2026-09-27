@@ -25,4 +25,22 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get profileTab => 'حسابي';
+
+  @override
+  String get framedMirrors => 'مرايات بإطار';
+
+  @override
+  String get adhesiveMirrors => 'مرايات لصق دبل';
+
+  @override
+  String get addToCart => 'إضافة للسلة';
+
+  @override
+  String get cm => 'سم';
+
+  @override
+  String get egp => 'ج.م';
+
+  @override
+  String get viewInRoom => 'معاينة';
 }

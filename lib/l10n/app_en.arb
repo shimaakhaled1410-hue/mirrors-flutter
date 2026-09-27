@@ -5,5 +5,11 @@
   "retailTab": "Retail",
   "wholesaleTab": "Wholesale",
   "ordersTab": "My Orders",
-  "profileTab": "Profile"
+  "profileTab": "Profile",
+  "framedMirrors": "Framed Mirrors",
+  "adhesiveMirrors": "Adhesive Mirrors",
+  "addToCart": "Add to Cart",
+  "cm": "cm",
+  "egp": "EGP",
+  "viewInRoom": "Preview"
 }
