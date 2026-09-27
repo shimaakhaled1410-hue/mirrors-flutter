@@ -1,12 +1,14 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:mirrors_app/l10n/app_localizations.dart';
 import 'core/theme/app_theme.dart';
 
 void main() {
   runApp(
     DevicePreview(
-      enabled: !kReleaseMode, // مفعل في الـ Debug فقط
+      enabled: !kReleaseMode,
       builder: (context) => const MirrorsApp(),
     ),
   );
@@ -25,11 +27,20 @@ class MirrorsApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.system,
-      home: const Scaffold(
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: AppLocalizations.supportedLocales,
+      home: Scaffold(
         body: Center(
-          child: Text(
-            'Welcome to Mirrors App!',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          child: Builder(
+            builder: (context) => Text(
+              AppLocalizations.of(context)!.welcomeMessage,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
           ),
         ),
       ),
