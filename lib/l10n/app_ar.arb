@@ -1,5 +1,9 @@
 {
   "@@locale": "ar",
   "appTitle": "متجر المرايات",
-  "welcomeMessage": "مرحباً بك في تطبيق المرايات!"
+  "welcomeMessage": "مرحباً بك في تطبيق المرايات!",
+  "retailTab": "قطاعي",
+  "wholesaleTab": "جملة",
+  "ordersTab": "طلباتي",
+  "profileTab": "حسابي"
 }

@@ -1,5 +1,9 @@
 {
   "@@locale": "en",
   "appTitle": "Mirrors Store",
-  "welcomeMessage": "Welcome to Mirrors App!"
+  "welcomeMessage": "Welcome to Mirrors App!",
+  "retailTab": "Retail",
+  "wholesaleTab": "Wholesale",
+  "ordersTab": "My Orders",
+  "profileTab": "Profile"
 }

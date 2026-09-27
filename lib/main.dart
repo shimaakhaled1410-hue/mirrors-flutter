@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:mirrors_app/l10n/app_localizations.dart';
+import 'core/routing/app_router.dart';
 import 'core/theme/app_theme.dart';
 
 void main() {
@@ -19,7 +20,7 @@ class MirrorsApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Mirrors App',
       debugShowCheckedModeBanner: false,
       locale: DevicePreview.locale(context),
@@ -27,6 +28,7 @@ class MirrorsApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.system,
+      routerConfig: AppRouter.router,
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -34,16 +36,6 @@ class MirrorsApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      home: Scaffold(
-        body: Center(
-          child: Builder(
-            builder: (context) => Text(
-              AppLocalizations.of(context)!.welcomeMessage,
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-          ),
-        ),
-      ),
     );
   }
 }

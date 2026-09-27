@@ -109,6 +109,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Welcome to Mirrors App!'**
   String get welcomeMessage;
+
+  /// No description provided for @retailTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Retail'**
+  String get retailTab;
+
+  /// No description provided for @wholesaleTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Wholesale'**
+  String get wholesaleTab;
+
+  /// No description provided for @ordersTab.
+  ///
+  /// In en, this message translates to:
+  /// **'My Orders'**
+  String get ordersTab;
+
+  /// No description provided for @profileTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get profileTab;
 }
 
 class _AppLocalizationsDelegate

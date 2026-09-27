@@ -13,4 +13,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get welcomeMessage => 'Welcome to Mirrors App!';
+
+  @override
+  String get retailTab => 'Retail';
+
+  @override
+  String get wholesaleTab => 'Wholesale';
+
+  @override
+  String get ordersTab => 'My Orders';
+
+  @override
+  String get profileTab => 'Profile';
 }

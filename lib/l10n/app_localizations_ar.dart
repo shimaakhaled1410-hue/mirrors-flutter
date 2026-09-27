@@ -13,4 +13,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get welcomeMessage => 'مرحباً بك في تطبيق المرايات!';
+
+  @override
+  String get retailTab => 'قطاعي';
+
+  @override
+  String get wholesaleTab => 'جملة';
+
+  @override
+  String get ordersTab => 'طلباتي';
+
+  @override
+  String get profileTab => 'حسابي';
 }
