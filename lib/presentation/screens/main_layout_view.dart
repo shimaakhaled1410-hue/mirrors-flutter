@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mirrors_app/core/routing/app_router.dart';
 import 'package:mirrors_app/l10n/app_localizations.dart';
 import 'package:mirrors_app/presentation/screens/orders_view.dart';
 import 'package:mirrors_app/presentation/screens/profile_view.dart';
@@ -28,7 +30,8 @@ class _MainLayoutViewState extends State<MainLayoutView> {
     final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
-      extendBody: true, // Allows content to show gracefully behind the floating bar
+      extendBody:
+          true, // Allows content to show gracefully behind the floating bar
       appBar: AppBar(
         scrolledUnderElevation: 0,
         title: Text(l10n.appTitle),
@@ -36,7 +39,7 @@ class _MainLayoutViewState extends State<MainLayoutView> {
           IconButton(
             icon: const Icon(Icons.shopping_bag_outlined),
             onPressed: () {
-              // TODO: Navigate to cart view
+              context.push(AppRouter.cart);
             },
           ),
           IconButton(
@@ -47,10 +50,7 @@ class _MainLayoutViewState extends State<MainLayoutView> {
           ),
         ],
       ),
-      body: IndexedStack(
-        index: _currentIndex,
-        children: _screens,
-      ),
+      body: IndexedStack(index: _currentIndex, children: _screens),
       bottomNavigationBar: CustomBottomNavBar(
         currentIndex: _currentIndex,
         onTap: (index) {
