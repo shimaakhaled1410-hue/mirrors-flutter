@@ -56,7 +56,6 @@ class _CheckoutViewState extends State<CheckoutView> {
     final total = cartState.subtotal + _shippingFee;
     final remaining = (total - _depositPaid).clamp(0.0, total);
 
-    // 1. Create order
     context.read<OrdersCubit>().placeOrder(
           items: cartState.items,
           totalPrice: total,
@@ -65,17 +64,15 @@ class _CheckoutViewState extends State<CheckoutView> {
           customerName: _nameController.text.trim(),
           phoneNumber: _phoneController.text.trim(),
           address: _addressController.text.trim(),
-          paymentMethod: 'Vodafone Cash (Deposit)',
+          paymentMethod: l10n.vodafoneCash,
           senderWalletNumber: _senderWalletController.text.trim(),
           notes: _notesController.text.trim().isEmpty
               ? null
               : _notesController.text.trim(),
         );
 
-    // 2. Clear cart
     context.read<CartCubit>().clearCart();
 
-    // 3. Show Success Dialog
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -105,13 +102,13 @@ class _CheckoutViewState extends State<CheckoutView> {
               ),
               const SizedBox(height: 18),
               Text(
-                'تم تسجيل طلبك بنجاح!',
+                l10n.orderPlacedSuccess,
                 textAlign: TextAlign.center,
                 style: AppStyles.bold18(dialogContext),
               ),
               const SizedBox(height: 8),
               Text(
-                'سيقوم المتجر بمراجعة تحويل العربون والبدء في تجهيز وتفصيل المرآة فوراً.',
+                l10n.orderPlacedSub,
                 textAlign: TextAlign.center,
                 style: AppStyles.regular12(dialogContext),
               ),
@@ -211,7 +208,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                         const SizedBox(height: 14),
                         _buildTextField(
                           controller: _phoneController,
-                          label: 'رقم هاتف التواصل مع المندوب',
+                          label: l10n.courierContactPhone,
                           icon: Icons.phone_outlined,
                           keyboardType: TextInputType.phone,
                           validator: (v) {
@@ -247,7 +244,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                 ),
                 const SizedBox(height: 16),
 
-                // 2. Deposit payment details
+                // 2. Deposit Details
                 FadeSlideIn(
                   index: 1,
                   child: Container(
@@ -266,14 +263,12 @@ class _CheckoutViewState extends State<CheckoutView> {
                                 color: AppColors.accent, size: 20),
                             const SizedBox(width: 8),
                             Text(
-                              'سداد عربون الطلب (فودافون كاش)',
+                              l10n.depositTitle,
                               style: AppStyles.semiBold16(context),
                             ),
                           ],
                         ),
                         const SizedBox(height: 12),
-
-                        // Store Wallet Number Box with Copy Action
                         Container(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 14, vertical: 12),
@@ -296,7 +291,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'رقم محفظة المتجر للتحويل:',
+                                      l10n.storeWalletLabel,
                                       style: AppStyles.regular12(context),
                                     ),
                                     Text(
@@ -312,15 +307,14 @@ class _CheckoutViewState extends State<CheckoutView> {
                               IconButton(
                                 icon: const Icon(Icons.copy_rounded,
                                     color: AppColors.accent, size: 20),
-                                tooltip: 'نسخ الرقم',
+                                tooltip: l10n.copyTooltip,
                                 onPressed: () {
                                   Clipboard.setData(ClipboardData(
                                       text: _storeWalletNumber));
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content:
-                                          Text('تم نسخ رقم المحفظة بنجاح'),
-                                      duration: Duration(seconds: 1),
+                                    SnackBar(
+                                      content: Text(l10n.copiedSuccessfully),
+                                      duration: const Duration(seconds: 1),
                                       behavior: SnackBarBehavior.floating,
                                     ),
                                   );
@@ -330,27 +324,23 @@ class _CheckoutViewState extends State<CheckoutView> {
                           ),
                         ),
                         const SizedBox(height: 14),
-
-                        // Sender phone number
                         _buildTextField(
                           controller: _senderWalletController,
-                          label: 'رقم المحفظة التي قمت بالتحويل منها',
+                          label: l10n.senderWalletLabel,
                           icon: Icons.send_rounded,
                           keyboardType: TextInputType.phone,
                           validator: (v) {
                             if (v == null || v.trim().isEmpty) {
-                              return 'يرجى كتابة الرقم للتأكد من عملية التحويل';
+                              return l10n.senderWalletValidation;
                             }
                             return null;
                           },
                         ),
                         const SizedBox(height: 14),
-
-                        // Deposit Amount input
                         _buildTextField(
                           controller: _depositController,
-                          label:
-                              'مبلغ العربون (الحد الأدنى 50% = ${minDeposit.toInt()} ج.م)',
+                          label: l10n.depositAmountLabel(
+                              minDeposit.toInt(), l10n.egp),
                           icon: Icons.price_check_rounded,
                           keyboardType: TextInputType.number,
                           onChanged: (val) {
@@ -362,10 +352,12 @@ class _CheckoutViewState extends State<CheckoutView> {
                           validator: (v) {
                             final parsed = double.tryParse(v ?? '') ?? 0.0;
                             if (parsed < minDeposit) {
-                              return 'يجب ألا يقل العربون عن 50% (${minDeposit.toInt()} ج.م)';
+                              return l10n.minDepositError(
+                                  minDeposit.toInt(), l10n.egp);
                             }
                             if (parsed > total) {
-                              return 'المبلغ لا يمكن أن يتجاوز إجمالي الطلب (${total.toInt()} ج.م)';
+                              return l10n.maxDepositError(
+                                  total.toInt(), l10n.egp);
                             }
                             return null;
                           },
@@ -376,7 +368,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                 ),
                 const SizedBox(height: 16),
 
-                // 3. Summary
+                // 3. Financial Summary
                 FadeSlideIn(
                   index: 2,
                   child: Container(
@@ -423,7 +415,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('العربون المدفوع الآن:',
+                            Text(l10n.depositPaidNow,
                                 style: AppStyles.semiBold16(context)
                                     .copyWith(fontSize: 14)),
                             Text(
@@ -436,7 +428,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('المتبقي للمندوب عند الاستلام:',
+                            Text(l10n.remainingOnDelivery,
                                 style: AppStyles.semiBold16(context).copyWith(
                                   fontSize: 14,
                                   color: Colors.green,
@@ -455,7 +447,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                 ),
                 const SizedBox(height: 24),
 
-                // Submit Button
+                // 4. Confirm Button
                 FadeSlideIn(
                   index: 3,
                   child: PressableScale(
@@ -480,7 +472,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                             padding: const EdgeInsets.symmetric(vertical: 16),
                             child: Center(
                               child: Text(
-                                'تأكيد الطلب وإرسال إثبات العربون',
+                                l10n.confirmOrderButton,
                                 style: AppStyles.semiBold16(context).copyWith(
                                   color: Colors.white,
                                   fontSize: 15,

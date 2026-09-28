@@ -186,4 +186,82 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get goToOrders => 'Track My Order';
+
+  @override
+  String get depositTitle => 'Order Deposit (Vodafone Cash)';
+
+  @override
+  String get storeWalletLabel => 'Store wallet number for transfer:';
+
+  @override
+  String get copiedSuccessfully => 'Wallet number copied successfully';
+
+  @override
+  String get copyTooltip => 'Copy number';
+
+  @override
+  String get senderWalletLabel => 'Wallet number transferred from';
+
+  @override
+  String get senderWalletValidation =>
+      'Please enter the transfer wallet number';
+
+  @override
+  String depositAmountLabel(int amount, String currency) {
+    return 'Deposit amount (Min 50% = $amount $currency)';
+  }
+
+  @override
+  String minDepositError(int amount, String currency) {
+    return 'Deposit cannot be less than 50% ($amount $currency)';
+  }
+
+  @override
+  String maxDepositError(int amount, String currency) {
+    return 'Amount cannot exceed total ($amount $currency)';
+  }
+
+  @override
+  String get depositPaidNow => 'Deposit paid now:';
+
+  @override
+  String get remainingOnDelivery => 'Remaining upon delivery:';
+
+  @override
+  String get confirmOrderButton => 'Confirm Order & Submit Deposit';
+
+  @override
+  String get orderPlacedSub =>
+      'The store will verify your deposit transfer and begin preparing your mirrors immediately.';
+
+  @override
+  String get courierContactPhone => 'Courier contact phone number';
+
+  @override
+  String get orderTrackingTitle => 'Order Progress & Delivery';
+
+  @override
+  String get notRegistered => 'Not specified';
+
+  @override
+  String get depositAndPaymentDetails => 'Payment & Deposit Details';
+
+  @override
+  String itemsCountTitle(int count) {
+    return 'Purchased items ($count)';
+  }
+
+  @override
+  String mirrorUnitDimensions(String dimensions) {
+    return 'Mirror $dimensions cm';
+  }
+
+  @override
+  String get depositPaidLabel => 'Paid deposit:';
+
+  @override
+  String get deliveryNotes => 'Notes';
+
+  @override
+  String get quantity => 'Quantity';
 }

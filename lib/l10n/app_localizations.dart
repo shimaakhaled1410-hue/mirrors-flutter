@@ -451,6 +451,138 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Track My Order'**
   String get goToOrders;
+
+  /// No description provided for @depositTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Deposit (Vodafone Cash)'**
+  String get depositTitle;
+
+  /// No description provided for @storeWalletLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Store wallet number for transfer:'**
+  String get storeWalletLabel;
+
+  /// No description provided for @copiedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Wallet number copied successfully'**
+  String get copiedSuccessfully;
+
+  /// No description provided for @copyTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy number'**
+  String get copyTooltip;
+
+  /// No description provided for @senderWalletLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Wallet number transferred from'**
+  String get senderWalletLabel;
+
+  /// No description provided for @senderWalletValidation.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter the transfer wallet number'**
+  String get senderWalletValidation;
+
+  /// No description provided for @depositAmountLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Deposit amount (Min 50% = {amount} {currency})'**
+  String depositAmountLabel(int amount, String currency);
+
+  /// No description provided for @minDepositError.
+  ///
+  /// In en, this message translates to:
+  /// **'Deposit cannot be less than 50% ({amount} {currency})'**
+  String minDepositError(int amount, String currency);
+
+  /// No description provided for @maxDepositError.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount cannot exceed total ({amount} {currency})'**
+  String maxDepositError(int amount, String currency);
+
+  /// No description provided for @depositPaidNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Deposit paid now:'**
+  String get depositPaidNow;
+
+  /// No description provided for @remainingOnDelivery.
+  ///
+  /// In en, this message translates to:
+  /// **'Remaining upon delivery:'**
+  String get remainingOnDelivery;
+
+  /// No description provided for @confirmOrderButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Order & Submit Deposit'**
+  String get confirmOrderButton;
+
+  /// No description provided for @orderPlacedSub.
+  ///
+  /// In en, this message translates to:
+  /// **'The store will verify your deposit transfer and begin preparing your mirrors immediately.'**
+  String get orderPlacedSub;
+
+  /// No description provided for @courierContactPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Courier contact phone number'**
+  String get courierContactPhone;
+
+  /// No description provided for @orderTrackingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Progress & Delivery'**
+  String get orderTrackingTitle;
+
+  /// No description provided for @notRegistered.
+  ///
+  /// In en, this message translates to:
+  /// **'Not specified'**
+  String get notRegistered;
+
+  /// No description provided for @depositAndPaymentDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment & Deposit Details'**
+  String get depositAndPaymentDetails;
+
+  /// No description provided for @itemsCountTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchased items ({count})'**
+  String itemsCountTitle(int count);
+
+  /// No description provided for @mirrorUnitDimensions.
+  ///
+  /// In en, this message translates to:
+  /// **'Mirror {dimensions} cm'**
+  String mirrorUnitDimensions(String dimensions);
+
+  /// No description provided for @depositPaidLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Paid deposit:'**
+  String get depositPaidLabel;
+
+  /// No description provided for @deliveryNotes.
+  ///
+  /// In en, this message translates to:
+  /// **'Notes'**
+  String get deliveryNotes;
+
+  /// No description provided for @quantity.
+  ///
+  /// In en, this message translates to:
+  /// **'Quantity'**
+  String get quantity;
 }
 
 class _AppLocalizationsDelegate

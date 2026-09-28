@@ -58,5 +58,55 @@
   "invalidPhone": "Please enter a valid phone number",
   "placeOrder": "Confirm & Place Order",
   "orderPlacedSuccess": "Your order has been placed successfully!",
-  "goToOrders": "Track My Order"
+  "goToOrders": "Track My Order",
+  "depositTitle": "Order Deposit (Vodafone Cash)",
+  "storeWalletLabel": "Store wallet number for transfer:",
+  "copiedSuccessfully": "Wallet number copied successfully",
+  "copyTooltip": "Copy number",
+  "senderWalletLabel": "Wallet number transferred from",
+  "senderWalletValidation": "Please enter the transfer wallet number",
+  "depositAmountLabel": "Deposit amount (Min 50% = {amount} {currency})",
+  "@depositAmountLabel": {
+    "placeholders": {
+      "amount": {"type": "int"},
+      "currency": {"type": "String"}
+    }
+  },
+  "minDepositError": "Deposit cannot be less than 50% ({amount} {currency})",
+  "@minDepositError": {
+    "placeholders": {
+      "amount": {"type": "int"},
+      "currency": {"type": "String"}
+    }
+  },
+  "maxDepositError": "Amount cannot exceed total ({amount} {currency})",
+  "@maxDepositError": {
+    "placeholders": {
+      "amount": {"type": "int"},
+      "currency": {"type": "String"}
+    }
+  },
+  "depositPaidNow": "Deposit paid now:",
+  "remainingOnDelivery": "Remaining upon delivery:",
+  "confirmOrderButton": "Confirm Order & Submit Deposit",
+  "orderPlacedSub": "The store will verify your deposit transfer and begin preparing your mirrors immediately.",
+  "courierContactPhone": "Courier contact phone number",
+  "orderTrackingTitle": "Order Progress & Delivery",
+  "notRegistered": "Not specified",
+  "depositAndPaymentDetails": "Payment & Deposit Details",
+  "itemsCountTitle": "Purchased items ({count})",
+  "@itemsCountTitle": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "mirrorUnitDimensions": "Mirror {dimensions} cm",
+  "@mirrorUnitDimensions": {
+    "placeholders": {
+      "dimensions": {"type": "String"}
+    }
+  },
+  "depositPaidLabel": "Paid deposit:",
+  "deliveryNotes": "Notes",
+  "quantity": "Quantity"
 }

@@ -31,7 +31,7 @@ class OrderDetailsView extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.all(16),
         children: [
-          // 1. Order Status & Stepper Card
+          // 1. Order Progress
           FadeSlideIn(
             index: 0,
             child: Container(
@@ -48,7 +48,7 @@ class OrderDetailsView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'مرحلة التنفيذ والتوصيل',
+                        l10n.orderTrackingTitle,
                         style: AppStyles.semiBold16(context),
                       ),
                       Container(
@@ -83,7 +83,7 @@ class OrderDetailsView extends StatelessWidget {
           ),
           const SizedBox(height: 16),
 
-          // 2. Shipping & Contact Details
+          // 2. Shipping Info
           FadeSlideIn(
             index: 1,
             child: Container(
@@ -113,15 +113,15 @@ class OrderDetailsView extends StatelessWidget {
                     label: l10n.fullName,
                     value: order.customerName?.isNotEmpty == true
                         ? order.customerName!
-                        : 'غير مسجل',
+                        : l10n.notRegistered,
                   ),
                   const Divider(height: 16),
                   _buildInfoRow(
                     context,
-                    label: 'هاتف التواصل',
+                    label: l10n.phoneNumber,
                     value: order.phoneNumber?.isNotEmpty == true
                         ? order.phoneNumber!
-                        : 'غير مسجل',
+                        : l10n.notRegistered,
                   ),
                   const Divider(height: 16),
                   _buildInfoRow(
@@ -129,13 +129,13 @@ class OrderDetailsView extends StatelessWidget {
                     label: l10n.address,
                     value: order.address?.isNotEmpty == true
                         ? order.address!
-                        : 'غير مسجل',
+                        : l10n.notRegistered,
                   ),
                   if (order.notes != null && order.notes!.isNotEmpty) ...[
                     const Divider(height: 16),
                     _buildInfoRow(
                       context,
-                      label: 'ملاحظات',
+                      label: l10n.deliveryNotes,
                       value: order.notes!,
                     ),
                   ],
@@ -145,7 +145,7 @@ class OrderDetailsView extends StatelessWidget {
           ),
           const SizedBox(height: 16),
 
-          // 3. Deposit & Payment Info
+          // 3. Payment & Deposit Details
           FadeSlideIn(
             index: 2,
             child: Container(
@@ -164,7 +164,7 @@ class OrderDetailsView extends StatelessWidget {
                           color: AppColors.accent, size: 20),
                       const SizedBox(width: 8),
                       Text(
-                        'بيانات السداد والعربون',
+                        l10n.depositAndPaymentDetails,
                         style: AppStyles.semiBold16(context),
                       ),
                     ],
@@ -172,15 +172,15 @@ class OrderDetailsView extends StatelessWidget {
                   const SizedBox(height: 14),
                   _buildInfoRow(
                     context,
-                    label: 'طريقة الدفع',
-                    value: order.paymentMethod ?? 'فودافون كاش (عربون)',
+                    label: l10n.paymentMethod,
+                    value: order.paymentMethod ?? l10n.vodafoneCash,
                   ),
                   if (order.senderWalletNumber != null &&
                       order.senderWalletNumber!.isNotEmpty) ...[
                     const Divider(height: 16),
                     _buildInfoRow(
                       context,
-                      label: 'المحفظة المحول منها',
+                      label: l10n.senderWalletLabel,
                       value: order.senderWalletNumber!,
                     ),
                   ],
@@ -190,7 +190,7 @@ class OrderDetailsView extends StatelessWidget {
           ),
           const SizedBox(height: 16),
 
-          // 4. Purchased Items List
+          // 4. Products List
           if (order.items.isNotEmpty) ...[
             FadeSlideIn(
               index: 3,
@@ -210,15 +210,17 @@ class OrderDetailsView extends StatelessWidget {
                             color: AppColors.accent, size: 20),
                         const SizedBox(width: 8),
                         Text(
-                          'المنتجات (${order.totalItems})',
+                          l10n.itemsCountTitle(order.totalItems),
                           style: AppStyles.semiBold16(context),
                         ),
                       ],
                     ),
                     const SizedBox(height: 12),
                     ...order.items.map((item) {
-                      final isFramed =
-                          item.product.category == MirrorCategory.framed;
+                      final categoryTitle =
+                          item.product.category == MirrorCategory.framed
+                              ? l10n.framedMirrors
+                              : l10n.adhesiveMirrors;
                       return Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8),
                         child: Row(
@@ -242,12 +244,13 @@ class OrderDetailsView extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'مرآة مقاس ${item.product.dimensions} سم',
+                                    l10n.mirrorUnitDimensions(
+                                        item.product.dimensions),
                                     style: AppStyles.semiBold16(context)
                                         .copyWith(fontSize: 14),
                                   ),
                                   Text(
-                                    '${isFramed ? "بإطار كلاسيكي" : "لصق وجهين"} • الكمية: ${item.quantity}',
+                                    '$categoryTitle • ${l10n.quantity}: ${item.quantity}',
                                     style: AppStyles.regular12(context)
                                         .copyWith(color: secondary),
                                   ),
@@ -270,7 +273,7 @@ class OrderDetailsView extends StatelessWidget {
             const SizedBox(height: 16),
           ],
 
-          // 5. Total Financial Summary
+          // 5. Financial Summary
           FadeSlideIn(
             index: 4,
             child: Container(
@@ -296,7 +299,7 @@ class OrderDetailsView extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('العربون المدفوع:',
+                      Text(l10n.depositPaidLabel,
                           style: AppStyles.regular14(context)),
                       Text(
                         '${order.depositAmount.toInt()} ${l10n.egp}',
@@ -309,7 +312,7 @@ class OrderDetailsView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'المتبقي للمندوب عند الاستلام:',
+                        l10n.remainingOnDelivery,
                         style: AppStyles.semiBold16(context)
                             .copyWith(color: Colors.green),
                       ),

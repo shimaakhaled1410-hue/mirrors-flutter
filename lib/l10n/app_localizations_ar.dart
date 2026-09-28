@@ -186,4 +186,82 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get goToOrders => 'تتبع طلبي';
+
+  @override
+  String get depositTitle => 'سداد عربون الطلب (فودافون كاش)';
+
+  @override
+  String get storeWalletLabel => 'رقم محفظة المتجر للتحويل:';
+
+  @override
+  String get copiedSuccessfully => 'تم نسخ رقم المحفظة بنجاح';
+
+  @override
+  String get copyTooltip => 'نسخ الرقم';
+
+  @override
+  String get senderWalletLabel => 'رقم المحفظة التي قمت بالتحويل منها';
+
+  @override
+  String get senderWalletValidation =>
+      'يرجى كتابة رقم المحفظة للتأكد من التحويل';
+
+  @override
+  String depositAmountLabel(int amount, String currency) {
+    return 'مبلغ العربون (الحد الأدنى 50% = $amount $currency)';
+  }
+
+  @override
+  String minDepositError(int amount, String currency) {
+    return 'يجب ألا يقل العربون عن 50% ($amount $currency)';
+  }
+
+  @override
+  String maxDepositError(int amount, String currency) {
+    return 'المبلغ لا يمكن أن يتجاوز الإجمالي ($amount $currency)';
+  }
+
+  @override
+  String get depositPaidNow => 'العربون المدفوع الآن:';
+
+  @override
+  String get remainingOnDelivery => 'المتبقي للمندوب عند الاستلام:';
+
+  @override
+  String get confirmOrderButton => 'تأكيد الطلب وإرسال إثبات العربون';
+
+  @override
+  String get orderPlacedSub =>
+      'سيقوم المتجر بمراجعة تحويل العربون والبدء في تجهيز وتفصيل المرآة فوراً.';
+
+  @override
+  String get courierContactPhone => 'رقم هاتف التواصل مع المندوب';
+
+  @override
+  String get orderTrackingTitle => 'مرحلة التنفيذ والتوصيل';
+
+  @override
+  String get notRegistered => 'غير مسجل';
+
+  @override
+  String get depositAndPaymentDetails => 'بيانات السداد والعربون';
+
+  @override
+  String itemsCountTitle(int count) {
+    return 'المنتجات ($count)';
+  }
+
+  @override
+  String mirrorUnitDimensions(String dimensions) {
+    return 'مرآة مقاس $dimensions سم';
+  }
+
+  @override
+  String get depositPaidLabel => 'العربون المدفوع:';
+
+  @override
+  String get deliveryNotes => 'ملاحظات';
+
+  @override
+  String get quantity => 'الكمية';
 }

@@ -58,5 +58,55 @@
   "invalidPhone": "يرجى إدخال رقم هاتف صحيح",
   "placeOrder": "تأكيد وإرسال الطلب",
   "orderPlacedSuccess": "تم تسجيل طلبك بنجاح!",
-  "goToOrders": "تتبع طلبي"
+  "goToOrders": "تتبع طلبي",
+  "depositTitle": "سداد عربون الطلب (فودافون كاش)",
+  "storeWalletLabel": "رقم محفظة المتجر للتحويل:",
+  "copiedSuccessfully": "تم نسخ رقم المحفظة بنجاح",
+  "copyTooltip": "نسخ الرقم",
+  "senderWalletLabel": "رقم المحفظة التي قمت بالتحويل منها",
+  "senderWalletValidation": "يرجى كتابة رقم المحفظة للتأكد من التحويل",
+  "depositAmountLabel": "مبلغ العربون (الحد الأدنى 50% = {amount} {currency})",
+  "@depositAmountLabel": {
+    "placeholders": {
+      "amount": {"type": "int"},
+      "currency": {"type": "String"}
+    }
+  },
+  "minDepositError": "يجب ألا يقل العربون عن 50% ({amount} {currency})",
+  "@minDepositError": {
+    "placeholders": {
+      "amount": {"type": "int"},
+      "currency": {"type": "String"}
+    }
+  },
+  "maxDepositError": "المبلغ لا يمكن أن يتجاوز الإجمالي ({amount} {currency})",
+  "@maxDepositError": {
+    "placeholders": {
+      "amount": {"type": "int"},
+      "currency": {"type": "String"}
+    }
+  },
+  "depositPaidNow": "العربون المدفوع الآن:",
+  "remainingOnDelivery": "المتبقي للمندوب عند الاستلام:",
+  "confirmOrderButton": "تأكيد الطلب وإرسال إثبات العربون",
+  "orderPlacedSub": "سيقوم المتجر بمراجعة تحويل العربون والبدء في تجهيز وتفصيل المرآة فوراً.",
+  "courierContactPhone": "رقم هاتف التواصل مع المندوب",
+  "orderTrackingTitle": "مرحلة التنفيذ والتوصيل",
+  "notRegistered": "غير مسجل",
+  "depositAndPaymentDetails": "بيانات السداد والعربون",
+  "itemsCountTitle": "المنتجات ({count})",
+  "@itemsCountTitle": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "mirrorUnitDimensions": "مرآة مقاس {dimensions} سم",
+  "@mirrorUnitDimensions": {
+    "placeholders": {
+      "dimensions": {"type": "String"}
+    }
+  },
+  "depositPaidLabel": "العربون المدفوع:",
+  "deliveryNotes": "ملاحظات",
+  "quantity": "الكمية"
 }
