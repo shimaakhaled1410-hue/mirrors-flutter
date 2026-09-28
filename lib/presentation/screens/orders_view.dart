@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mirrors_app/core/widgets/animated_widgets.dart';
 import 'package:mirrors_app/l10n/app_localizations.dart';
-import 'package:mirrors_app/presentation/manager/orders/order_cubit.dart';
+import 'package:mirrors_app/presentation/manager/orders/orders_cubit.dart';
 import 'package:mirrors_app/presentation/manager/orders/orders_state.dart';
 import 'package:mirrors_app/presentation/widgets/orders/order_card.dart';
 import '../../core/utils/app_colors.dart';

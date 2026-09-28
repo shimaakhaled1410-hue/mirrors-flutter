@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:mirrors_app/presentation/manager/orders/order_cubit.dart';
+import 'package:mirrors_app/presentation/manager/orders/orders_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/routing/app_router.dart';
@@ -26,7 +26,7 @@ void main() async {
         providers: [
           BlocProvider(create: (_) => AppSettingsCubit(prefs)),
           BlocProvider(create: (_) => CartCubit()),
-          BlocProvider(create: (_) => OrdersCubit()),
+          BlocProvider(create: (_) => OrdersCubit(prefs)),
         ],
         child: const MirrorsApp(),
       ),
