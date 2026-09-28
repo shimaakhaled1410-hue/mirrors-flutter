@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:mirrors_app/core/utils/app_colors.dart';
-import 'package:mirrors_app/core/utils/app_styles.dart';
-import 'package:mirrors_app/core/widgets/animated_widgets.dart';
-import 'package:mirrors_app/data/models/mirror_ui_model.dart';
-import 'package:mirrors_app/data/models/order_ui_model.dart';
-import 'package:mirrors_app/l10n/app_localizations.dart';
-import 'package:mirrors_app/presentation/widgets/orders/order_progress_stepper.dart';
+import '../../core/utils/app_colors.dart';
+import '../../core/utils/app_styles.dart';
+import '../../core/widgets/animated_widgets.dart';
+import '../../data/models/order_ui_model.dart';
+import '../../l10n/app_localizations.dart';
+import '../widgets/order_details/order_details_info_row.dart';
+import '../widgets/order_details/order_details_items_card.dart';
+import '../widgets/order_details/order_details_shipping_card.dart';
+import '../widgets/orders/order_progress_stepper.dart';
 
 class OrderDetailsView extends StatelessWidget {
   final OrderUiModel order;
@@ -19,8 +21,6 @@ class OrderDetailsView extends StatelessWidget {
     final surface = isDark ? AppColors.darkSurface : AppColors.lightSurface;
     final border = isDark ? AppColors.darkBorder : AppColors.lightBorder;
     final bg = isDark ? AppColors.darkBackground : AppColors.lightBackground;
-    final secondary =
-        isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary;
 
     return Scaffold(
       appBar: AppBar(
@@ -31,7 +31,7 @@ class OrderDetailsView extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.all(16),
         children: [
-          // 1. Order Progress
+          // 1. Order Status Stepper
           FadeSlideIn(
             index: 0,
             child: Container(
@@ -53,7 +53,9 @@ class OrderDetailsView extends StatelessWidget {
                       ),
                       Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 4),
+                          horizontal: 10,
+                          vertical: 4,
+                        ),
                         decoration: BoxDecoration(
                           color: bg,
                           borderRadius: BorderRadius.circular(20),
@@ -69,7 +71,9 @@ class OrderDetailsView extends StatelessWidget {
                   const SizedBox(height: 16),
                   Container(
                     padding: const EdgeInsets.symmetric(
-                        vertical: 16, horizontal: 4),
+                      vertical: 16,
+                      horizontal: 4,
+                    ),
                     decoration: BoxDecoration(
                       color: bg,
                       borderRadius: BorderRadius.circular(16),
@@ -83,66 +87,8 @@ class OrderDetailsView extends StatelessWidget {
           ),
           const SizedBox(height: 16),
 
-          // 2. Shipping Info
-          FadeSlideIn(
-            index: 1,
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: surface,
-                borderRadius: BorderRadius.circular(24),
-                border: Border.all(color: border),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      const Icon(Icons.person_outline,
-                          color: AppColors.accent, size: 20),
-                      const SizedBox(width: 8),
-                      Text(
-                        l10n.shippingDetails,
-                        style: AppStyles.semiBold16(context),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 14),
-                  _buildInfoRow(
-                    context,
-                    label: l10n.fullName,
-                    value: order.customerName?.isNotEmpty == true
-                        ? order.customerName!
-                        : l10n.notRegistered,
-                  ),
-                  const Divider(height: 16),
-                  _buildInfoRow(
-                    context,
-                    label: l10n.phoneNumber,
-                    value: order.phoneNumber?.isNotEmpty == true
-                        ? order.phoneNumber!
-                        : l10n.notRegistered,
-                  ),
-                  const Divider(height: 16),
-                  _buildInfoRow(
-                    context,
-                    label: l10n.address,
-                    value: order.address?.isNotEmpty == true
-                        ? order.address!
-                        : l10n.notRegistered,
-                  ),
-                  if (order.notes != null && order.notes!.isNotEmpty) ...[
-                    const Divider(height: 16),
-                    _buildInfoRow(
-                      context,
-                      label: l10n.deliveryNotes,
-                      value: order.notes!,
-                    ),
-                  ],
-                ],
-              ),
-            ),
-          ),
+          // 2. Shipping Details
+          FadeSlideIn(index: 1, child: OrderDetailsShippingCard(order: order)),
           const SizedBox(height: 16),
 
           // 3. Payment & Deposit Details
@@ -160,8 +106,11 @@ class OrderDetailsView extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      const Icon(Icons.account_balance_wallet_outlined,
-                          color: AppColors.accent, size: 20),
+                      const Icon(
+                        Icons.account_balance_wallet_outlined,
+                        color: AppColors.accent,
+                        size: 20,
+                      ),
                       const SizedBox(width: 8),
                       Text(
                         l10n.depositAndPaymentDetails,
@@ -170,16 +119,14 @@ class OrderDetailsView extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 14),
-                  _buildInfoRow(
-                    context,
+                  OrderDetailsInfoRow(
                     label: l10n.paymentMethod,
                     value: order.paymentMethod ?? l10n.vodafoneCash,
                   ),
                   if (order.senderWalletNumber != null &&
                       order.senderWalletNumber!.isNotEmpty) ...[
                     const Divider(height: 16),
-                    _buildInfoRow(
-                      context,
+                    OrderDetailsInfoRow(
                       label: l10n.senderWalletLabel,
                       value: order.senderWalletNumber!,
                     ),
@@ -192,84 +139,7 @@ class OrderDetailsView extends StatelessWidget {
 
           // 4. Products List
           if (order.items.isNotEmpty) ...[
-            FadeSlideIn(
-              index: 3,
-              child: Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: surface,
-                  borderRadius: BorderRadius.circular(24),
-                  border: Border.all(color: border),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        const Icon(Icons.inventory_2_outlined,
-                            color: AppColors.accent, size: 20),
-                        const SizedBox(width: 8),
-                        Text(
-                          l10n.itemsCountTitle(order.totalItems),
-                          style: AppStyles.semiBold16(context),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 12),
-                    ...order.items.map((item) {
-                      final categoryTitle =
-                          item.product.category == MirrorCategory.framed
-                              ? l10n.framedMirrors
-                              : l10n.adhesiveMirrors;
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                        child: Row(
-                          children: [
-                            Container(
-                              width: 44,
-                              height: 44,
-                              decoration: BoxDecoration(
-                                color: AppColors.accent.withValues(alpha: 0.12),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: const Icon(
-                                Icons.crop_portrait_rounded,
-                                color: AppColors.accent,
-                                size: 22,
-                              ),
-                            ),
-                            const SizedBox(width: 12),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    l10n.mirrorUnitDimensions(
-                                        item.product.dimensions),
-                                    style: AppStyles.semiBold16(context)
-                                        .copyWith(fontSize: 14),
-                                  ),
-                                  Text(
-                                    '$categoryTitle • ${l10n.quantity}: ${item.quantity}',
-                                    style: AppStyles.regular12(context)
-                                        .copyWith(color: secondary),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Text(
-                              '${item.totalPrice.toInt()} ${l10n.egp}',
-                              style: AppStyles.bold16(context)
-                                  .copyWith(fontSize: 14),
-                            ),
-                          ],
-                        ),
-                      );
-                    }),
-                  ],
-                ),
-              ),
-            ),
+            FadeSlideIn(index: 3, child: OrderDetailsItemsCard(order: order)),
             const SizedBox(height: 16),
           ],
 
@@ -299,8 +169,10 @@ class OrderDetailsView extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(l10n.depositPaidLabel,
-                          style: AppStyles.regular14(context)),
+                      Text(
+                        l10n.depositPaidLabel,
+                        style: AppStyles.regular14(context),
+                      ),
                       Text(
                         '${order.depositAmount.toInt()} ${l10n.egp}',
                         style: AppStyles.bold16Accent,
@@ -313,13 +185,15 @@ class OrderDetailsView extends StatelessWidget {
                     children: [
                       Text(
                         l10n.remainingOnDelivery,
-                        style: AppStyles.semiBold16(context)
-                            .copyWith(color: Colors.green),
+                        style: AppStyles.semiBold16(
+                          context,
+                        ).copyWith(color: Colors.green),
                       ),
                       Text(
                         '${order.remainingAmount.toInt()} ${l10n.egp}',
-                        style: AppStyles.bold18(context)
-                            .copyWith(color: Colors.green),
+                        style: AppStyles.bold18(
+                          context,
+                        ).copyWith(color: Colors.green),
                       ),
                     ],
                   ),
@@ -330,35 +204,6 @@ class OrderDetailsView extends StatelessWidget {
           const SizedBox(height: 32),
         ],
       ),
-    );
-  }
-
-  Widget _buildInfoRow(
-    BuildContext context, {
-    required String label,
-    required String value,
-  }) {
-    final secondary = Theme.of(context).brightness == Brightness.dark
-        ? AppColors.darkTextSecondary
-        : AppColors.lightTextSecondary;
-
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          label,
-          style: AppStyles.regular14(context).copyWith(color: secondary),
-        ),
-        const SizedBox(width: 16),
-        Flexible(
-          child: Text(
-            value,
-            textAlign: TextAlign.end,
-            style: AppStyles.medium14(context),
-          ),
-        ),
-      ],
     );
   }
 }
