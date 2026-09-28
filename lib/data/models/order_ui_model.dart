@@ -1,3 +1,5 @@
+import 'cart_item_model.dart';
+
 enum OrderStatus {
   received(0),
   preparing(1),
@@ -14,6 +16,11 @@ class OrderUiModel {
   final int totalItems;
   final double totalPrice;
   final OrderStatus status;
+  final String? customerName;
+  final String? phoneNumber;
+  final String? address;
+  final String? paymentMethod;
+  final List<CartItemModel> items;
 
   const OrderUiModel({
     required this.orderId,
@@ -21,7 +28,38 @@ class OrderUiModel {
     required this.totalItems,
     required this.totalPrice,
     required this.status,
+    this.customerName,
+    this.phoneNumber,
+    this.address,
+    this.paymentMethod,
+    this.items = const [],
   });
+
+  OrderUiModel copyWith({
+    String? orderId,
+    String? date,
+    int? totalItems,
+    double? totalPrice,
+    OrderStatus? status,
+    String? customerName,
+    String? phoneNumber,
+    String? address,
+    String? paymentMethod,
+    List<CartItemModel>? items,
+  }) {
+    return OrderUiModel(
+      orderId: orderId ?? this.orderId,
+      date: date ?? this.date,
+      totalItems: totalItems ?? this.totalItems,
+      totalPrice: totalPrice ?? this.totalPrice,
+      status: status ?? this.status,
+      customerName: customerName ?? this.customerName,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      address: address ?? this.address,
+      paymentMethod: paymentMethod ?? this.paymentMethod,
+      items: items ?? this.items,
+    );
+  }
 }
 
 const List<OrderUiModel> kDummyOrders = [
