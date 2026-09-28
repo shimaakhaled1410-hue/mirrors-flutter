@@ -15,12 +15,7 @@ class GlassSafetyGuideWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [AppColors.accent.withValues(alpha: 0.1), surface],
-          stops: const [0, 0.55],
-        ),
+        color: surface,
         borderRadius: BorderRadius.circular(24),
         border: Border.all(
           color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
@@ -41,19 +36,12 @@ class GlassSafetyGuideWidget extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(9),
                 decoration: BoxDecoration(
-                  gradient: AppColors.accentGradient,
+                  color: AppColors.accent.withValues(alpha: 0.14),
                   borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.accent.withValues(alpha: 0.35),
-                      blurRadius: 10,
-                      offset: const Offset(0, 4),
-                    ),
-                  ],
                 ),
                 child: const Icon(
                   Icons.shield_outlined,
-                  color: Colors.white,
+                  color: AppColors.accent,
                   size: 20,
                 ),
               ),

@@ -169,7 +169,7 @@ class _CartSummaryWidgetState extends State<CartSummaryWidget> {
                           const Icon(
                             Icons.arrow_forward_rounded,
                             size: 18,
-                            color: AppColors.accent,
+                            color: AppColors.accentSoft,
                             // matchTextDirection: true,
                           ),
                         ],

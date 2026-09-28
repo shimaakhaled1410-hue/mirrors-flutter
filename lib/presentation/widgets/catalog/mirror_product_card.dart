@@ -59,8 +59,8 @@ class MirrorProductCard extends StatelessWidget {
                           colors: [
                             background,
                             isDark
-                                ? const Color(0xFF191D23)
-                                : const Color(0xFFEDF0F4),
+                                ? const Color(0xFF1A1320)
+                                : const Color(0xFFF0E8EB),
                           ],
                         ),
                       ),
@@ -117,7 +117,7 @@ class MirrorProductCard extends StatelessWidget {
                         color: AppColors.primary.withValues(alpha: 0.92),
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(
-                          color: AppColors.accent.withValues(alpha: 0.35),
+                          color: AppColors.accentSoft.withValues(alpha: 0.4),
                         ),
                       ),
                       child: Row(
@@ -126,7 +126,7 @@ class MirrorProductCard extends StatelessWidget {
                           const Icon(
                             Icons.straighten_rounded,
                             size: 12,
-                            color: AppColors.accent,
+                            color: AppColors.accentSoft,
                           ),
                           const SizedBox(width: 4),
                           Text(

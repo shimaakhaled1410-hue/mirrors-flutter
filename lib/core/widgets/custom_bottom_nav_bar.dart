@@ -93,11 +93,11 @@ class CustomBottomNavBar extends StatelessWidget {
                             height: 3,
                             margin: const EdgeInsets.only(bottom: 5),
                             decoration: BoxDecoration(
-                              color: AppColors.accent,
+                              color: AppColors.accentSoft,
                               borderRadius: BorderRadius.circular(2),
                               boxShadow: [
                                 BoxShadow(
-                                  color: AppColors.accent.withValues(
+                                  color: AppColors.accentSoft.withValues(
                                     alpha: 0.6,
                                   ),
                                   blurRadius: 6,
@@ -122,7 +122,7 @@ class CustomBottomNavBar extends StatelessWidget {
                           type: MaterialType.transparency,
                           child: InkWell(
                             borderRadius: BorderRadius.circular(24),
-                            splashColor: AppColors.accent.withValues(
+                            splashColor: AppColors.accentSoft.withValues(
                               alpha: 0.12,
                             ),
                             highlightColor: Colors.transparent,
@@ -152,7 +152,7 @@ class CustomBottomNavBar extends StatelessWidget {
                                       key: ValueKey(isSelected),
                                       size: 22,
                                       color: isSelected
-                                          ? AppColors.accent
+                                          ? AppColors.accentSoft
                                           : inactive,
                                     ),
                                   ),
