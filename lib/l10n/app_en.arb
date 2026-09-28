@@ -37,5 +37,15 @@
   "contactSupport": "Chat with Store via WhatsApp",
   "appSettings": "Settings",
   "darkMode": "Dark Mode",
-  "changeLanguage": "Language"
+  "changeLanguage": "Language",
+  "cartTitle": "Shopping Cart",
+  "emptyCart": "Your cart is empty",
+  "subtotal": "Subtotal",
+  "shippingFee": "Shipping",
+  "total": "Total",
+  "checkout": "Proceed to Checkout",
+  "paymentMethod": "Payment Method",
+  "cashOnDelivery": "Cash on Delivery",
+  "vodafoneCash": "Vodafone Cash",
+  "visaCard": "Credit Card"
 }

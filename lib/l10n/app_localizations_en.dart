@@ -123,4 +123,34 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get changeLanguage => 'Language';
+
+  @override
+  String get cartTitle => 'Shopping Cart';
+
+  @override
+  String get emptyCart => 'Your cart is empty';
+
+  @override
+  String get subtotal => 'Subtotal';
+
+  @override
+  String get shippingFee => 'Shipping';
+
+  @override
+  String get total => 'Total';
+
+  @override
+  String get checkout => 'Proceed to Checkout';
+
+  @override
+  String get paymentMethod => 'Payment Method';
+
+  @override
+  String get cashOnDelivery => 'Cash on Delivery';
+
+  @override
+  String get vodafoneCash => 'Vodafone Cash';
+
+  @override
+  String get visaCard => 'Credit Card';
 }

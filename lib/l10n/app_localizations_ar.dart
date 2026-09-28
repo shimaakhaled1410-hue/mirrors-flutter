@@ -123,4 +123,34 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get changeLanguage => 'اللغة';
+
+  @override
+  String get cartTitle => 'سلة المشتريات';
+
+  @override
+  String get emptyCart => 'سلة المشتريات فارغة';
+
+  @override
+  String get subtotal => 'المجموع الفرعي';
+
+  @override
+  String get shippingFee => 'مصاريف الشحن';
+
+  @override
+  String get total => 'الإجمالي الكلي';
+
+  @override
+  String get checkout => 'إتمام الطلب';
+
+  @override
+  String get paymentMethod => 'طريقة الدفع';
+
+  @override
+  String get cashOnDelivery => 'الدفع عند الاستلام';
+
+  @override
+  String get vodafoneCash => 'فودافون كاش';
+
+  @override
+  String get visaCard => 'بطاقة بنكية';
 }

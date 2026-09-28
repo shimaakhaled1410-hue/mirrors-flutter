@@ -325,6 +325,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Language'**
   String get changeLanguage;
+
+  /// No description provided for @cartTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Shopping Cart'**
+  String get cartTitle;
+
+  /// No description provided for @emptyCart.
+  ///
+  /// In en, this message translates to:
+  /// **'Your cart is empty'**
+  String get emptyCart;
+
+  /// No description provided for @subtotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Subtotal'**
+  String get subtotal;
+
+  /// No description provided for @shippingFee.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipping'**
+  String get shippingFee;
+
+  /// No description provided for @total.
+  ///
+  /// In en, this message translates to:
+  /// **'Total'**
+  String get total;
+
+  /// No description provided for @checkout.
+  ///
+  /// In en, this message translates to:
+  /// **'Proceed to Checkout'**
+  String get checkout;
+
+  /// No description provided for @paymentMethod.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment Method'**
+  String get paymentMethod;
+
+  /// No description provided for @cashOnDelivery.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash on Delivery'**
+  String get cashOnDelivery;
+
+  /// No description provided for @vodafoneCash.
+  ///
+  /// In en, this message translates to:
+  /// **'Vodafone Cash'**
+  String get vodafoneCash;
+
+  /// No description provided for @visaCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Credit Card'**
+  String get visaCard;
 }
 
 class _AppLocalizationsDelegate

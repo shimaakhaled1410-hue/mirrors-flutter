@@ -37,5 +37,15 @@
   "contactSupport": "تواصل مع المتجر عبر الواتساب",
   "appSettings": "الإعدادات",
   "darkMode": "الوضع الداكن",
-  "changeLanguage": "اللغة"
+  "changeLanguage": "اللغة",
+  "cartTitle": "سلة المشتريات",
+  "emptyCart": "سلة المشتريات فارغة",
+  "subtotal": "المجموع الفرعي",
+  "shippingFee": "مصاريف الشحن",
+  "total": "الإجمالي الكلي",
+  "checkout": "إتمام الطلب",
+  "paymentMethod": "طريقة الدفع",
+  "cashOnDelivery": "الدفع عند الاستلام",
+  "vodafoneCash": "فودافون كاش",
+  "visaCard": "بطاقة بنكية"
 }
