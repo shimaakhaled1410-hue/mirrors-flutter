@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mirrors_app/core/widgets/animated_widgets.dart';
 import 'package:mirrors_app/l10n/app_localizations.dart';
+
 import '../../data/models/mirror_ui_model.dart';
+import '../manager/cart/cart_cubit.dart';
 import '../widgets/catalog/category_toggle_filter.dart';
 import '../widgets/catalog/wholesale_product_card.dart';
 
@@ -52,7 +55,22 @@ class _WholesaleViewState extends State<WholesaleView> {
                 child: WholesaleProductCard(
                   mirror: mirror,
                   onAddToCart: (tier, totalPrice) {
-                    // TODO: Add wholesale batch to cart
+                    // Add wholesale batch to CartCubit
+                    context
+                        .read<CartCubit>()
+                        .addWholesaleBatch(mirror, tier.quantity);
+
+                    // Show confirmation SnackBar
+                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          '${mirror.dimensions} ${l10n.cm} • ${tier.quantity} ${l10n.piecesCount} (${totalPrice.toInt()} ${l10n.egp})',
+                        ),
+                        duration: const Duration(seconds: 1),
+                        behavior: SnackBarBehavior.floating,
+                      ),
+                    );
                   },
                 ),
               );
