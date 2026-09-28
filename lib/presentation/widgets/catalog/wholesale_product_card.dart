@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mirrors_app/core/widgets/animated_widgets.dart';
 import 'package:mirrors_app/l10n/app_localizations.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_styles.dart';
@@ -29,65 +30,83 @@ class _WholesaleProductCardState extends State<WholesaleProductCard> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final border = isDark ? AppColors.darkBorder : AppColors.lightBorder;
 
     return Container(
-      margin: const EdgeInsets.only(bottom: 14),
-      padding: const EdgeInsets.all(14),
+      margin: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: isDark ? AppColors.darkSurface : AppColors.lightSurface,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
-        ),
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: border),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: isDark ? 0.2 : 0.03),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
+            color: Colors.black.withValues(alpha: isDark ? 0.28 : 0.05),
+            blurRadius: 20,
+            offset: const Offset(0, 8),
           ),
         ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Top Row: Dimensions & Base wholesale piece price
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: AppColors.primary.withValues(alpha: 0.1),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Icon(
-                      widget.mirror.category == MirrorCategory.framed
-                          ? Icons.crop_portrait_rounded
-                          : Icons.layers_rounded,
-                      color: AppColors.accent,
-                      size: 20,
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '${widget.mirror.dimensions} ${l10n.cm}',
-                        style: AppStyles.semiBold16(context),
+              Expanded(
+                child: Row(
+                  children: [
+                    Container(
+                      width: 46,
+                      height: 46,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            AppColors.accent.withValues(alpha: 0.22),
+                            AppColors.accent.withValues(alpha: 0.06),
+                          ],
+                        ),
+                        borderRadius: BorderRadius.circular(14),
+                        border: Border.all(
+                          color: AppColors.accent.withValues(alpha: 0.25),
+                        ),
                       ),
-                      Text(
+                      child: Icon(
                         widget.mirror.category == MirrorCategory.framed
-                            ? l10n.framedMirrors
-                            : l10n.adhesiveMirrors,
-                        style: AppStyles.regular12(context),
+                            ? Icons.crop_portrait_rounded
+                            : Icons.layers_rounded,
+                        color: AppColors.accent,
+                        size: 22,
                       ),
-                    ],
-                  ),
-                ],
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '${widget.mirror.dimensions} ${l10n.cm}',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: AppStyles.semiBold16(context),
+                          ),
+                          Text(
+                            widget.mirror.category == MirrorCategory.framed
+                                ? l10n.framedMirrors
+                                : l10n.adhesiveMirrors,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: AppStyles.regular12(context),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
+              const SizedBox(width: 8),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
@@ -103,8 +122,7 @@ class _WholesaleProductCardState extends State<WholesaleProductCard> {
               ),
             ],
           ),
-          const SizedBox(height: 12),
-          // Middle: Tier Selector
+          const SizedBox(height: 16),
           WholesaleTierSelector(
             selectedTier: _selectedTier,
             onTierSelected: (tier) {
@@ -113,47 +131,101 @@ class _WholesaleProductCardState extends State<WholesaleProductCard> {
               });
             },
           ),
-          const SizedBox(height: 14),
-          const Divider(height: 1),
-          const SizedBox(height: 12),
-          // Bottom Row: Total Calculations & Add to Cart button
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(l10n.totalPrice, style: AppStyles.regular12(context)),
-                  Text(
-                    '${_totalPrice.toInt()} ${l10n.egp}',
-                    style: AppStyles.bold18(
-                      context,
-                    ).copyWith(color: AppColors.accent),
-                  ),
-                ],
-              ),
-              ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary,
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 10,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+          const SizedBox(height: 16),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+            decoration: BoxDecoration(
+              color: isDark
+                  ? AppColors.darkBackground
+                  : AppColors.lightBackground,
+              borderRadius: BorderRadius.circular(18),
+              border: Border.all(color: border),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        l10n.totalPrice,
+                        style: AppStyles.regular12(context),
+                      ),
+                      AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 250),
+                        switchInCurve: Curves.easeOutCubic,
+                        transitionBuilder: (child, animation) {
+                          return FadeTransition(
+                            opacity: animation,
+                            child: SlideTransition(
+                              position: Tween<Offset>(
+                                begin: const Offset(0, 0.3),
+                                end: Offset.zero,
+                              ).animate(animation),
+                              child: child,
+                            ),
+                          );
+                        },
+                        child: Text(
+                          '${_totalPrice.toInt()} ${l10n.egp}',
+                          key: ValueKey(_totalPrice.toInt()),
+                          style: AppStyles.bold18(
+                            context,
+                          ).copyWith(color: AppColors.accent),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                icon: const Icon(Icons.add_shopping_cart_rounded, size: 18),
-                label: Text(
-                  l10n.addToCart,
-                  style: AppStyles.semiBold16(
-                    context,
-                  ).copyWith(color: Colors.white, fontSize: 13),
+                PressableScale(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      gradient: AppColors.primaryGradient,
+                      borderRadius: BorderRadius.circular(14),
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.primary.withValues(alpha: 0.35),
+                          blurRadius: 12,
+                          offset: const Offset(0, 5),
+                        ),
+                      ],
+                    ),
+                    child: Material(
+                      type: MaterialType.transparency,
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(14),
+                        onTap: () =>
+                            widget.onAddToCart(_selectedTier, _totalPrice),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 11,
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Icon(
+                                Icons.add_shopping_cart_rounded,
+                                size: 18,
+                                color: Colors.white,
+                              ),
+                              const SizedBox(width: 8),
+                              Text(
+                                l10n.addToCart,
+                                style: AppStyles.semiBold16(
+                                  context,
+                                ).copyWith(color: Colors.white, fontSize: 13),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
-                onPressed: () => widget.onAddToCart(_selectedTier, _totalPrice),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),

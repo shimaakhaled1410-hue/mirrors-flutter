@@ -41,32 +41,54 @@ class WholesaleTierSelector extends StatelessWidget {
         children: WholesaleTier.values.map((tier) {
           final isSelected = selectedTier == tier;
           return Padding(
-            padding: const EdgeInsets.only(right: 8),
-            child: InkWell(
-              borderRadius: BorderRadius.circular(12),
-              onTap: () => onTierSelected(tier),
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                decoration: BoxDecoration(
+            padding: const EdgeInsetsDirectional.only(end: 8),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 250),
+              curve: Curves.easeOutCubic,
+              decoration: BoxDecoration(
+                color: isSelected
+                    ? AppColors.primary
+                    : (isDark
+                          ? AppColors.darkBackground
+                          : AppColors.lightBackground),
+                borderRadius: BorderRadius.circular(14),
+                border: Border.all(
                   color: isSelected
-                      ? AppColors.primary
-                      : (isDark ? AppColors.darkBackground : AppColors.lightBackground),
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(
-                    color: isSelected
-                        ? AppColors.accent
-                        : (isDark ? AppColors.darkBorder : AppColors.lightBorder),
-                  ),
+                      ? AppColors.accent
+                      : (isDark
+                            ? AppColors.darkBorder
+                            : AppColors.lightBorder),
                 ),
-                child: Text(
-                  _getTierLabel(context, tier),
-                  style: isSelected
-                      ? AppStyles.semiBold16(context).copyWith(
-                          fontSize: 12,
-                          color: Colors.white,
-                        )
-                      : AppStyles.regular12(context),
+                boxShadow: isSelected
+                    ? [
+                        BoxShadow(
+                          color: AppColors.primary.withValues(alpha: 0.3),
+                          blurRadius: 10,
+                          offset: const Offset(0, 4),
+                        ),
+                      ]
+                    : const [],
+              ),
+              child: Material(
+                type: MaterialType.transparency,
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(14),
+                  onTap: () => onTierSelected(tier),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 9,
+                    ),
+                    child: AnimatedDefaultTextStyle(
+                      duration: const Duration(milliseconds: 250),
+                      style: isSelected
+                          ? AppStyles.semiBold16(
+                              context,
+                            ).copyWith(fontSize: 12, color: Colors.white)
+                          : AppStyles.regular12(context),
+                      child: Text(_getTierLabel(context, tier)),
+                    ),
+                  ),
                 ),
               ),
             ),

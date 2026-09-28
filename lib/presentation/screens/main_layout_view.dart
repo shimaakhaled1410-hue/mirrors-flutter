@@ -6,6 +6,7 @@ import 'package:mirrors_app/presentation/screens/orders_view.dart';
 import 'package:mirrors_app/presentation/screens/profile_view.dart';
 import 'package:mirrors_app/presentation/screens/retail_view.dart';
 import 'package:mirrors_app/presentation/screens/wholesale_view.dart';
+import '../../../../core/utils/app_colors.dart';
 import '../../../../core/widgets/custom_bottom_nav_bar.dart';
 
 class MainLayoutView extends StatefulWidget {
@@ -25,29 +26,54 @@ class _MainLayoutViewState extends State<MainLayoutView> {
     ProfileView(),
   ];
 
+  Widget _buildAction(
+    BuildContext context, {
+    required IconData icon,
+    required VoidCallback onPressed,
+  }) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    return IconButton(
+      icon: Icon(icon, size: 20),
+      style: IconButton.styleFrom(
+        backgroundColor: isDark
+            ? AppColors.darkSurface
+            : AppColors.lightSurface,
+        side: BorderSide(
+          color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+      ),
+      onPressed: onPressed,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
-      extendBody:
-          true, // Allows content to show gracefully behind the floating bar
+      extendBody: true,
       appBar: AppBar(
         scrolledUnderElevation: 0,
         title: Text(l10n.appTitle),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.shopping_bag_outlined),
+          _buildAction(
+            context,
+            icon: Icons.shopping_bag_outlined,
             onPressed: () {
               context.push(AppRouter.cart);
             },
           ),
-          IconButton(
-            icon: const Icon(Icons.chat_bubble_outline_rounded),
+          const SizedBox(width: 6),
+          _buildAction(
+            context,
+            icon: Icons.chat_bubble_outline_rounded,
             onPressed: () {
               // TODO: Open WhatsApp support action sheet
             },
           ),
+          const SizedBox(width: 12),
         ],
       ),
       body: IndexedStack(index: _currentIndex, children: _screens),

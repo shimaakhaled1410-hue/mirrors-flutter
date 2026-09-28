@@ -13,6 +13,8 @@ class OrderProgressStepper extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final idleColor = isDark ? AppColors.darkBorder : AppColors.lightBorder;
+    final doneColor = isDark ? AppColors.primaryLight : AppColors.primary;
 
     final steps = [
       {'title': l10n.orderReceived, 'icon': Icons.receipt_long_rounded},
@@ -20,6 +22,21 @@ class OrderProgressStepper extends StatelessWidget {
       {'title': l10n.orderShipping, 'icon': Icons.local_shipping_rounded},
       {'title': l10n.orderDelivered, 'icon': Icons.check_circle_rounded},
     ];
+
+    Widget line(bool active) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 4),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 450),
+          curve: Curves.easeOutCubic,
+          height: 3,
+          decoration: BoxDecoration(
+            color: active ? AppColors.accent : idleColor,
+            borderRadius: BorderRadius.circular(2),
+          ),
+        ),
+      );
+    }
 
     return Row(
       children: List.generate(steps.length, (index) {
@@ -35,33 +52,33 @@ class OrderProgressStepper extends StatelessWidget {
                   Expanded(
                     child: index == 0
                         ? const SizedBox.shrink()
-                        : Container(
-                            height: 2,
-                            color: currentStatus.step >= index
-                                ? AppColors.accent
-                                : (isDark
-                                      ? AppColors.darkBorder
-                                      : AppColors.lightBorder),
-                          ),
+                        : line(currentStatus.step >= index),
                   ),
-                  Container(
-                    width: 32,
-                    height: 32,
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 400),
+                    curve: Curves.easeOutCubic,
+                    width: 34,
+                    height: 34,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: isCompleted
-                          ? (isCurrent ? AppColors.accent : AppColors.primary)
+                          ? (isCurrent ? AppColors.accent : doneColor)
                           : (isDark
                                 ? AppColors.darkBackground
                                 : AppColors.lightBackground),
                       border: Border.all(
-                        color: isCompleted
-                            ? AppColors.accent
-                            : (isDark
-                                  ? AppColors.darkBorder
-                                  : AppColors.lightBorder),
+                        color: isCompleted ? AppColors.accent : idleColor,
                         width: 1.5,
                       ),
+                      boxShadow: isCurrent
+                          ? [
+                              BoxShadow(
+                                color: AppColors.accent.withValues(alpha: 0.45),
+                                blurRadius: 14,
+                                spreadRadius: 2,
+                              ),
+                            ]
+                          : const [],
                     ),
                     child: Icon(
                       step['icon'] as IconData,
@@ -76,18 +93,11 @@ class OrderProgressStepper extends StatelessWidget {
                   Expanded(
                     child: index == steps.length - 1
                         ? const SizedBox.shrink()
-                        : Container(
-                            height: 2,
-                            color: currentStatus.step > index
-                                ? AppColors.accent
-                                : (isDark
-                                      ? AppColors.darkBorder
-                                      : AppColors.lightBorder),
-                          ),
+                        : line(currentStatus.step > index),
                   ),
                 ],
               ),
-              const SizedBox(height: 6),
+              const SizedBox(height: 8),
               Text(
                 step['title'] as String,
                 textAlign: TextAlign.center,

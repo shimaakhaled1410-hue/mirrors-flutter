@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mirrors_app/core/widgets/animated_widgets.dart';
 import 'package:mirrors_app/l10n/app_localizations.dart';
 import '../../data/models/mirror_ui_model.dart';
 import '../widgets/catalog/category_toggle_filter.dart';
@@ -35,20 +36,25 @@ class _WholesaleViewState extends State<WholesaleView> {
         ),
         Expanded(
           child: ListView.builder(
+            key: ValueKey(_selectedCategory),
+            physics: const BouncingScrollPhysics(),
             padding: const EdgeInsets.only(
               left: 16,
               right: 16,
               top: 8,
-              bottom: 100, // padding to float above bottom navigation bar
+              bottom: 100,
             ),
             itemCount: filteredMirrors.length,
             itemBuilder: (context, index) {
               final mirror = filteredMirrors[index];
-              return WholesaleProductCard(
-                mirror: mirror,
-                onAddToCart: (tier, totalPrice) {
-                  // TODO: Add wholesale batch to cart
-                },
+              return FadeSlideIn(
+                index: index,
+                child: WholesaleProductCard(
+                  mirror: mirror,
+                  onAddToCart: (tier, totalPrice) {
+                    // TODO: Add wholesale batch to cart
+                  },
+                ),
               );
             },
           ),
