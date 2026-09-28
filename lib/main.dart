@@ -3,13 +3,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:mirrors_app/l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/routing/app_router.dart';
 import 'core/theme/app_theme.dart';
+import 'l10n/app_localizations.dart';
 import 'presentation/manager/app_settings/app_settings_cubit.dart';
 import 'presentation/manager/app_settings/app_settings_state.dart';
+import 'presentation/manager/cart/cart_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,8 +19,11 @@ void main() async {
   runApp(
     DevicePreview(
       enabled: !kReleaseMode,
-      builder: (context) => BlocProvider(
-        create: (_) => AppSettingsCubit(prefs),
+      builder: (context) => MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (_) => AppSettingsCubit(prefs)),
+          BlocProvider(create: (_) => CartCubit()),
+        ],
         child: const MirrorsApp(),
       ),
     ),

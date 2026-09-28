@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mirrors_app/core/widgets/animated_widgets.dart';
 import 'package:mirrors_app/l10n/app_localizations.dart';
+import 'package:mirrors_app/presentation/manager/cart/cart_cubit.dart';
 import 'package:mirrors_app/presentation/widgets/catalog/category_toggle_filter.dart';
 import 'package:mirrors_app/presentation/widgets/catalog/mirror_product_card.dart';
 import '../../data/models/mirror_ui_model.dart';
@@ -58,7 +60,17 @@ class _RetailViewState extends State<RetailView> {
                 child: MirrorProductCard(
                   mirror: mirror,
                   onAddToCart: () {
-                    // TODO: Add product to retail cart
+                    context.read<CartCubit>().addRetailItem(mirror);
+                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          '${mirror.dimensions} ${l10n.cm} - ${l10n.addToCart}',
+                        ),
+                        duration: const Duration(seconds: 1),
+                        behavior: SnackBarBehavior.floating,
+                      ),
+                    );
                   },
                   onPreview: () {
                     // TODO: Open Camera AR Preview
