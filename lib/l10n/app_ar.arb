@@ -47,5 +47,16 @@
   "paymentMethod": "طريقة الدفع",
   "cashOnDelivery": "الدفع عند الاستلام",
   "vodafoneCash": "فودافون كاش",
-  "visaCard": "بطاقة بنكية"
+  "visaCard": "بطاقة بنكية",
+  "checkoutTitle": "إتمام الطلب",
+  "shippingDetails": "بيانات الشحن والتوصيل",
+  "fullName": "الاسم بالكامل",
+  "phoneNumber": "رقم الهاتف",
+  "address": "العنوان بالتفصيل",
+  "notesOptional": "ملاحظات التوصيل (اختياري)",
+  "fieldRequired": "هذا الحقل مطلوب",
+  "invalidPhone": "يرجى إدخال رقم هاتف صحيح",
+  "placeOrder": "تأكيد وإرسال الطلب",
+  "orderPlacedSuccess": "تم تسجيل طلبك بنجاح!",
+  "goToOrders": "تتبع طلبي"
 }

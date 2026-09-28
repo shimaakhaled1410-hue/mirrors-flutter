@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mirrors_app/core/routing/app_routes.dart';
 import 'package:mirrors_app/core/widgets/animated_widgets.dart';
 import 'package:mirrors_app/l10n/app_localizations.dart';
 
@@ -21,10 +23,7 @@ class CartView extends StatelessWidget {
     final cartCubit = context.read<CartCubit>();
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.cartTitle),
-        scrolledUnderElevation: 0,
-      ),
+      appBar: AppBar(title: Text(l10n.cartTitle), scrolledUnderElevation: 0),
       body: BlocBuilder<CartCubit, CartState>(
         builder: (context, state) {
           final items = state.items;
@@ -90,7 +89,7 @@ class CartView extends StatelessWidget {
                           subtotal: state.subtotal,
                           shippingFee: _shippingFee,
                           onCheckout: () {
-                            // TODO: Proceed with order placement bottom-sheet
+                            context.push(AppRoutes.checkout);
                           },
                         ),
                       ),

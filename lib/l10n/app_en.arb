@@ -47,5 +47,16 @@
   "paymentMethod": "Payment Method",
   "cashOnDelivery": "Cash on Delivery",
   "vodafoneCash": "Vodafone Cash",
-  "visaCard": "Credit Card"
+  "visaCard": "Credit Card",
+  "checkoutTitle": "Checkout",
+  "shippingDetails": "Shipping Details",
+  "fullName": "Full Name",
+  "phoneNumber": "Phone Number",
+  "address": "Full Address",
+  "notesOptional": "Delivery Notes (Optional)",
+  "fieldRequired": "This field is required",
+  "invalidPhone": "Please enter a valid phone number",
+  "placeOrder": "Confirm & Place Order",
+  "orderPlacedSuccess": "Your order has been placed successfully!",
+  "goToOrders": "Track My Order"
 }

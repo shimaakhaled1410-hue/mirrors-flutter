@@ -1,23 +1,26 @@
 import 'package:go_router/go_router.dart';
 import '../../presentation/screens/cart_view.dart';
+import '../../presentation/screens/checkout_view.dart';
 import '../../presentation/screens/main_layout_view.dart';
+import 'app_routes.dart';
 
 class AppRouter {
   AppRouter._();
 
-  static const String mainLayout = '/';
-  static const String cart = '/cart';
-
   static final GoRouter router = GoRouter(
-    initialLocation: mainLayout,
+    initialLocation: AppRoutes.mainLayout,
     routes: [
       GoRoute(
-        path: mainLayout,
+        path: AppRoutes.mainLayout,
         builder: (context, state) => const MainLayoutView(),
       ),
       GoRoute(
-        path: cart,
+        path: AppRoutes.cart,
         builder: (context, state) => const CartView(),
+      ),
+      GoRoute(
+        path: AppRoutes.checkout,
+        builder: (context, state) => const CheckoutView(),
       ),
     ],
   );

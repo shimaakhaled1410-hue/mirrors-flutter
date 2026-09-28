@@ -153,4 +153,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get visaCard => 'Credit Card';
+
+  @override
+  String get checkoutTitle => 'Checkout';
+
+  @override
+  String get shippingDetails => 'Shipping Details';
+
+  @override
+  String get fullName => 'Full Name';
+
+  @override
+  String get phoneNumber => 'Phone Number';
+
+  @override
+  String get address => 'Full Address';
+
+  @override
+  String get notesOptional => 'Delivery Notes (Optional)';
+
+  @override
+  String get fieldRequired => 'This field is required';
+
+  @override
+  String get invalidPhone => 'Please enter a valid phone number';
+
+  @override
+  String get placeOrder => 'Confirm & Place Order';
+
+  @override
+  String get orderPlacedSuccess => 'Your order has been placed successfully!';
+
+  @override
+  String get goToOrders => 'Track My Order';
 }

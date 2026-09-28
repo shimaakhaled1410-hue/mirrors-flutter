@@ -385,6 +385,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Credit Card'**
   String get visaCard;
+
+  /// No description provided for @checkoutTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Checkout'**
+  String get checkoutTitle;
+
+  /// No description provided for @shippingDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipping Details'**
+  String get shippingDetails;
+
+  /// No description provided for @fullName.
+  ///
+  /// In en, this message translates to:
+  /// **'Full Name'**
+  String get fullName;
+
+  /// No description provided for @phoneNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone Number'**
+  String get phoneNumber;
+
+  /// No description provided for @address.
+  ///
+  /// In en, this message translates to:
+  /// **'Full Address'**
+  String get address;
+
+  /// No description provided for @notesOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery Notes (Optional)'**
+  String get notesOptional;
+
+  /// No description provided for @fieldRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'This field is required'**
+  String get fieldRequired;
+
+  /// No description provided for @invalidPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid phone number'**
+  String get invalidPhone;
+
+  /// No description provided for @placeOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm & Place Order'**
+  String get placeOrder;
+
+  /// No description provided for @orderPlacedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Your order has been placed successfully!'**
+  String get orderPlacedSuccess;
+
+  /// No description provided for @goToOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'Track My Order'**
+  String get goToOrders;
 }
 
 class _AppLocalizationsDelegate

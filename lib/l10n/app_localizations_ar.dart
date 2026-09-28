@@ -153,4 +153,37 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get visaCard => 'بطاقة بنكية';
+
+  @override
+  String get checkoutTitle => 'إتمام الطلب';
+
+  @override
+  String get shippingDetails => 'بيانات الشحن والتوصيل';
+
+  @override
+  String get fullName => 'الاسم بالكامل';
+
+  @override
+  String get phoneNumber => 'رقم الهاتف';
+
+  @override
+  String get address => 'العنوان بالتفصيل';
+
+  @override
+  String get notesOptional => 'ملاحظات التوصيل (اختياري)';
+
+  @override
+  String get fieldRequired => 'هذا الحقل مطلوب';
+
+  @override
+  String get invalidPhone => 'يرجى إدخال رقم هاتف صحيح';
+
+  @override
+  String get placeOrder => 'تأكيد وإرسال الطلب';
+
+  @override
+  String get orderPlacedSuccess => 'تم تسجيل طلبك بنجاح!';
+
+  @override
+  String get goToOrders => 'تتبع طلبي';
 }

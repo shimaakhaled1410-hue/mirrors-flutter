@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mirrors_app/core/routing/app_router.dart';
+import 'package:mirrors_app/core/routing/app_routes.dart';
 import 'package:mirrors_app/l10n/app_localizations.dart';
 import 'package:mirrors_app/presentation/manager/cart/cart_cubit.dart';
 import 'package:mirrors_app/presentation/manager/cart/cart_state.dart';
@@ -53,7 +53,7 @@ class _MainLayoutViewState extends State<MainLayoutView> {
                 ),
               ),
               onPressed: () {
-                context.push(AppRouter.cart);
+                context.push(AppRoutes.cart);
               },
             ),
             if (totalCount > 0)
