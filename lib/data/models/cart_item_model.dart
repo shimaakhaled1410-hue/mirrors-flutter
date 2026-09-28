@@ -32,4 +32,20 @@ class CartItemModel {
       unitPrice: unitPrice ?? this.unitPrice,
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'product': product.toJson(),
+        'quantity': quantity,
+        'isWholesale': isWholesale,
+        'unitPrice': unitPrice,
+      };
+
+  factory CartItemModel.fromJson(Map<String, dynamic> json) => CartItemModel(
+        id: json['id'] as String,
+        product: MirrorUiModel.fromJson(json['product'] as Map<String, dynamic>),
+        quantity: json['quantity'] as int,
+        isWholesale: json['isWholesale'] as bool,
+        unitPrice: (json['unitPrice'] as num).toDouble(),
+      );
 }
