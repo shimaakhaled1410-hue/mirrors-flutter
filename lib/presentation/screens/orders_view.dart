@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mirrors_app/core/routing/app_routes.dart';
 import 'package:mirrors_app/core/widgets/animated_widgets.dart';
 import 'package:mirrors_app/l10n/app_localizations.dart';
 import 'package:mirrors_app/presentation/manager/orders/orders_cubit.dart';
@@ -68,7 +70,7 @@ class OrdersView extends StatelessWidget {
               child: OrderCard(
                 order: order,
                 onTap: () {
-                  // TODO: Navigate to Order Details View
+                  context.push(AppRoutes.orderDetails, extra: order);
                 },
               ),
             );
