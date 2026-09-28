@@ -4,7 +4,7 @@ import '../../../data/models/order_ui_model.dart';
 import 'orders_state.dart';
 
 class OrdersCubit extends Cubit<OrdersState> {
-  OrdersCubit() : super(const OrdersState(orders: kDummyOrders));
+  OrdersCubit() : super(const OrdersState(orders: []));
 
   void placeOrder({
     required List<CartItemModel> items,

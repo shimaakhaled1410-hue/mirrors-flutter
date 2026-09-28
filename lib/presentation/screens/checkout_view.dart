@@ -44,13 +44,13 @@ class _CheckoutViewState extends State<CheckoutView> {
 
     // 1. Create order in OrdersCubit
     context.read<OrdersCubit>().placeOrder(
-          items: cartState.items,
-          totalPrice: total,
-          customerName: _nameController.text.trim(),
-          phoneNumber: _phoneController.text.trim(),
-          address: _addressController.text.trim(),
-          paymentMethod: _selectedPayment,
-        );
+      items: cartState.items,
+      totalPrice: total,
+      customerName: _nameController.text.trim(),
+      phoneNumber: _phoneController.text.trim(),
+      address: _addressController.text.trim(),
+      paymentMethod: _selectedPayment,
+    );
 
     // 2. Clear current cart
     context.read<CartCubit>().clearCart();
@@ -63,10 +63,12 @@ class _CheckoutViewState extends State<CheckoutView> {
         final isDark = Theme.of(dialogContext).brightness == Brightness.dark;
 
         return AlertDialog(
-          backgroundColor:
-              isDark ? AppColors.darkSurface : AppColors.lightSurface,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+          backgroundColor: isDark
+              ? AppColors.darkSurface
+              : AppColors.lightSurface,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+          ),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -102,13 +104,14 @@ class _CheckoutViewState extends State<CheckoutView> {
                     padding: const EdgeInsets.symmetric(vertical: 12),
                   ),
                   onPressed: () {
-                    Navigator.of(dialogContext).pop();
+                    dialogContext.pop();
                     context.go(AppRoutes.mainLayout);
                   },
                   child: Text(
                     l10n.goToOrders,
-                    style: AppStyles.semiBold16(dialogContext)
-                        .copyWith(color: Colors.white, fontSize: 14),
+                    style: AppStyles.semiBold16(
+                      dialogContext,
+                    ).copyWith(color: Colors.white, fontSize: 14),
                   ),
                 ),
               ),
@@ -156,8 +159,11 @@ class _CheckoutViewState extends State<CheckoutView> {
                       children: [
                         Row(
                           children: [
-                            const Icon(Icons.local_shipping_outlined,
-                                color: AppColors.accent, size: 20),
+                            const Icon(
+                              Icons.local_shipping_outlined,
+                              color: AppColors.accent,
+                              size: 20,
+                            ),
                             const SizedBox(width: 8),
                             Text(
                               l10n.shippingDetails,
@@ -217,34 +223,40 @@ class _CheckoutViewState extends State<CheckoutView> {
                 FadeSlideIn(
                   index: 1,
                   child: Container(
-                    padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
                       color: surface,
                       borderRadius: BorderRadius.circular(24),
                       border: Border.all(color: border),
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          l10n.paymentMethod,
-                          style: AppStyles.semiBold16(context),
+                    child: Material(
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.circular(24),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              l10n.paymentMethod,
+                              style: AppStyles.semiBold16(context),
+                            ),
+                            const SizedBox(height: 12),
+                            _buildRadioTile(
+                              title: l10n.cashOnDelivery,
+                              subtitle: 'الدفع نقداً للمندوب عند وصول المرآة',
+                              value: 'cash',
+                              icon: Icons.payments_outlined,
+                            ),
+                            const Divider(height: 12),
+                            _buildRadioTile(
+                              title: l10n.vodafoneCash,
+                              subtitle: 'تحويل للمحفظة: 01012345678',
+                              value: 'vodafone',
+                              icon: Icons.phone_android_rounded,
+                            ),
+                          ],
                         ),
-                        const SizedBox(height: 12),
-                        _buildRadioTile(
-                          title: l10n.cashOnDelivery,
-                          subtitle: 'الدفع نقداً للمندوب عند وصول المرآة',
-                          value: 'cash',
-                          icon: Icons.payments_outlined,
-                        ),
-                        const Divider(height: 12),
-                        _buildRadioTile(
-                          title: l10n.vodafoneCash,
-                          subtitle: 'تحويل للمحفظة: 01012345678',
-                          value: 'vodafone',
-                          icon: Icons.phone_android_rounded,
-                        ),
-                      ],
+                      ),
                     ),
                   ),
                 ),
@@ -265,28 +277,35 @@ class _CheckoutViewState extends State<CheckoutView> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(l10n.subtotal,
-                                style: AppStyles.regular14(context)),
-                            Text('${cartState.subtotal.toInt()} ${l10n.egp}',
-                                style: AppStyles.medium14(context)),
+                            Text(
+                              l10n.subtotal,
+                              style: AppStyles.regular14(context),
+                            ),
+                            Text(
+                              '${cartState.subtotal.toInt()} ${l10n.egp}',
+                              style: AppStyles.medium14(context),
+                            ),
                           ],
                         ),
                         const SizedBox(height: 8),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(l10n.shippingFee,
-                                style: AppStyles.regular14(context)),
-                            Text('${_shippingFee.toInt()} ${l10n.egp}',
-                                style: AppStyles.medium14(context)),
+                            Text(
+                              l10n.shippingFee,
+                              style: AppStyles.regular14(context),
+                            ),
+                            Text(
+                              '${_shippingFee.toInt()} ${l10n.egp}',
+                              style: AppStyles.medium14(context),
+                            ),
                           ],
                         ),
                         const Divider(height: 20),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(l10n.total,
-                                style: AppStyles.bold18(context)),
+                            Text(l10n.total, style: AppStyles.bold18(context)),
                             Text(
                               '${total.toInt()} ${l10n.egp}',
                               style: AppStyles.bold16Accent,
@@ -325,10 +344,9 @@ class _CheckoutViewState extends State<CheckoutView> {
                             child: Center(
                               child: Text(
                                 l10n.placeOrder,
-                                style: AppStyles.semiBold16(context).copyWith(
-                                  color: Colors.white,
-                                  fontSize: 15,
-                                ),
+                                style: AppStyles.semiBold16(
+                                  context,
+                                ).copyWith(color: Colors.white, fontSize: 15),
                               ),
                             ),
                           ),
@@ -399,7 +417,10 @@ class _CheckoutViewState extends State<CheckoutView> {
       activeColor: AppColors.accent,
       contentPadding: EdgeInsets.zero,
       secondary: Icon(icon, color: AppColors.accent),
-      title: Text(title, style: AppStyles.semiBold16(context).copyWith(fontSize: 14)),
+      title: Text(
+        title,
+        style: AppStyles.semiBold16(context).copyWith(fontSize: 14),
+      ),
       subtitle: Text(subtitle, style: AppStyles.regular12(context)),
       onChanged: (val) {
         if (val != null) {
