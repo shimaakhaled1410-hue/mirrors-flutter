@@ -4,7 +4,7 @@ import 'package:mirrors_app/l10n/app_localizations.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../../core/utils/app_styles.dart';
 
-enum PaymentMethod { cash, vodafoneCash, visa }
+// enum PaymentMethod { cash, vodafoneCash, visa }
 
 class CartSummaryWidget extends StatefulWidget {
   final double subtotal;
@@ -23,7 +23,7 @@ class CartSummaryWidget extends StatefulWidget {
 }
 
 class _CartSummaryWidgetState extends State<CartSummaryWidget> {
-  PaymentMethod _selectedPayment = PaymentMethod.cash;
+  // PaymentMethod _selectedPayment = PaymentMethod.cash;
 
   double get _total => widget.subtotal + widget.shippingFee;
 
@@ -105,33 +105,33 @@ class _CartSummaryWidgetState extends State<CartSummaryWidget> {
               ],
             ),
           ),
-          const SizedBox(height: 20),
-          Text(l10n.paymentMethod, style: AppStyles.semiBold16(context)),
-          const SizedBox(height: 10),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: [
-              _buildPaymentOption(
-                context,
-                title: l10n.cashOnDelivery,
-                icon: Icons.payments_outlined,
-                method: PaymentMethod.cash,
-              ),
-              _buildPaymentOption(
-                context,
-                title: l10n.vodafoneCash,
-                icon: Icons.phone_android_rounded,
-                method: PaymentMethod.vodafoneCash,
-              ),
-              _buildPaymentOption(
-                context,
-                title: l10n.visaCard,
-                icon: Icons.credit_card_rounded,
-                method: PaymentMethod.visa,
-              ),
-            ],
-          ),
+          // const SizedBox(height: 20),
+          // Text(l10n.paymentMethod, style: AppStyles.semiBold16(context)),
+          // const SizedBox(height: 10),
+          // Wrap(
+          //   spacing: 8,
+          //   runSpacing: 8,
+          //   children: [
+          //     _buildPaymentOption(
+          //       context,
+          //       title: l10n.cashOnDelivery,
+          //       icon: Icons.payments_outlined,
+          //       method: PaymentMethod.cash,
+          //     ),
+          //     _buildPaymentOption(
+          //       context,
+          //       title: l10n.vodafoneCash,
+          //       icon: Icons.phone_android_rounded,
+          //       method: PaymentMethod.vodafoneCash,
+          //     ),
+          //     _buildPaymentOption(
+          //       context,
+          //       title: l10n.visaCard,
+          //       icon: Icons.credit_card_rounded,
+          //       method: PaymentMethod.visa,
+          //     ),
+          //   ],
+          // ),
           const SizedBox(height: 20),
           SizedBox(
             width: double.infinity,
@@ -195,78 +195,80 @@ class _CartSummaryWidgetState extends State<CartSummaryWidget> {
     );
   }
 
-  Widget _buildPaymentOption(
-    BuildContext context, {
-    required String title,
-    required IconData icon,
-    required PaymentMethod method,
-  }) {
-    final isSelected = _selectedPayment == method;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+  // Widget _buildPaymentOption(
+  //   BuildContext context, {
+  //   required String title,
+  //   required IconData icon,
+  //   required PaymentMethod method,
+  // }) {
+  //   final isSelected = _selectedPayment == method;
+  //   final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 250),
-      curve: Curves.easeOutCubic,
-      decoration: BoxDecoration(
-        color: isSelected
-            ? AppColors.accent.withValues(alpha: 0.12)
-            : Colors.transparent,
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(
-          color: isSelected
-              ? AppColors.accent
-              : (isDark ? AppColors.darkBorder : AppColors.lightBorder),
-          width: isSelected ? 1.5 : 1,
-        ),
-      ),
-      child: Material(
-        type: MaterialType.transparency,
-        child: InkWell(
-          borderRadius: BorderRadius.circular(14),
-          onTap: () {
-            setState(() {
-              _selectedPayment = method;
-            });
-          },
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 9),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(
-                  icon,
-                  size: 17,
-                  color: isSelected ? AppColors.accent : null,
-                ),
-                const SizedBox(width: 6),
-                AnimatedDefaultTextStyle(
-                  duration: const Duration(milliseconds: 250),
-                  style: isSelected
-                      ? AppStyles.semiBold16(
-                          context,
-                        ).copyWith(fontSize: 12, color: AppColors.accent)
-                      : AppStyles.regular12(context),
-                  child: Text(title),
-                ),
-                AnimatedSize(
-                  duration: const Duration(milliseconds: 250),
-                  curve: Curves.easeOutCubic,
-                  child: isSelected
-                      ? const Padding(
-                          padding: EdgeInsetsDirectional.only(start: 6),
-                          child: Icon(
-                            Icons.check_circle_rounded,
-                            size: 15,
-                            color: AppColors.accent,
-                          ),
-                        )
-                      : const SizedBox.shrink(),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+  //   return AnimatedContainer(
+  //     duration: const Duration(milliseconds: 250),
+  //     curve: Curves.easeOutCubic,
+  //     decoration: BoxDecoration(
+  //       color: isSelected
+  //           ? AppColors.accent.withValues(alpha: 0.12)
+  //           : Colors.transparent,
+  //       borderRadius: BorderRadius.circular(14),
+  //       border: Border.all(
+  //         color: isSelected
+  //             ? AppColors.accent
+  //             : (isDark ? AppColors.darkBorder : AppColors.lightBorder),
+  //         width: isSelected ? 1.5 : 1,
+  //       ),
+  //     ),
+  //     child: Material(
+  //       type: MaterialType.transparency,
+  //       child: InkWell(
+  //         borderRadius: BorderRadius.circular(14),
+  //         onTap: () {
+  //           setState(() {
+  //             _selectedPayment = method;
+  //           });
+  //         },
+  //         child: Padding(
+  //           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 9),
+  //           child: Row(
+  //             mainAxisSize: MainAxisSize.min,
+  //             children: [
+  //               Icon(
+  //                 icon,
+  //                 size: 17,
+  //                 color: isSelected ? AppColors.accent : null,
+  //               ),
+  //               const SizedBox(width: 6),
+  //               AnimatedDefaultTextStyle(
+  //                 duration: const Duration(milliseconds: 250),
+  //                 style: isSelected
+  //                     ? AppStyles.semiBold16(
+  //                         context,
+  //                       ).copyWith(fontSize: 12, color: AppColors.accent)
+  //                     : AppStyles.regular12(context),
+  //                 child: Text(title),
+  //               ),
+  //               AnimatedSize(
+  //                 duration: const Duration(milliseconds: 250),
+  //                 curve: Curves.easeOutCubic,
+  //                 child: isSelected
+  //                     ? const Padding(
+  //                         padding: EdgeInsetsDirectional.only(start: 6),
+  //                         child: Icon(
+  //                           Icons.check_circle_rounded,
+  //                           size: 15,
+  //                           color: AppColors.accent,
+  //                         ),
+  //                       )
+  //                     : const SizedBox.shrink(),
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
+
+
 }
