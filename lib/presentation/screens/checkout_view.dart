@@ -31,12 +31,14 @@ class _CheckoutViewState extends State<CheckoutView> {
 
   static const double _shippingFee = 50.0;
   late final String _storeWalletNumber;
-  double _depositPaid = 0.0;
 
   @override
   void initState() {
     super.initState();
     _storeWalletNumber = dotenv.env['WALLET_PHONE_NUMBER'] ?? '01012345678';
+    final subtotal = context.read<CartCubit>().state.subtotal;
+    final minDeposit = (subtotal + _shippingFee) * 0.50;
+    _depositController.text = minDeposit.toInt().toString();
   }
 
   @override
@@ -51,16 +53,18 @@ class _CheckoutViewState extends State<CheckoutView> {
   }
 
   void _onConfirmOrder(BuildContext context, CartState cartState) {
+    FocusScope.of(context).unfocus();
     if (!_formKey.currentState!.validate()) return;
 
     final l10n = AppLocalizations.of(context)!;
     final total = cartState.subtotal + _shippingFee;
-    final remaining = (total - _depositPaid).clamp(0.0, total);
+    final depositPaid = double.tryParse(_depositController.text) ?? 0.0;
+    final remaining = (total - depositPaid).clamp(0.0, total);
 
     context.read<OrdersCubit>().placeOrder(
           items: cartState.items,
           totalPrice: total,
-          depositAmount: _depositPaid,
+          depositAmount: depositPaid,
           remainingAmount: remaining,
           customerName: _nameController.text.trim(),
           phoneNumber: _phoneController.text.trim(),
@@ -95,17 +99,11 @@ class _CheckoutViewState extends State<CheckoutView> {
           final total = cartState.subtotal + _shippingFee;
           final minDeposit = total * 0.50;
 
-          if (_depositController.text.isEmpty && total > 0) {
-            _depositPaid = minDeposit;
-            _depositController.text = minDeposit.toInt().toString();
-          }
-
-          final remaining = (total - _depositPaid).clamp(0.0, total);
-
           return Form(
             key: _formKey,
             child: ListView(
               physics: const BouncingScrollPhysics(),
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               padding: const EdgeInsets.all(16),
               children: [
                 FadeSlideIn(
@@ -126,22 +124,25 @@ class _CheckoutViewState extends State<CheckoutView> {
                     depositController: _depositController,
                     minDeposit: minDeposit,
                     total: total,
-                    onDepositChanged: (val) {
-                      setState(() {
-                        _depositPaid = double.tryParse(val) ?? 0.0;
-                      });
-                    },
                   ),
                 ),
                 const SizedBox(height: 16),
                 FadeSlideIn(
                   index: 2,
-                  child: CheckoutFinancialSummary(
-                    subtotal: cartState.subtotal,
-                    shippingFee: _shippingFee,
-                    total: total,
-                    depositPaid: _depositPaid,
-                    remaining: remaining,
+                  child: ValueListenableBuilder<TextEditingValue>(
+                    valueListenable: _depositController,
+                    builder: (context, value, _) {
+                      final depositPaid = double.tryParse(value.text) ?? 0.0;
+                      final remaining = (total - depositPaid).clamp(0.0, total);
+
+                      return CheckoutFinancialSummary(
+                        subtotal: cartState.subtotal,
+                        shippingFee: _shippingFee,
+                        total: total,
+                        depositPaid: depositPaid,
+                        remaining: remaining,
+                      );
+                    },
                   ),
                 ),
                 const SizedBox(height: 24),

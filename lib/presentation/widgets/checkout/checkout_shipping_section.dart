@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_styles.dart';
+import '../../../../core/widgets/app_text_field.dart';
 import '../../../../l10n/app_localizations.dart';
 
 class CheckoutShippingSection extends StatelessWidget {
@@ -46,21 +47,24 @@ class CheckoutShippingSection extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 16),
-          _buildInput(
-            context,
+          AppTextField(
             controller: nameController,
             label: l10n.fullName,
             icon: Icons.person_outline,
+            textInputAction: TextInputAction.next,
+            textCapitalization: TextCapitalization.words,
+            autofillHints: const [AutofillHints.name],
             validator: (v) =>
                 v == null || v.trim().isEmpty ? l10n.fieldRequired : null,
           ),
           const SizedBox(height: 14),
-          _buildInput(
-            context,
+          AppTextField(
             controller: phoneController,
             label: l10n.courierContactPhone,
             icon: Icons.phone_outlined,
             keyboardType: TextInputType.phone,
+            textInputAction: TextInputAction.next,
+            autofillHints: const [AutofillHints.telephoneNumber],
             validator: (v) {
               if (v == null || v.trim().isEmpty) return l10n.fieldRequired;
               if (v.trim().length < 10) return l10n.invalidPhone;
@@ -68,65 +72,27 @@ class CheckoutShippingSection extends StatelessWidget {
             },
           ),
           const SizedBox(height: 14),
-          _buildInput(
-            context,
+          AppTextField(
             controller: addressController,
             label: l10n.address,
             icon: Icons.location_on_outlined,
             maxLines: 2,
+            keyboardType: TextInputType.streetAddress,
+            textInputAction: TextInputAction.next,
+            textCapitalization: TextCapitalization.sentences,
+            autofillHints: const [AutofillHints.fullStreetAddress],
             validator: (v) =>
                 v == null || v.trim().isEmpty ? l10n.fieldRequired : null,
           ),
           const SizedBox(height: 14),
-          _buildInput(
-            context,
+          AppTextField(
             controller: notesController,
             label: l10n.notesOptional,
             icon: Icons.note_alt_outlined,
-            maxLines: 1,
+            textInputAction: TextInputAction.done,
+            textCapitalization: TextCapitalization.sentences,
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildInput(
-    BuildContext context, {
-    required TextEditingController controller,
-    required String label,
-    required IconData icon,
-    TextInputType? keyboardType,
-    int maxLines = 1,
-    String? Function(String?)? validator,
-  }) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    return TextFormField(
-      controller: controller,
-      keyboardType: keyboardType,
-      maxLines: maxLines,
-      validator: validator,
-      style: AppStyles.medium14(context),
-      decoration: InputDecoration(
-        labelText: label,
-        prefixIcon: Icon(icon, size: 20, color: AppColors.accent),
-        filled: true,
-        fillColor: isDark
-            ? AppColors.darkBackground
-            : AppColors.lightBackground,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide.none,
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(
-            color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
-          borderSide: const BorderSide(color: AppColors.accent, width: 1.5),
-        ),
       ),
     );
   }

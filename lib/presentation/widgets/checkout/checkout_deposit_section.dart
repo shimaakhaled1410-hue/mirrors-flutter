@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_styles.dart';
+import '../../../../core/widgets/app_text_field.dart';
 import '../../../../l10n/app_localizations.dart';
 
 class CheckoutDepositSection extends StatelessWidget {
@@ -10,7 +11,7 @@ class CheckoutDepositSection extends StatelessWidget {
   final TextEditingController depositController;
   final double minDeposit;
   final double total;
-  final ValueChanged<String> onDepositChanged;
+  final ValueChanged<String>? onDepositChanged;
 
   const CheckoutDepositSection({
     super.key,
@@ -19,7 +20,7 @@ class CheckoutDepositSection extends StatelessWidget {
     required this.depositController,
     required this.minDeposit,
     required this.total,
-    required this.onDepositChanged,
+    this.onDepositChanged,
   });
 
   @override
@@ -99,7 +100,6 @@ class CheckoutDepositSection extends StatelessWidget {
                       SnackBar(
                         content: Text(l10n.copiedSuccessfully),
                         duration: const Duration(seconds: 1),
-                        behavior: SnackBarBehavior.floating,
                       ),
                     );
                   },
@@ -107,25 +107,26 @@ class CheckoutDepositSection extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 14),
-          TextFormField(
+          const SizedBox(height: 16),
+          AppTextField(
             controller: senderWalletController,
+            label: l10n.senderWalletLabel,
+            icon: Icons.send_rounded,
             keyboardType: TextInputType.phone,
-            style: AppStyles.medium14(context),
+            textInputAction: TextInputAction.next,
             validator: (v) => v == null || v.trim().isEmpty
                 ? l10n.senderWalletValidation
                 : null,
-            decoration: _inputDecoration(
-              context,
-              label: l10n.senderWalletLabel,
-              icon: Icons.send_rounded,
-            ),
           ),
           const SizedBox(height: 14),
-          TextFormField(
+          AppTextField(
             controller: depositController,
+            label: l10n.depositAmountLabel(minDeposit.toInt(), l10n.egp),
+            icon: Icons.price_check_rounded,
+            suffixText: l10n.egp,
             keyboardType: TextInputType.number,
-            style: AppStyles.medium14(context),
+            textInputAction: TextInputAction.done,
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             onChanged: onDepositChanged,
             validator: (v) {
               final parsed = double.tryParse(v ?? '') ?? 0.0;
@@ -137,41 +138,8 @@ class CheckoutDepositSection extends StatelessWidget {
               }
               return null;
             },
-            decoration: _inputDecoration(
-              context,
-              label: l10n.depositAmountLabel(minDeposit.toInt(), l10n.egp),
-              icon: Icons.price_check_rounded,
-            ),
           ),
         ],
-      ),
-    );
-  }
-
-  InputDecoration _inputDecoration(
-    BuildContext context, {
-    required String label,
-    required IconData icon,
-  }) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    return InputDecoration(
-      labelText: label,
-      prefixIcon: Icon(icon, size: 20, color: AppColors.accent),
-      filled: true,
-      fillColor: isDark ? AppColors.darkBackground : AppColors.lightBackground,
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(16),
-        borderSide: BorderSide.none,
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(16),
-        borderSide: BorderSide(
-          color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
-        ),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(16),
-        borderSide: const BorderSide(color: AppColors.accent, width: 1.5),
       ),
     );
   }
