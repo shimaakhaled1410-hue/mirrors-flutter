@@ -3,12 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mirrors_app/core/routing/app_routes.dart';
 import 'package:mirrors_app/core/widgets/animated_widgets.dart';
+import 'package:mirrors_app/core/widgets/empty_state_widget.dart';
 import 'package:mirrors_app/l10n/app_localizations.dart';
 import 'package:mirrors_app/presentation/manager/orders/orders_cubit.dart';
 import 'package:mirrors_app/presentation/manager/orders/orders_state.dart';
 import 'package:mirrors_app/presentation/widgets/orders/order_card.dart';
-import '../../core/utils/app_colors.dart';
-import '../../core/utils/app_styles.dart';
 
 class OrdersView extends StatelessWidget {
   const OrdersView({super.key});
@@ -21,60 +20,40 @@ class OrdersView extends StatelessWidget {
       builder: (context, state) {
         final orders = state.orders;
 
-        if (orders.isEmpty) {
-          return Center(
-            child: FadeSlideIn(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    width: 88,
-                    height: 88,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColors.accent.withValues(alpha: 0.1),
-                      border: Border.all(
-                        color: AppColors.accent.withValues(alpha: 0.25),
+        return AnimatedSwitcher(
+          duration: const Duration(milliseconds: 300),
+          child: orders.isEmpty
+              ? EmptyStateWidget(
+                  key: const ValueKey('empty_orders'),
+                  icon: Icons.receipt_long_rounded,
+                  title: l10n.ordersEmptyTitle,
+                  subtitle: l10n.ordersEmptySubtitle,
+                  buttonText: l10n.browseCatalog,
+                  onButtonPressed: () => context.go(AppRoutes.mainLayout),
+                )
+              : ListView.builder(
+                  key: const ValueKey('orders_list'),
+                  physics: const BouncingScrollPhysics(),
+                  padding: const EdgeInsets.only(
+                    left: 16,
+                    right: 16,
+                    top: 14,
+                    bottom: 100,
+                  ),
+                  itemCount: orders.length,
+                  itemBuilder: (context, index) {
+                    final order = orders[index];
+                    return FadeSlideIn(
+                      index: index,
+                      child: OrderCard(
+                        order: order,
+                        onTap: () {
+                          context.push(AppRoutes.orderDetails, extra: order);
+                        },
                       ),
-                    ),
-                    child: const Icon(
-                      Icons.receipt_long_rounded,
-                      size: 38,
-                      color: AppColors.accent,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    l10n.ordersTab,
-                    style: AppStyles.semiBold16(context),
-                  ),
-                ],
-              ),
-            ),
-          );
-        }
-
-        return ListView.builder(
-          physics: const BouncingScrollPhysics(),
-          padding: const EdgeInsets.only(
-            left: 16,
-            right: 16,
-            top: 14,
-            bottom: 100,
-          ),
-          itemCount: orders.length,
-          itemBuilder: (context, index) {
-            final order = orders[index];
-            return FadeSlideIn(
-              index: index,
-              child: OrderCard(
-                order: order,
-                onTap: () {
-                  context.push(AppRoutes.orderDetails, extra: order);
-                },
-              ),
-            );
-          },
+                    );
+                  },
+                ),
         );
       },
     );

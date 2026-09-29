@@ -3,10 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mirrors_app/core/routing/app_routes.dart';
 import 'package:mirrors_app/core/widgets/animated_widgets.dart';
+import 'package:mirrors_app/core/widgets/empty_state_widget.dart';
 import 'package:mirrors_app/l10n/app_localizations.dart';
 
-import '../../core/utils/app_colors.dart';
-import '../../core/utils/app_styles.dart';
 import '../manager/cart/cart_cubit.dart';
 import '../manager/cart/cart_state.dart';
 import '../widgets/cart/cart_item_card.dart';
@@ -31,36 +30,13 @@ class CartView extends StatelessWidget {
           return AnimatedSwitcher(
             duration: const Duration(milliseconds: 300),
             child: items.isEmpty
-                ? Center(
-                    key: const ValueKey('empty'),
-                    child: FadeSlideIn(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Container(
-                            width: 96,
-                            height: 96,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: AppColors.accent.withValues(alpha: 0.1),
-                              border: Border.all(
-                                color: AppColors.accent.withValues(alpha: 0.25),
-                              ),
-                            ),
-                            child: const Icon(
-                              Icons.shopping_bag_outlined,
-                              size: 42,
-                              color: AppColors.accent,
-                            ),
-                          ),
-                          const SizedBox(height: 18),
-                          Text(
-                            l10n.emptyCart,
-                            style: AppStyles.semiBold16(context),
-                          ),
-                        ],
-                      ),
-                    ),
+                ? EmptyStateWidget(
+                    key: const ValueKey('empty_cart'),
+                    icon: Icons.shopping_bag_outlined,
+                    title: l10n.cartEmptyTitle,
+                    subtitle: l10n.cartEmptySubtitle,
+                    buttonText: l10n.startShopping,
+                    onButtonPressed: () => context.go(AppRoutes.mainLayout),
                   )
                 : ListView(
                     key: const ValueKey('items'),
