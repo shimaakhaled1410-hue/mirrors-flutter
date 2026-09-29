@@ -619,6 +619,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Information saved successfully'**
   String get infoSavedSuccess;
+
+  /// No description provided for @cancelOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel Order'**
+  String get cancelOrder;
+
+  /// No description provided for @cancelOrderDialogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel Order #{orderId}?'**
+  String cancelOrderDialogTitle(String orderId);
+
+  /// No description provided for @cancelOrderDialogMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to cancel this order? The store support team will contact you regarding your deposit refund.'**
+  String get cancelOrderDialogMessage;
+
+  /// No description provided for @confirmCancelButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, Cancel'**
+  String get confirmCancelButton;
+
+  /// No description provided for @keepOrderButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep Order'**
+  String get keepOrderButton;
+
+  /// No description provided for @orderCancelledSnackbar.
+  ///
+  /// In en, this message translates to:
+  /// **'Order has been cancelled successfully'**
+  String get orderCancelledSnackbar;
+
+  /// No description provided for @statusCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get statusCancelled;
 }
 
 class _AppLocalizationsDelegate

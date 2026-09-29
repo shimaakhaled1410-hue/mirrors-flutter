@@ -120,5 +120,17 @@
   },
  "editProfileTitle": "Edit Delivery Information",
   "saveChanges": "Save Changes",
-  "infoSavedSuccess": "Information saved successfully"
+  "infoSavedSuccess": "Information saved successfully",
+  "cancelOrder": "Cancel Order",
+  "cancelOrderDialogTitle": "Cancel Order #{orderId}?",
+  "@cancelOrderDialogTitle": {
+    "placeholders": {
+      "orderId": {"type": "String"}
+    }
+  },
+  "cancelOrderDialogMessage": "Are you sure you want to cancel this order? The store support team will contact you regarding your deposit refund.",
+  "confirmCancelButton": "Yes, Cancel",
+  "keepOrderButton": "Keep Order",
+  "orderCancelledSnackbar": "Order has been cancelled successfully",
+  "statusCancelled": "Cancelled"
 }

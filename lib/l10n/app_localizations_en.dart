@@ -286,4 +286,28 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get infoSavedSuccess => 'Information saved successfully';
+
+  @override
+  String get cancelOrder => 'Cancel Order';
+
+  @override
+  String cancelOrderDialogTitle(String orderId) {
+    return 'Cancel Order #$orderId?';
+  }
+
+  @override
+  String get cancelOrderDialogMessage =>
+      'Are you sure you want to cancel this order? The store support team will contact you regarding your deposit refund.';
+
+  @override
+  String get confirmCancelButton => 'Yes, Cancel';
+
+  @override
+  String get keepOrderButton => 'Keep Order';
+
+  @override
+  String get orderCancelledSnackbar => 'Order has been cancelled successfully';
+
+  @override
+  String get statusCancelled => 'Cancelled';
 }

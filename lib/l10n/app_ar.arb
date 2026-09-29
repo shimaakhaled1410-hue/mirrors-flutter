@@ -120,5 +120,17 @@
   },
   "editProfileTitle": "تعديل بيانات التوصيل",
   "saveChanges": "حفظ التعديلات",
-  "infoSavedSuccess": "تم حفظ البيانات بنجاح"
+  "infoSavedSuccess": "تم حفظ البيانات بنجاح",
+  "cancelOrder": "إلغاء الطلب",
+  "cancelOrderDialogTitle": "إلغاء الطلب #{orderId}؟",
+  "@cancelOrderDialogTitle": {
+    "placeholders": {
+      "orderId": {"type": "String"}
+    }
+  },
+  "cancelOrderDialogMessage": "هل أنت متأكد من رغبتك في إلغاء هذا الطلب؟ سيتواصل معك فريق الدعم بشأن استرداد العربون.",
+  "confirmCancelButton": "نعم، تأكيد الإلغاء",
+  "keepOrderButton": "الاحتفاظ بالطلب",
+  "orderCancelledSnackbar": "تم إلغاء الطلب بنجاح",
+  "statusCancelled": "ملغي"
 }

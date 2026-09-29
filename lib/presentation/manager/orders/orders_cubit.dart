@@ -30,7 +30,17 @@ class OrdersCubit extends Cubit<OrdersState> {
     final rawJson = jsonEncode(orders.map((o) => o.toJson()).toList());
     await _prefs.setString(AppStorageKeys.savedOrders, rawJson);
   }
+void cancelOrder(String orderId) {
+    final updatedOrders = state.orders.map((order) {
+      if (order.orderId == orderId) {
+        return order.copyWith(status: OrderStatus.cancelled);
+      }
+      return order;
+    }).toList();
 
+    emit(state.copyWith(orders: updatedOrders));
+    _saveOrders(updatedOrders);
+  }
   void placeOrder({
     required List<CartItemModel> items,
     required double totalPrice,

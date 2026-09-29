@@ -286,4 +286,28 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get infoSavedSuccess => 'تم حفظ البيانات بنجاح';
+
+  @override
+  String get cancelOrder => 'إلغاء الطلب';
+
+  @override
+  String cancelOrderDialogTitle(String orderId) {
+    return 'إلغاء الطلب #$orderId؟';
+  }
+
+  @override
+  String get cancelOrderDialogMessage =>
+      'هل أنت متأكد من رغبتك في إلغاء هذا الطلب؟ سيتواصل معك فريق الدعم بشأن استرداد العربون.';
+
+  @override
+  String get confirmCancelButton => 'نعم، تأكيد الإلغاء';
+
+  @override
+  String get keepOrderButton => 'الاحتفاظ بالطلب';
+
+  @override
+  String get orderCancelledSnackbar => 'تم إلغاء الطلب بنجاح';
+
+  @override
+  String get statusCancelled => 'ملغي';
 }
