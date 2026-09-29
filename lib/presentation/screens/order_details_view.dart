@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mirrors_app/core/utils/whatsapp_helper.dart';
 import '../../core/utils/app_colors.dart';
 import '../../core/utils/app_styles.dart';
 import '../../core/widgets/animated_widgets.dart';
@@ -198,6 +199,35 @@ class OrderDetailsView extends StatelessWidget {
                     ],
                   ),
                 ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 32),
+          // Contact Support Button
+          FadeSlideIn(
+            index: 5,
+            child: OutlinedButton.icon(
+              style: OutlinedButton.styleFrom(
+                foregroundColor: AppColors.accent,
+                side: const BorderSide(color: AppColors.accent),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                padding: const EdgeInsets.symmetric(vertical: 14),
+              ),
+              onPressed: () {
+                WhatsAppHelper.openChat(
+                  context: context,
+                  customMessage: l10n.orderSupportMessage(order.orderId),
+                  errorMessage: l10n.whatsappError,
+                );
+              },
+              icon: const Icon(Icons.chat_rounded, size: 20),
+              label: Text(
+                l10n.contactSupport,
+                style: AppStyles.semiBold16(
+                  context,
+                ).copyWith(fontSize: 14, color: AppColors.accent),
               ),
             ),
           ),

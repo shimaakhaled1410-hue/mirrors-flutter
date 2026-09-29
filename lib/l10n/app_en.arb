@@ -108,5 +108,14 @@
   },
   "depositPaidLabel": "Paid deposit:",
   "deliveryNotes": "Notes",
-  "quantity": "Quantity"
+  "quantity": "Quantity",
+  "contactSupport": "Contact Support",
+  "whatsappError": "Could not open WhatsApp. Please ensure it is installed on your device.",
+  "generalSupportMessage": "Hello, I would like to inquire about customized mirrors.",
+  "orderSupportMessage": "Hello, I would like to inquire about my order #{orderId}.",
+  "@orderSupportMessage": {
+    "placeholders": {
+      "orderId": {"type": "String"}
+    }
+  }
 }

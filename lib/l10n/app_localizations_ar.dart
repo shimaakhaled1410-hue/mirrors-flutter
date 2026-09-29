@@ -113,7 +113,7 @@ class AppLocalizationsAr extends AppLocalizations {
       'استخدم خطافات حائط متينة ومناسبة لتعليق مرايات الخيط.';
 
   @override
-  String get contactSupport => 'تواصل مع المتجر عبر الواتساب';
+  String get contactSupport => 'تواصل مع الدعم الفني';
 
   @override
   String get appSettings => 'الإعدادات';
@@ -264,4 +264,17 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get quantity => 'الكمية';
+
+  @override
+  String get whatsappError =>
+      'تعذر فتح تطبيق واتساب. يرجى التأكد من تثبيته على جهازك.';
+
+  @override
+  String get generalSupportMessage =>
+      'مرحباً، أود الاستفسار عن تفصيل وتجهيز المرايات.';
+
+  @override
+  String orderSupportMessage(String orderId) {
+    return 'مرحباً، أود الاستفسار بخصوص الطلب رقم #$orderId.';
+  }
 }

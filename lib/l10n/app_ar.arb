@@ -108,5 +108,14 @@
   },
   "depositPaidLabel": "العربون المدفوع:",
   "deliveryNotes": "ملاحظات",
-  "quantity": "الكمية"
+  "quantity": "الكمية",
+  "contactSupport": "تواصل مع الدعم الفني",
+  "whatsappError": "تعذر فتح تطبيق واتساب. يرجى التأكد من تثبيته على جهازك.",
+  "generalSupportMessage": "مرحباً، أود الاستفسار عن تفصيل وتجهيز المرايات.",
+  "orderSupportMessage": "مرحباً، أود الاستفسار بخصوص الطلب رقم #{orderId}.",
+  "@orderSupportMessage": {
+    "placeholders": {
+      "orderId": {"type": "String"}
+    }
+  }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mirrors_app/core/routing/app_routes.dart';
+import 'package:mirrors_app/core/utils/whatsapp_helper.dart';
 import 'package:mirrors_app/l10n/app_localizations.dart';
 import 'package:mirrors_app/presentation/manager/cart/cart_cubit.dart';
 import 'package:mirrors_app/presentation/manager/cart/cart_state.dart';
@@ -142,7 +143,11 @@ class _MainLayoutViewState extends State<MainLayoutView> {
             context,
             icon: Icons.chat_bubble_outline_rounded,
             onPressed: () {
-              // TODO: Open WhatsApp support action sheet
+              WhatsAppHelper.openChat(
+                context: context,
+                customMessage: l10n.generalSupportMessage,
+                errorMessage: l10n.whatsappError,
+              );
             },
           ),
           const SizedBox(width: 12),

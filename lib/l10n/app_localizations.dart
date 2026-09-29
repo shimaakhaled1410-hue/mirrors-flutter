@@ -305,7 +305,7 @@ abstract class AppLocalizations {
   /// No description provided for @contactSupport.
   ///
   /// In en, this message translates to:
-  /// **'Chat with Store via WhatsApp'**
+  /// **'Contact Support'**
   String get contactSupport;
 
   /// No description provided for @appSettings.
@@ -583,6 +583,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Quantity'**
   String get quantity;
+
+  /// No description provided for @whatsappError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not open WhatsApp. Please ensure it is installed on your device.'**
+  String get whatsappError;
+
+  /// No description provided for @generalSupportMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Hello, I would like to inquire about customized mirrors.'**
+  String get generalSupportMessage;
+
+  /// No description provided for @orderSupportMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Hello, I would like to inquire about my order #{orderId}.'**
+  String orderSupportMessage(String orderId);
 }
 
 class _AppLocalizationsDelegate

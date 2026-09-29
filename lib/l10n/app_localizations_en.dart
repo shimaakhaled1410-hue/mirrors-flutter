@@ -113,7 +113,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Use sturdy wall anchors for hanging rope-framed mirrors.';
 
   @override
-  String get contactSupport => 'Chat with Store via WhatsApp';
+  String get contactSupport => 'Contact Support';
 
   @override
   String get appSettings => 'Settings';
@@ -264,4 +264,17 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get quantity => 'Quantity';
+
+  @override
+  String get whatsappError =>
+      'Could not open WhatsApp. Please ensure it is installed on your device.';
+
+  @override
+  String get generalSupportMessage =>
+      'Hello, I would like to inquire about customized mirrors.';
+
+  @override
+  String orderSupportMessage(String orderId) {
+    return 'Hello, I would like to inquire about my order #$orderId.';
+  }
 }
