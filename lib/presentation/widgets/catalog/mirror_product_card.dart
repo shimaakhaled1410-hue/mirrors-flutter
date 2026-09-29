@@ -22,9 +22,16 @@ class MirrorProductCard extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final surface = isDark ? AppColors.darkSurface : AppColors.lightSurface;
-    final background = isDark
-        ? AppColors.darkBackground
-        : AppColors.lightBackground;
+    final background =
+        isDark ? AppColors.darkBackground : AppColors.lightBackground;
+    final secondary =
+        isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary;
+
+    final title = mirror.subCategory == RetailSubCategory.withShelf
+        ? l10n.mirrorWithShelf
+        : (mirror.category == MirrorCategory.framed
+            ? l10n.framedMirrors
+            : l10n.adhesiveMirrors);
 
     return Container(
       decoration: BoxDecoration(
@@ -47,7 +54,7 @@ class MirrorProductCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
-              flex: 3,
+              flex: 5,
               child: Stack(
                 children: [
                   Positioned.fill(
@@ -68,8 +75,8 @@ class MirrorProductCard extends StatelessWidget {
                   ),
                   Center(
                     child: Container(
-                      width: 92,
-                      height: 92,
+                      width: 88,
+                      height: 88,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: AppColors.accent.withValues(alpha: 0.08),
@@ -79,8 +86,8 @@ class MirrorProductCard extends StatelessWidget {
                       ),
                       child: Center(
                         child: Container(
-                          width: 64,
-                          height: 64,
+                          width: 60,
+                          height: 60,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: surface,
@@ -95,52 +102,46 @@ class MirrorProductCard extends StatelessWidget {
                             ],
                           ),
                           child: Icon(
-                            mirror.category == MirrorCategory.framed
-                                ? Icons.crop_portrait_rounded
-                                : Icons.layers_rounded,
-                            size: 30,
+                            mirror.subCategory == RetailSubCategory.withShelf
+                                ? Icons.shelves
+                                : (mirror.category == MirrorCategory.framed
+                                    ? Icons.crop_portrait_rounded
+                                    : Icons.layers_rounded),
+                            size: 28,
                             color: AppColors.accent,
                           ),
                         ),
                       ),
                     ),
                   ),
-                  PositionedDirectional(
-                    top: 10,
-                    start: 10,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 9,
-                        vertical: 5,
-                      ),
-                      decoration: BoxDecoration(
-                        color: AppColors.primary.withValues(alpha: 0.92),
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(
-                          color: AppColors.accentSoft.withValues(alpha: 0.4),
+                  if (mirror.isRetailOnly)
+                    PositionedDirectional(
+                      top: 10,
+                      start: 10,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: AppColors.accent.withValues(alpha: 0.16),
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(
+                            color: AppColors.accent.withValues(alpha: 0.4),
+                          ),
+                        ),
+                        child: Text(
+                          mirror.subCategory == RetailSubCategory.withShelf
+                              ? l10n.filterWithShelf
+                              : l10n.filterSpecialSizes,
+                          style: AppStyles.regular12(context).copyWith(
+                            color: AppColors.accent,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Icon(
-                            Icons.straighten_rounded,
-                            size: 12,
-                            color: AppColors.accentSoft,
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            '${mirror.dimensions} ${l10n.cm}',
-                            style: AppStyles.regular12(context).copyWith(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 11,
-                            ),
-                          ),
-                        ],
-                      ),
                     ),
-                  ),
                   PositionedDirectional(
                     top: 8,
                     end: 8,
@@ -179,20 +180,41 @@ class MirrorProductCard extends StatelessWidget {
               ),
             ),
             Expanded(
-              flex: 2,
+              flex: 4,
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(12, 10, 12, 12),
+                padding: const EdgeInsets.fromLTRB(12, 8, 12, 12),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      mirror.category == MirrorCategory.framed
-                          ? l10n.framedMirrors
-                          : l10n.adhesiveMirrors,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: AppStyles.medium14(context),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          title,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: AppStyles.semiBold14(context),
+                        ),
+                        const SizedBox(height: 2),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.straighten_rounded,
+                              size: 13,
+                              color: secondary,
+                            ),
+                            const SizedBox(width: 4),
+                            Text(
+                              '${mirror.dimensions} ${l10n.cm}',
+                              style: AppStyles.regular12(context).copyWith(
+                                color: secondary,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
