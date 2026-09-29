@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:mirrors_app/core/constants/app_storage_keys.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/utils/app_colors.dart';
 import '../../core/utils/app_styles.dart';
 import '../../core/widgets/animated_widgets.dart';
@@ -31,7 +33,6 @@ class _CheckoutViewState extends State<CheckoutView> {
 
   static const double _shippingFee = 50.0;
   late final String _storeWalletNumber;
-
   @override
   void initState() {
     super.initState();
@@ -39,6 +40,26 @@ class _CheckoutViewState extends State<CheckoutView> {
     final subtotal = context.read<CartCubit>().state.subtotal;
     final minDeposit = (subtotal + _shippingFee) * 0.50;
     _depositController.text = minDeposit.toInt().toString();
+
+    _loadDefaultCustomerInfo();
+  }
+
+  Future<void> _loadDefaultCustomerInfo() async {
+    final prefs = await SharedPreferences.getInstance();
+    final savedName = prefs.getString(AppStorageKeys.customerName);
+    final savedPhone = prefs.getString(AppStorageKeys.customerPhone);
+    final savedAddress = prefs.getString(AppStorageKeys.customerAddress);
+
+    if (!mounted) return;
+    if (savedName != null && savedName.isNotEmpty) {
+      _nameController.text = savedName;
+    }
+    if (savedPhone != null && savedPhone.isNotEmpty) {
+      _phoneController.text = savedPhone;
+    }
+    if (savedAddress != null && savedAddress.isNotEmpty) {
+      _addressController.text = savedAddress;
+    }
   }
 
   @override
@@ -52,7 +73,7 @@ class _CheckoutViewState extends State<CheckoutView> {
     super.dispose();
   }
 
-  void _onConfirmOrder(BuildContext context, CartState cartState) {
+ Future<void> _onConfirmOrder(BuildContext context, CartState cartState) async {
     FocusScope.of(context).unfocus();
     if (!_formKey.currentState!.validate()) return;
 
@@ -61,19 +82,33 @@ class _CheckoutViewState extends State<CheckoutView> {
     final depositPaid = double.tryParse(_depositController.text) ?? 0.0;
     final remaining = (total - depositPaid).clamp(0.0, total);
 
+    final customerName = _nameController.text.trim();
+    final phoneNumber = _phoneController.text.trim();
+    final address = _addressController.text.trim();
+    final senderWalletNumber = _senderWalletController.text.trim();
+    final notes = _notesController.text.trim().isEmpty
+        ? null
+        : _notesController.text.trim();
+
+    // Persist default shipping info for future checkouts
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(AppStorageKeys.customerName, customerName);
+    await prefs.setString(AppStorageKeys.customerPhone, phoneNumber);
+    await prefs.setString(AppStorageKeys.customerAddress, address);
+
+    if (!context.mounted) return;
+
     context.read<OrdersCubit>().placeOrder(
           items: cartState.items,
           totalPrice: total,
           depositAmount: depositPaid,
           remainingAmount: remaining,
-          customerName: _nameController.text.trim(),
-          phoneNumber: _phoneController.text.trim(),
-          address: _addressController.text.trim(),
+          customerName: customerName,
+          phoneNumber: phoneNumber,
+          address: address,
           paymentMethod: l10n.vodafoneCash,
-          senderWalletNumber: _senderWalletController.text.trim(),
-          notes: _notesController.text.trim().isEmpty
-              ? null
-              : _notesController.text.trim(),
+          senderWalletNumber: senderWalletNumber,
+          notes: notes,
         );
 
     context.read<CartCubit>().clearCart();
@@ -171,10 +206,9 @@ class _CheckoutViewState extends State<CheckoutView> {
                             child: Center(
                               child: Text(
                                 l10n.confirmOrderButton,
-                                style: AppStyles.semiBold16(context).copyWith(
-                                  color: Colors.white,
-                                  fontSize: 15,
-                                ),
+                                style: AppStyles.semiBold16(
+                                  context,
+                                ).copyWith(color: Colors.white, fontSize: 15),
                               ),
                             ),
                           ),

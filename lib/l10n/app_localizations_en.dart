@@ -277,4 +277,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String orderSupportMessage(String orderId) {
     return 'Hello, I would like to inquire about my order #$orderId.';
   }
+
+  @override
+  String get editProfileTitle => 'Edit Delivery Information';
+
+  @override
+  String get saveChanges => 'Save Changes';
+
+  @override
+  String get infoSavedSuccess => 'Information saved successfully';
 }

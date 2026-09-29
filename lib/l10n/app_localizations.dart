@@ -601,6 +601,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Hello, I would like to inquire about my order #{orderId}.'**
   String orderSupportMessage(String orderId);
+
+  /// No description provided for @editProfileTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Delivery Information'**
+  String get editProfileTitle;
+
+  /// No description provided for @saveChanges.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Changes'**
+  String get saveChanges;
+
+  /// No description provided for @infoSavedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Information saved successfully'**
+  String get infoSavedSuccess;
 }
 
 class _AppLocalizationsDelegate

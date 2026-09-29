@@ -117,5 +117,8 @@
     "placeholders": {
       "orderId": {"type": "String"}
     }
-  }
+  },
+  "editProfileTitle": "تعديل بيانات التوصيل",
+  "saveChanges": "حفظ التعديلات",
+  "infoSavedSuccess": "تم حفظ البيانات بنجاح"
 }

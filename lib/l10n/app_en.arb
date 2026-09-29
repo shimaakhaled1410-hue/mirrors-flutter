@@ -117,5 +117,8 @@
     "placeholders": {
       "orderId": {"type": "String"}
     }
-  }
+  },
+ "editProfileTitle": "Edit Delivery Information",
+  "saveChanges": "Save Changes",
+  "infoSavedSuccess": "Information saved successfully"
 }

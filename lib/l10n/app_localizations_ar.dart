@@ -277,4 +277,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String orderSupportMessage(String orderId) {
     return 'مرحباً، أود الاستفسار بخصوص الطلب رقم #$orderId.';
   }
+
+  @override
+  String get editProfileTitle => 'تعديل بيانات التوصيل';
+
+  @override
+  String get saveChanges => 'حفظ التعديلات';
+
+  @override
+  String get infoSavedSuccess => 'تم حفظ البيانات بنجاح';
 }
