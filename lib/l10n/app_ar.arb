@@ -138,5 +138,10 @@
   "startShopping": "تصفح المرايا",
   "ordersEmptyTitle": "لا توجد طلبات سابقة",
   "ordersEmptySubtitle": "لم تقم بعمل أي طلبات حتى الآن. عند إتمام طلبك، ستتمكن من متابعة حالته وتفاصيله هنا.",
-  "browseCatalog": "ابدأ التسوق الآن"
+  "browseCatalog": "ابدأ التسوق الآن",
+  "filterAll": "الكل",
+  "filterStandard": "المقاسات العادية",
+  "filterSpecialSizes": "مقاسات خاصة",
+  "filterWithShelf": "مرايا برَف",
+  "mirrorWithShelf": "مرآة بإطار مع رف زجاجي"
 }

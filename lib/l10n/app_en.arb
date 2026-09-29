@@ -138,5 +138,10 @@
   "startShopping": "Explore Mirrors",
   "ordersEmptyTitle": "No Orders Yet",
   "ordersEmptySubtitle": "You haven't placed any mirror orders yet. When you do, you can track their status right here.",
-  "browseCatalog": "Start Shopping"
+  "browseCatalog": "Start Shopping",
+  "filterAll": "All",
+  "filterStandard": "Standard",
+  "filterSpecialSizes": "Special Sizes",
+  "filterWithShelf": "With Shelf",
+  "mirrorWithShelf": "Framed Mirror with Shelf"
 }

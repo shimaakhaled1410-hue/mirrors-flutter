@@ -35,7 +35,11 @@ class AppStyles {
     fontWeight: FontWeight.w500,
     color: Theme.of(context).colorScheme.onSurface,
   );
-
+  static TextStyle semiBold14(BuildContext context) => GoogleFonts.cairo(
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+    color: Theme.of(context).colorScheme.onSurface,
+  );
   static TextStyle regular14(BuildContext context) => GoogleFonts.cairo(
     fontSize: 14,
     fontWeight: FontWeight.normal,

@@ -330,4 +330,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get browseCatalog => 'ابدأ التسوق الآن';
+
+  @override
+  String get filterAll => 'الكل';
+
+  @override
+  String get filterStandard => 'المقاسات العادية';
+
+  @override
+  String get filterSpecialSizes => 'مقاسات خاصة';
+
+  @override
+  String get filterWithShelf => 'مرايا برَف';
+
+  @override
+  String get mirrorWithShelf => 'مرآة بإطار مع رف زجاجي';
 }

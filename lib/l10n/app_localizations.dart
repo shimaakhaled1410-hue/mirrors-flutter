@@ -697,6 +697,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Start Shopping'**
   String get browseCatalog;
+
+  /// No description provided for @filterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get filterAll;
+
+  /// No description provided for @filterStandard.
+  ///
+  /// In en, this message translates to:
+  /// **'Standard'**
+  String get filterStandard;
+
+  /// No description provided for @filterSpecialSizes.
+  ///
+  /// In en, this message translates to:
+  /// **'Special Sizes'**
+  String get filterSpecialSizes;
+
+  /// No description provided for @filterWithShelf.
+  ///
+  /// In en, this message translates to:
+  /// **'With Shelf'**
+  String get filterWithShelf;
+
+  /// No description provided for @mirrorWithShelf.
+  ///
+  /// In en, this message translates to:
+  /// **'Framed Mirror with Shelf'**
+  String get mirrorWithShelf;
 }
 
 class _AppLocalizationsDelegate

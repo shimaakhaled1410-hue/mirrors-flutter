@@ -5,6 +5,7 @@ import 'package:mirrors_app/l10n/app_localizations.dart';
 import 'package:mirrors_app/presentation/manager/cart/cart_cubit.dart';
 import 'package:mirrors_app/presentation/widgets/catalog/category_toggle_filter.dart';
 import 'package:mirrors_app/presentation/widgets/catalog/mirror_product_card.dart';
+import 'package:mirrors_app/presentation/widgets/catalog/retail_sub_category_filter.dart';
 import '../../data/models/mirror_ui_model.dart';
 
 class RetailView extends StatefulWidget {
@@ -16,13 +17,20 @@ class RetailView extends StatefulWidget {
 
 class _RetailViewState extends State<RetailView> {
   MirrorCategory _selectedCategory = MirrorCategory.framed;
+  RetailSubCategory? _selectedSubCategory;
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final filteredMirrors = kDummyMirrors
-        .where((mirror) => mirror.category == _selectedCategory)
-        .toList();
+    final isFramed = _selectedCategory == MirrorCategory.framed;
+
+    final filteredMirrors = kDummyMirrors.where((mirror) {
+      if (mirror.category != _selectedCategory) return false;
+      if (isFramed && _selectedSubCategory != null) {
+        return mirror.subCategory == _selectedSubCategory;
+      }
+      return true;
+    }).toList();
 
     return Column(
       children: [
@@ -31,14 +39,27 @@ class _RetailViewState extends State<RetailView> {
           onCategoryChanged: (category) {
             setState(() {
               _selectedCategory = category;
+              _selectedSubCategory = null;
             });
           },
           framedLabel: l10n.framedMirrors,
           adhesiveLabel: l10n.adhesiveMirrors,
         ),
+        if (isFramed) ...[
+          const SizedBox(height: 10),
+          RetailSubCategoryFilter(
+            selectedFilter: _selectedSubCategory,
+            onSelected: (subCategory) {
+              setState(() {
+                _selectedSubCategory = subCategory;
+              });
+            },
+          ),
+        ],
+        const SizedBox(height: 4),
         Expanded(
           child: GridView.builder(
-            key: ValueKey(_selectedCategory),
+            key: ValueKey('${_selectedCategory}_$_selectedSubCategory'),
             physics: const BouncingScrollPhysics(),
             padding: const EdgeInsets.only(
               left: 16,

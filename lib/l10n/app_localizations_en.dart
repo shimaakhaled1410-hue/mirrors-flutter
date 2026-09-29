@@ -330,4 +330,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get browseCatalog => 'Start Shopping';
+
+  @override
+  String get filterAll => 'All';
+
+  @override
+  String get filterStandard => 'Standard';
+
+  @override
+  String get filterSpecialSizes => 'Special Sizes';
+
+  @override
+  String get filterWithShelf => 'With Shelf';
+
+  @override
+  String get mirrorWithShelf => 'Framed Mirror with Shelf';
 }

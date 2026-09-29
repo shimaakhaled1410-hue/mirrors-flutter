@@ -10,10 +10,24 @@ enum MirrorCategory {
       );
 }
 
+enum RetailSubCategory {
+  standard,
+  specialSize,
+  withShelf;
+
+  String toJson() => name;
+  static RetailSubCategory fromJson(String json) =>
+      RetailSubCategory.values.firstWhere(
+        (e) => e.name == json,
+        orElse: () => RetailSubCategory.standard,
+      );
+}
+
 class MirrorUiModel {
   final String id;
   final String dimensions;
   final MirrorCategory category;
+  final RetailSubCategory subCategory;
   final double retailPrice;
   final double wholesalePrice;
   final String? imagePlaceholder;
@@ -22,15 +36,21 @@ class MirrorUiModel {
     required this.id,
     required this.dimensions,
     required this.category,
+    this.subCategory = RetailSubCategory.standard,
     required this.retailPrice,
     required this.wholesalePrice,
     this.imagePlaceholder,
   });
 
+  bool get isRetailOnly =>
+      subCategory == RetailSubCategory.specialSize ||
+      subCategory == RetailSubCategory.withShelf;
+
   Map<String, dynamic> toJson() => {
         'id': id,
         'dimensions': dimensions,
         'category': category.toJson(),
+        'subCategory': subCategory.toJson(),
         'retailPrice': retailPrice,
         'wholesalePrice': wholesalePrice,
         if (imagePlaceholder != null) 'imagePlaceholder': imagePlaceholder,
@@ -40,19 +60,48 @@ class MirrorUiModel {
         id: json['id'] as String,
         dimensions: json['dimensions'] as String,
         category: MirrorCategory.fromJson(json['category'] as String),
+        subCategory: RetailSubCategory.fromJson(
+          json['subCategory'] as String? ?? RetailSubCategory.standard.name,
+        ),
         retailPrice: (json['retailPrice'] as num).toDouble(),
         wholesalePrice: (json['wholesalePrice'] as num).toDouble(),
         imagePlaceholder: json['imagePlaceholder'] as String?,
       );
 }
 
-// All 12 product variants based on specifications
 const List<MirrorUiModel> kDummyMirrors = [
-  // Framed Mirrors (6 variants)
+  // Special Sizes & With Shelf (Retail Only)
+  MirrorUiModel(
+    id: 'f_special_1',
+    dimensions: '40 × 60',
+    category: MirrorCategory.framed,
+    subCategory: RetailSubCategory.specialSize,
+    retailPrice: 260,
+    wholesalePrice: 0,
+  ),
+  MirrorUiModel(
+    id: 'f_special_2',
+    dimensions: '50 × 50',
+    category: MirrorCategory.framed,
+    subCategory: RetailSubCategory.specialSize,
+    retailPrice: 280,
+    wholesalePrice: 0,
+  ),
+  MirrorUiModel(
+    id: 'f_shelf_1',
+    dimensions: '40 × 60',
+    category: MirrorCategory.framed,
+    subCategory: RetailSubCategory.withShelf,
+    retailPrice: 340,
+    wholesalePrice: 0,
+  ),
+
+  // Standard Framed Mirrors (6 variants)
   MirrorUiModel(
     id: 'f1',
     dimensions: '30 × 35',
     category: MirrorCategory.framed,
+    subCategory: RetailSubCategory.standard,
     retailPrice: 150,
     wholesalePrice: 115,
   ),
@@ -60,6 +109,7 @@ const List<MirrorUiModel> kDummyMirrors = [
     id: 'f2',
     dimensions: '28 × 30',
     category: MirrorCategory.framed,
+    subCategory: RetailSubCategory.standard,
     retailPrice: 120,
     wholesalePrice: 90,
   ),
@@ -67,6 +117,7 @@ const List<MirrorUiModel> kDummyMirrors = [
     id: 'f3',
     dimensions: '25 × 25',
     category: MirrorCategory.framed,
+    subCategory: RetailSubCategory.standard,
     retailPrice: 95,
     wholesalePrice: 70,
   ),
@@ -74,6 +125,7 @@ const List<MirrorUiModel> kDummyMirrors = [
     id: 'f4',
     dimensions: '23 × 19',
     category: MirrorCategory.framed,
+    subCategory: RetailSubCategory.standard,
     retailPrice: 70,
     wholesalePrice: 50,
   ),
@@ -81,6 +133,7 @@ const List<MirrorUiModel> kDummyMirrors = [
     id: 'f5',
     dimensions: '16 × 16',
     category: MirrorCategory.framed,
+    subCategory: RetailSubCategory.standard,
     retailPrice: 35,
     wholesalePrice: 25,
   ),
@@ -88,6 +141,7 @@ const List<MirrorUiModel> kDummyMirrors = [
     id: 'f6',
     dimensions: '13 × 13',
     category: MirrorCategory.framed,
+    subCategory: RetailSubCategory.standard,
     retailPrice: 30,
     wholesalePrice: 20,
   ),
@@ -97,6 +151,7 @@ const List<MirrorUiModel> kDummyMirrors = [
     id: 'a1',
     dimensions: '29 × 34',
     category: MirrorCategory.adhesive,
+    subCategory: RetailSubCategory.standard,
     retailPrice: 120,
     wholesalePrice: 90,
   ),
@@ -104,6 +159,7 @@ const List<MirrorUiModel> kDummyMirrors = [
     id: 'a2',
     dimensions: '27 × 29',
     category: MirrorCategory.adhesive,
+    subCategory: RetailSubCategory.standard,
     retailPrice: 95,
     wholesalePrice: 70,
   ),
@@ -111,6 +167,7 @@ const List<MirrorUiModel> kDummyMirrors = [
     id: 'a3',
     dimensions: '24 × 24',
     category: MirrorCategory.adhesive,
+    subCategory: RetailSubCategory.standard,
     retailPrice: 75,
     wholesalePrice: 55,
   ),
@@ -118,6 +175,7 @@ const List<MirrorUiModel> kDummyMirrors = [
     id: 'a4',
     dimensions: '18 × 22',
     category: MirrorCategory.adhesive,
+    subCategory: RetailSubCategory.standard,
     retailPrice: 50,
     wholesalePrice: 35,
   ),
@@ -125,6 +183,7 @@ const List<MirrorUiModel> kDummyMirrors = [
     id: 'a5',
     dimensions: '15 × 15',
     category: MirrorCategory.adhesive,
+    subCategory: RetailSubCategory.standard,
     retailPrice: 25,
     wholesalePrice: 15,
   ),
@@ -132,6 +191,7 @@ const List<MirrorUiModel> kDummyMirrors = [
     id: 'a6',
     dimensions: '12 × 12',
     category: MirrorCategory.adhesive,
+    subCategory: RetailSubCategory.standard,
     retailPrice: 18,
     wholesalePrice: 11,
   ),
