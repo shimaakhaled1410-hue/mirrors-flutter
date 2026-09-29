@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mirrors_app/core/utils/whatsapp_helper.dart';
 import 'package:mirrors_app/core/widgets/animated_widgets.dart';
 import 'package:mirrors_app/l10n/app_localizations.dart';
 
@@ -46,7 +47,12 @@ class SupportAndSettingsWidget extends StatelessWidget {
               child: InkWell(
                 borderRadius: BorderRadius.circular(20),
                 onTap: () {
-                  // TODO: Open WhatsApp support action
+                  final l10n = AppLocalizations.of(context)!;
+                  WhatsAppHelper.openChat(
+                    context: context,
+                    customMessage: l10n.generalSupportMessage,
+                    errorMessage: l10n.whatsappError,
+                  );
                 },
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
