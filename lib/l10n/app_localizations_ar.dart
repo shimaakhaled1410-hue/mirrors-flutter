@@ -310,4 +310,24 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get statusCancelled => 'ملغي';
+
+  @override
+  String get cartEmptyTitle => 'سلة المشتريات فارغة';
+
+  @override
+  String get cartEmptySubtitle =>
+      'لم تقم بإضافة أي مرايا بعد. تصفح تشكيلتنا المميزة واختر ما يناسب مساحتك.';
+
+  @override
+  String get startShopping => 'تصفح المرايا';
+
+  @override
+  String get ordersEmptyTitle => 'لا توجد طلبات سابقة';
+
+  @override
+  String get ordersEmptySubtitle =>
+      'لم تقم بعمل أي طلبات حتى الآن. عند إتمام طلبك، ستتمكن من متابعة حالته وتفاصيله هنا.';
+
+  @override
+  String get browseCatalog => 'ابدأ التسوق الآن';
 }

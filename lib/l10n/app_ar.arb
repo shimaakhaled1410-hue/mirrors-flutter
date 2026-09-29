@@ -132,5 +132,11 @@
   "confirmCancelButton": "نعم، تأكيد الإلغاء",
   "keepOrderButton": "الاحتفاظ بالطلب",
   "orderCancelledSnackbar": "تم إلغاء الطلب بنجاح",
-  "statusCancelled": "ملغي"
+  "statusCancelled": "ملغي",
+  "cartEmptyTitle": "سلة المشتريات فارغة",
+  "cartEmptySubtitle": "لم تقم بإضافة أي مرايا بعد. تصفح تشكيلتنا المميزة واختر ما يناسب مساحتك.",
+  "startShopping": "تصفح المرايا",
+  "ordersEmptyTitle": "لا توجد طلبات سابقة",
+  "ordersEmptySubtitle": "لم تقم بعمل أي طلبات حتى الآن. عند إتمام طلبك، ستتمكن من متابعة حالته وتفاصيله هنا.",
+  "browseCatalog": "ابدأ التسوق الآن"
 }

@@ -132,5 +132,11 @@
   "confirmCancelButton": "Yes, Cancel",
   "keepOrderButton": "Keep Order",
   "orderCancelledSnackbar": "Order has been cancelled successfully",
-  "statusCancelled": "Cancelled"
+  "statusCancelled": "Cancelled",
+  "cartEmptyTitle": "Your Cart is Empty",
+  "cartEmptySubtitle": "Looks like you haven't added any mirrors yet. Discover our collection and find the perfect match for your space.",
+  "startShopping": "Explore Mirrors",
+  "ordersEmptyTitle": "No Orders Yet",
+  "ordersEmptySubtitle": "You haven't placed any mirror orders yet. When you do, you can track their status right here.",
+  "browseCatalog": "Start Shopping"
 }

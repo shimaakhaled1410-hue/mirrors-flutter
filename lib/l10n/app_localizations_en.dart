@@ -310,4 +310,24 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get statusCancelled => 'Cancelled';
+
+  @override
+  String get cartEmptyTitle => 'Your Cart is Empty';
+
+  @override
+  String get cartEmptySubtitle =>
+      'Looks like you haven\'t added any mirrors yet. Discover our collection and find the perfect match for your space.';
+
+  @override
+  String get startShopping => 'Explore Mirrors';
+
+  @override
+  String get ordersEmptyTitle => 'No Orders Yet';
+
+  @override
+  String get ordersEmptySubtitle =>
+      'You haven\'t placed any mirror orders yet. When you do, you can track their status right here.';
+
+  @override
+  String get browseCatalog => 'Start Shopping';
 }

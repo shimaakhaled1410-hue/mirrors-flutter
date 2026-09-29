@@ -661,6 +661,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cancelled'**
   String get statusCancelled;
+
+  /// No description provided for @cartEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Cart is Empty'**
+  String get cartEmptyTitle;
+
+  /// No description provided for @cartEmptySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Looks like you haven\'t added any mirrors yet. Discover our collection and find the perfect match for your space.'**
+  String get cartEmptySubtitle;
+
+  /// No description provided for @startShopping.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore Mirrors'**
+  String get startShopping;
+
+  /// No description provided for @ordersEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No Orders Yet'**
+  String get ordersEmptyTitle;
+
+  /// No description provided for @ordersEmptySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'You haven\'t placed any mirror orders yet. When you do, you can track their status right here.'**
+  String get ordersEmptySubtitle;
+
+  /// No description provided for @browseCatalog.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Shopping'**
+  String get browseCatalog;
 }
 
 class _AppLocalizationsDelegate
