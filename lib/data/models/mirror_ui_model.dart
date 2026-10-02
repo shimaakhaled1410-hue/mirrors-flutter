@@ -69,6 +69,20 @@ class MirrorUiModel {
       );
 }
 
+extension MirrorDimensionsX on MirrorUiModel {
+  double get aspectRatio {
+    try {
+      final parts = dimensions.split(RegExp(r'[^0-9]+')).where((s) => s.isNotEmpty).toList();
+      if (parts.length >= 2) {
+        final w = double.parse(parts[0]);
+        final h = double.parse(parts[1]);
+        if (h > 0) return w / h;
+      }
+    } catch (_) {}
+    return 0.75;
+  }
+}
+
 const List<MirrorUiModel> kDummyMirrors = [
   // Special Sizes & With Shelf (Retail Only)
   MirrorUiModel(

@@ -6,7 +6,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:mirrors_app/presentation/manager/orders/orders_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'core/routing/app_router.dart';
 import 'core/theme/app_theme.dart';
 import 'l10n/app_localizations.dart';
@@ -16,12 +15,12 @@ import 'presentation/manager/cart/cart_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: ".env");
+  await dotenv.load(fileName: "assets/.env");
   final prefs = await SharedPreferences.getInstance();
 
   runApp(
     DevicePreview(
-      enabled: !kReleaseMode,
+      enabled: !kIsWeb,
       builder: (context) => MultiBlocProvider(
         providers: [
           BlocProvider(create: (_) => AppSettingsCubit(prefs)),

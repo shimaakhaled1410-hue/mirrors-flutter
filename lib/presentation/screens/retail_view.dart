@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mirrors_app/core/routing/app_routes.dart';
 import 'package:mirrors_app/core/widgets/animated_widgets.dart';
 import 'package:mirrors_app/l10n/app_localizations.dart';
 import 'package:mirrors_app/presentation/manager/cart/cart_cubit.dart';
@@ -94,7 +96,7 @@ class _RetailViewState extends State<RetailView> {
                     );
                   },
                   onPreview: () {
-                    // TODO: Open Camera AR Preview
+                    context.push(AppRoutes.mirrorWallPreview, extra: mirror);
                   },
                 ),
               );
