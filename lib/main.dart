@@ -20,7 +20,7 @@ void main() async {
 
   runApp(
     DevicePreview(
-      enabled: !kIsWeb,
+      enabled: kIsWeb,
       builder: (context) => MultiBlocProvider(
         providers: [
           BlocProvider(create: (_) => AppSettingsCubit(prefs)),

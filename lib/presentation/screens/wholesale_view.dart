@@ -22,7 +22,8 @@ class _WholesaleViewState extends State<WholesaleView> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final filteredMirrors = kDummyMirrors
-        .where((mirror) => mirror.category == _selectedCategory)
+        .where((mirror) =>
+            mirror.category == _selectedCategory && !mirror.isRetailOnly)
         .toList();
 
     return Column(
@@ -55,12 +56,10 @@ class _WholesaleViewState extends State<WholesaleView> {
                 child: WholesaleProductCard(
                   mirror: mirror,
                   onAddToCart: (tier, totalPrice) {
-                    // Add wholesale batch to CartCubit
                     context
                         .read<CartCubit>()
                         .addWholesaleBatch(mirror, tier.quantity);
 
-                    // Show confirmation SnackBar
                     ScaffoldMessenger.of(context).hideCurrentSnackBar();
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
