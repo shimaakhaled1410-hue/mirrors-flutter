@@ -84,8 +84,11 @@ extension MirrorDimensionsX on MirrorUiModel {
 }
 
 const String kFramedMirrorAsset = 'assets/images/framed_mirror.png';
+const String kShelfMirrorAsset = 'assets/images/shelf_mirror.png';
+const String kAdhesiveMirrorAsset = 'assets/images/adhesive_mirror.png';
 
 const List<MirrorUiModel> kDummyMirrors = [
+  // Special Sizes & With Shelf (Retail Only)
   MirrorUiModel(
     id: 'f_special_1',
     dimensions: '40 × 60',
@@ -111,8 +114,10 @@ const List<MirrorUiModel> kDummyMirrors = [
     subCategory: RetailSubCategory.withShelf,
     retailPrice: 340,
     wholesalePrice: 0,
+    imagePlaceholder: kShelfMirrorAsset,
   ),
 
+  // Standard Framed Mirrors (6 variants)
   MirrorUiModel(
     id: 'f1',
     dimensions: '30 × 35',
@@ -168,6 +173,7 @@ const List<MirrorUiModel> kDummyMirrors = [
     imagePlaceholder: kFramedMirrorAsset,
   ),
 
+  // Double Adhesive Mirrors (6 variants)
   MirrorUiModel(
     id: 'a1',
     dimensions: '29 × 34',
@@ -175,6 +181,7 @@ const List<MirrorUiModel> kDummyMirrors = [
     subCategory: RetailSubCategory.standard,
     retailPrice: 120,
     wholesalePrice: 90,
+    imagePlaceholder: kAdhesiveMirrorAsset,
   ),
   MirrorUiModel(
     id: 'a2',
@@ -183,6 +190,7 @@ const List<MirrorUiModel> kDummyMirrors = [
     subCategory: RetailSubCategory.standard,
     retailPrice: 95,
     wholesalePrice: 70,
+    imagePlaceholder: kAdhesiveMirrorAsset,
   ),
   MirrorUiModel(
     id: 'a3',
@@ -191,6 +199,7 @@ const List<MirrorUiModel> kDummyMirrors = [
     subCategory: RetailSubCategory.standard,
     retailPrice: 75,
     wholesalePrice: 55,
+    imagePlaceholder: kAdhesiveMirrorAsset,
   ),
   MirrorUiModel(
     id: 'a4',
@@ -199,6 +208,7 @@ const List<MirrorUiModel> kDummyMirrors = [
     subCategory: RetailSubCategory.standard,
     retailPrice: 50,
     wholesalePrice: 35,
+    imagePlaceholder: kAdhesiveMirrorAsset,
   ),
   MirrorUiModel(
     id: 'a5',
@@ -207,6 +217,7 @@ const List<MirrorUiModel> kDummyMirrors = [
     subCategory: RetailSubCategory.standard,
     retailPrice: 25,
     wholesalePrice: 15,
+    imagePlaceholder: kAdhesiveMirrorAsset,
   ),
   MirrorUiModel(
     id: 'a6',
@@ -215,6 +226,7 @@ const List<MirrorUiModel> kDummyMirrors = [
     subCategory: RetailSubCategory.standard,
     retailPrice: 18,
     wholesalePrice: 11,
+    imagePlaceholder: kAdhesiveMirrorAsset,
   ),
 ];
 
