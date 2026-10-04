@@ -4,6 +4,7 @@ import 'package:mirrors_app/l10n/app_localizations.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_styles.dart';
 import '../../../data/models/mirror_ui_model.dart';
+import 'components/zoomable_image_dialog.dart';
 import 'wholesale_tier_selector.dart';
 
 class WholesaleProductCard extends StatefulWidget {
@@ -31,6 +32,7 @@ class _WholesaleProductCardState extends State<WholesaleProductCard> {
     final l10n = AppLocalizations.of(context)!;
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final border = isDark ? AppColors.darkBorder : AppColors.lightBorder;
+    final heroTag = 'wholesale_mirror_zoom_${widget.mirror.id}';
 
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
@@ -52,44 +54,54 @@ class _WholesaleProductCardState extends State<WholesaleProductCard> {
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Expanded(
                 child: Row(
                   children: [
-                    Container(
-                      width: 46,
-                      height: 46,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [
-                            AppColors.accent.withValues(alpha: 0.22),
-                            AppColors.accent.withValues(alpha: 0.06),
-                          ],
+                    GestureDetector(
+                      onTap: () {
+                        if (widget.mirror.imagePlaceholder != null) {
+                          ZoomableImageDialog.show(
+                            context,
+                            imagePath: widget.mirror.imagePlaceholder!,
+                            heroTag: heroTag,
+                          );
+                        }
+                      },
+                      child: Container(
+                        width: 54,
+                        height: 70,
+                        padding: const EdgeInsets.all(4),
+                        decoration: BoxDecoration(
+                          color: isDark
+                              ? const Color(0xFF1E1724)
+                              : const Color(0xFFFAF9FB),
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(
+                            color: isDark
+                                ? AppColors.darkBorder
+                                : AppColors.lightBorder,
+                          ),
                         ),
-                        borderRadius: BorderRadius.circular(14),
-                        border: Border.all(
-                          color: AppColors.accent.withValues(alpha: 0.25),
-                        ),
-                      ),
-                      child: widget.mirror.imagePlaceholder != null
-                          ? Padding(
-                              padding: const EdgeInsets.all(4),
-                              child: Image.asset(
-                                widget.mirror.imagePlaceholder!,
-                                fit: BoxFit.contain,
+                        child: widget.mirror.imagePlaceholder != null
+                            ? Hero(
+                                tag: heroTag,
+                                child: Image.asset(
+                                  widget.mirror.imagePlaceholder!,
+                                  fit: BoxFit.contain,
+                                ),
+                              )
+                            : Icon(
+                                widget.mirror.category == MirrorCategory.framed
+                                    ? Icons.crop_portrait_rounded
+                                    : Icons.layers_rounded,
+                                color: AppColors.accent,
+                                size: 24,
                               ),
-                            )
-                          : Icon(
-                              widget.mirror.category == MirrorCategory.framed
-                                  ? Icons.crop_portrait_rounded
-                                  : Icons.layers_rounded,
-                              color: AppColors.accent,
-                              size: 22,
-                            ),
+                      ),
                     ),
-                    const SizedBox(width: 12),
+                    const SizedBox(width: 14),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -100,13 +112,18 @@ class _WholesaleProductCardState extends State<WholesaleProductCard> {
                             overflow: TextOverflow.ellipsis,
                             style: AppStyles.semiBold16(context),
                           ),
+                          const SizedBox(height: 2),
                           Text(
                             widget.mirror.category == MirrorCategory.framed
                                 ? l10n.framedMirrors
                                 : l10n.adhesiveMirrors,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: AppStyles.regular12(context),
+                            style: AppStyles.regular12(context).copyWith(
+                              color: isDark
+                                  ? AppColors.darkTextSecondary
+                                  : AppColors.lightTextSecondary,
+                            ),
                           ),
                         ],
                       ),
