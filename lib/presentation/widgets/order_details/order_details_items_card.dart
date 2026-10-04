@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mirrors_app/presentation/widgets/catalog/components/zoomable_image_dialog.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_styles.dart';
 import '../../../../data/models/mirror_ui_model.dart';
@@ -46,24 +47,56 @@ class OrderDetailsItemsCard extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           ...order.items.map((item) {
-            final categoryTitle = item.product.category == MirrorCategory.framed
-                ? l10n.framedMirrors
-                : l10n.adhesiveMirrors;
+            final categoryTitle = item.product.subCategory == RetailSubCategory.withShelf
+                ? l10n.mirrorWithShelf
+                : (item.product.category == MirrorCategory.framed
+                    ? l10n.framedMirrors
+                    : l10n.adhesiveMirrors);
+
+            final heroTag = 'order_detail_zoom_${item.id}';
+
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: Row(
                 children: [
-                  Container(
-                    width: 44,
-                    height: 44,
-                    decoration: BoxDecoration(
-                      color: AppColors.accent.withValues(alpha: 0.12),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: const Icon(
-                      Icons.crop_portrait_rounded,
-                      color: AppColors.accent,
-                      size: 22,
+                  GestureDetector(
+                    onTap: () {
+                      if (item.product.imagePlaceholder != null) {
+                        ZoomableImageDialog.show(
+                          context,
+                          imagePath: item.product.imagePlaceholder!,
+                          heroTag: heroTag,
+                        );
+                      }
+                    },
+                    child: Container(
+                      width: 48,
+                      height: 64,
+                      padding: const EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        color: isDark
+                            ? const Color(0xFF1E1724)
+                            : const Color(0xFFFAF9FB),
+                        borderRadius: BorderRadius.circular(14),
+                        border: Border.all(color: border),
+                      ),
+                      child: item.product.imagePlaceholder != null
+                          ? Hero(
+                              tag: heroTag,
+                              child: Image.asset(
+                                item.product.imagePlaceholder!,
+                                fit: BoxFit.contain,
+                              ),
+                            )
+                          : Icon(
+                              item.product.subCategory == RetailSubCategory.withShelf
+                                  ? Icons.shelves
+                                  : (item.product.category == MirrorCategory.framed
+                                      ? Icons.crop_portrait_rounded
+                                      : Icons.layers_rounded),
+                              color: AppColors.accent,
+                              size: 22,
+                            ),
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -77,6 +110,7 @@ class OrderDetailsItemsCard extends StatelessWidget {
                             context,
                           ).copyWith(fontSize: 14),
                         ),
+                        const SizedBox(height: 2),
                         Text(
                           '$categoryTitle • ${l10n.quantity}: ${item.quantity}',
                           style: AppStyles.regular12(
