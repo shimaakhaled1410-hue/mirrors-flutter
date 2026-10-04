@@ -17,13 +17,53 @@ class MirrorProductCard extends StatelessWidget {
     required this.onPreview,
   });
 
+  void _showZoomableImage(BuildContext context) {
+    if (mirror.imagePlaceholder == null) return;
+
+    showDialog(
+      context: context,
+      barrierColor: Colors.black.withValues(alpha: 0.85),
+      builder: (context) => Dialog(
+        backgroundColor: Colors.transparent,
+        insetPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            InteractiveViewer(
+              minScale: 0.8,
+              maxScale: 4.0,
+              clipBehavior: Clip.none,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Image.asset(
+                  mirror.imagePlaceholder!,
+                  fit: BoxFit.contain,
+                ),
+              ),
+            ),
+            Positioned(
+              top: 0,
+              right: 0,
+              child: IconButton(
+                style: IconButton.styleFrom(
+                  backgroundColor: Colors.black.withValues(alpha: 0.5),
+                  shape: const CircleBorder(),
+                ),
+                icon: const Icon(Icons.close_rounded, color: Colors.white, size: 24),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final surface = isDark ? AppColors.darkSurface : AppColors.lightSurface;
-    final background =
-        isDark ? AppColors.darkBackground : AppColors.lightBackground;
     final secondary =
         isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary;
 
@@ -42,9 +82,9 @@ class MirrorProductCard extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: isDark ? 0.3 : 0.06),
-            blurRadius: 20,
-            offset: const Offset(0, 8),
+            color: Colors.black.withValues(alpha: isDark ? 0.3 : 0.05),
+            blurRadius: 16,
+            offset: const Offset(0, 6),
           ),
         ],
       ),
@@ -58,67 +98,38 @@ class MirrorProductCard extends StatelessWidget {
               child: Stack(
                 children: [
                   Positioned.fill(
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [
-                            background,
-                            isDark
-                                ? const Color(0xFF1A1320)
-                                : const Color(0xFFF0E8EB),
-                          ],
-                        ),
-                      ),
+                    child: Container(
+                      color: isDark ? const Color(0xFF1E1724) : const Color(0xFFFAF9FB),
                     ),
                   ),
                   Center(
                     child: mirror.imagePlaceholder != null
-                        ? Padding(
-                            padding: const EdgeInsets.all(12),
-                            child: Image.asset(
-                              mirror.imagePlaceholder!,
-                              fit: BoxFit.contain,
+                        ? GestureDetector(
+                            onTap: () => _showZoomableImage(context),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                              child: Hero(
+                                tag: 'mirror_${mirror.id}',
+                                child: Image.asset(
+                                  mirror.imagePlaceholder!,
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
                             ),
                           )
                         : Container(
-                            width: 88,
-                            height: 88,
+                            width: 72,
+                            height: 72,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: AppColors.accent.withValues(alpha: 0.08),
-                              border: Border.all(
-                                color: AppColors.accent.withValues(alpha: 0.22),
-                              ),
                             ),
-                            child: Center(
-                              child: Container(
-                                width: 60,
-                                height: 60,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: surface,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withValues(
-                                        alpha: isDark ? 0.3 : 0.08,
-                                      ),
-                                      blurRadius: 12,
-                                      offset: const Offset(0, 4),
-                                    ),
-                                  ],
-                                ),
-                                child: Icon(
-                                  mirror.subCategory == RetailSubCategory.withShelf
-                                      ? Icons.shelves
-                                      : (mirror.category == MirrorCategory.framed
-                                          ? Icons.crop_portrait_rounded
-                                          : Icons.layers_rounded),
-                                  size: 28,
-                                  color: AppColors.accent,
-                                ),
-                              ),
+                            child: Icon(
+                              mirror.subCategory == RetailSubCategory.withShelf
+                                  ? Icons.shelves
+                                  : Icons.layers_rounded,
+                              size: 32,
+                              color: AppColors.accent,
                             ),
                           ),
                   ),
@@ -127,15 +138,12 @@ class MirrorProductCard extends StatelessWidget {
                       top: 10,
                       start: 10,
                       child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 8,
-                          vertical: 4,
-                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                         decoration: BoxDecoration(
-                          color: AppColors.accent.withValues(alpha: 0.16),
+                          color: AppColors.accent.withValues(alpha: 0.14),
                           borderRadius: BorderRadius.circular(8),
                           border: Border.all(
-                            color: AppColors.accent.withValues(alpha: 0.4),
+                            color: AppColors.accent.withValues(alpha: 0.35),
                           ),
                         ),
                         child: Text(
@@ -157,12 +165,12 @@ class MirrorProductCard extends StatelessWidget {
                       child: Container(
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: surface.withValues(alpha: 0.9),
+                          color: surface.withValues(alpha: 0.85),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withValues(alpha: 0.12),
-                              blurRadius: 10,
-                              offset: const Offset(0, 3),
+                              color: Colors.black.withValues(alpha: 0.1),
+                              blurRadius: 8,
+                              offset: const Offset(0, 2),
                             ),
                           ],
                         ),
@@ -172,11 +180,11 @@ class MirrorProductCard extends StatelessWidget {
                             customBorder: const CircleBorder(),
                             onTap: onPreview,
                             child: const Padding(
-                              padding: EdgeInsets.all(8),
+                              padding: EdgeInsets.all(7),
                               child: Icon(
                                 Icons.view_in_ar_rounded,
                                 color: AppColors.accent,
-                                size: 18,
+                                size: 17,
                               ),
                             ),
                           ),
@@ -190,7 +198,7 @@ class MirrorProductCard extends StatelessWidget {
             Expanded(
               flex: 4,
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(12, 8, 12, 12),
+                padding: const EdgeInsets.fromLTRB(12, 6, 12, 12),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -243,9 +251,7 @@ class MirrorProductCard extends StatelessWidget {
                               borderRadius: BorderRadius.circular(12),
                               boxShadow: [
                                 BoxShadow(
-                                  color: AppColors.primary.withValues(
-                                    alpha: 0.35,
-                                  ),
+                                  color: AppColors.primary.withValues(alpha: 0.35),
                                   blurRadius: 10,
                                   offset: const Offset(0, 4),
                                 ),
