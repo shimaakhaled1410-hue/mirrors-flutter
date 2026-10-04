@@ -85,40 +85,41 @@ class MirrorCardImageHeader extends StatelessWidget {
               ),
             ),
           ),
-        PositionedDirectional(
-          top: 8,
-          end: 8,
-          child: PressableScale(
-            child: Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: surface.withValues(alpha: 0.85),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.1),
-                    blurRadius: 8,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
-              ),
-              child: Material(
-                type: MaterialType.transparency,
-                child: InkWell(
-                  customBorder: const CircleBorder(),
-                  onTap: onPreview,
-                  child: const Padding(
-                    padding: EdgeInsets.all(7),
-                    child: Icon(
-                      Icons.view_in_ar_rounded,
-                      color: AppColors.accent,
-                      size: 17,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
+        // PositionedDirectional(
+        //   top: 8,
+        //   end: 8,
+        //   child: PressableScale(
+        //     child: Container(
+        //       decoration: BoxDecoration(
+        //         shape: BoxShape.circle,
+        //         color: surface.withValues(alpha: 0.85),
+        //         boxShadow: [
+        //           BoxShadow(
+        //             color: Colors.black.withValues(alpha: 0.1),
+        //             blurRadius: 8,
+        //             offset: const Offset(0, 2),
+        //           ),
+        //         ],
+        //       ),
+        //       child: Material(
+        //         type: MaterialType.transparency,
+        //         child: InkWell(
+        //           customBorder: const CircleBorder(),
+        //           onTap: onPreview,
+        //           child: const Padding(
+        //             padding: EdgeInsets.all(7),
+        //             child: Icon(
+        //               Icons.view_in_ar_rounded,
+        //               color: AppColors.accent,
+        //               size: 17,
+        //             ),
+        //           ),
+        //         ),
+        //       ),
+        //     ),
+        //   ),
+        // ),
+     
       ],
     );
   }
