@@ -74,45 +74,53 @@ class MirrorProductCard extends StatelessWidget {
                     ),
                   ),
                   Center(
-                    child: Container(
-                      width: 88,
-                      height: 88,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: AppColors.accent.withValues(alpha: 0.08),
-                        border: Border.all(
-                          color: AppColors.accent.withValues(alpha: 0.22),
-                        ),
-                      ),
-                      child: Center(
-                        child: Container(
-                          width: 60,
-                          height: 60,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: surface,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withValues(
-                                  alpha: isDark ? 0.3 : 0.08,
-                                ),
-                                blurRadius: 12,
-                                offset: const Offset(0, 4),
+                    child: mirror.imagePlaceholder != null
+                        ? Padding(
+                            padding: const EdgeInsets.all(12),
+                            child: Image.asset(
+                              mirror.imagePlaceholder!,
+                              fit: BoxFit.contain,
+                            ),
+                          )
+                        : Container(
+                            width: 88,
+                            height: 88,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: AppColors.accent.withValues(alpha: 0.08),
+                              border: Border.all(
+                                color: AppColors.accent.withValues(alpha: 0.22),
                               ),
-                            ],
+                            ),
+                            child: Center(
+                              child: Container(
+                                width: 60,
+                                height: 60,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: surface,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withValues(
+                                        alpha: isDark ? 0.3 : 0.08,
+                                      ),
+                                      blurRadius: 12,
+                                      offset: const Offset(0, 4),
+                                    ),
+                                  ],
+                                ),
+                                child: Icon(
+                                  mirror.subCategory == RetailSubCategory.withShelf
+                                      ? Icons.shelves
+                                      : (mirror.category == MirrorCategory.framed
+                                          ? Icons.crop_portrait_rounded
+                                          : Icons.layers_rounded),
+                                  size: 28,
+                                  color: AppColors.accent,
+                                ),
+                              ),
+                            ),
                           ),
-                          child: Icon(
-                            mirror.subCategory == RetailSubCategory.withShelf
-                                ? Icons.shelves
-                                : (mirror.category == MirrorCategory.framed
-                                    ? Icons.crop_portrait_rounded
-                                    : Icons.layers_rounded),
-                            size: 28,
-                            color: AppColors.accent,
-                          ),
-                        ),
-                      ),
-                    ),
                   ),
                   if (mirror.isRetailOnly)
                     PositionedDirectional(

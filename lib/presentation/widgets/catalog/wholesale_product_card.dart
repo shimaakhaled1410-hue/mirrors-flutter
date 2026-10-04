@@ -73,13 +73,21 @@ class _WholesaleProductCardState extends State<WholesaleProductCard> {
                           color: AppColors.accent.withValues(alpha: 0.25),
                         ),
                       ),
-                      child: Icon(
-                        widget.mirror.category == MirrorCategory.framed
-                            ? Icons.crop_portrait_rounded
-                            : Icons.layers_rounded,
-                        color: AppColors.accent,
-                        size: 22,
-                      ),
+                      child: widget.mirror.imagePlaceholder != null
+                          ? Padding(
+                              padding: const EdgeInsets.all(4),
+                              child: Image.asset(
+                                widget.mirror.imagePlaceholder!,
+                                fit: BoxFit.contain,
+                              ),
+                            )
+                          : Icon(
+                              widget.mirror.category == MirrorCategory.framed
+                                  ? Icons.crop_portrait_rounded
+                                  : Icons.layers_rounded,
+                              color: AppColors.accent,
+                              size: 22,
+                            ),
                     ),
                     const SizedBox(width: 12),
                     Expanded(
