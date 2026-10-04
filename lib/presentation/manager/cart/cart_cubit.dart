@@ -11,6 +11,9 @@ class CartCubit extends Cubit<CartState> {
     _loadCart();
   }
 
+  static const int kMinWholesaleQuantity = 3;
+  static const int kWholesaleStep = 3;
+
   Future<void> _loadCart() async {
     try {
       final prefs = await SharedPreferences.getInstance();
@@ -22,9 +25,7 @@ class CartCubit extends Cubit<CartState> {
             .toList();
         emit(state.copyWith(items: loadedItems));
       }
-    } catch (_) {
-      // In case of any deserialization issues, fall back to empty cart
-    }
+    } catch (_) {}
   }
 
   Future<void> _saveCart(List<CartItemModel> items) async {
@@ -32,9 +33,7 @@ class CartCubit extends Cubit<CartState> {
       final prefs = await SharedPreferences.getInstance();
       final encodedString = jsonEncode(items.map((e) => e.toJson()).toList());
       await prefs.setString(AppStorageKeys.cartStorageKey, encodedString);
-    } catch (_) {
-      // Handle storage errors silently
-    }
+    } catch (_) {}
   }
 
   void addRetailItem(MirrorUiModel product) {
@@ -92,7 +91,8 @@ class CartCubit extends Cubit<CartState> {
   void incrementQuantity(String cartItemId) {
     final updated = state.items.map((item) {
       if (item.id == cartItemId) {
-        return item.copyWith(quantity: item.quantity + 1);
+        final step = item.isWholesale ? kWholesaleStep : 1;
+        return item.copyWith(quantity: item.quantity + step);
       }
       return item;
     }).toList();
@@ -102,8 +102,12 @@ class CartCubit extends Cubit<CartState> {
 
   void decrementQuantity(String cartItemId) {
     final updated = state.items.map((item) {
-      if (item.id == cartItemId && item.quantity > 1) {
-        return item.copyWith(quantity: item.quantity - 1);
+      if (item.id == cartItemId) {
+        final step = item.isWholesale ? kWholesaleStep : 1;
+        final minQty = item.isWholesale ? kMinWholesaleQuantity : 1;
+        if (item.quantity - step >= minQty) {
+          return item.copyWith(quantity: item.quantity - step);
+        }
       }
       return item;
     }).toList();
