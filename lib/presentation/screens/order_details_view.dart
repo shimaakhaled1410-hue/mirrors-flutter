@@ -1,13 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/utils/app_colors.dart';
 import '../../core/utils/app_styles.dart';
 import '../../core/utils/whatsapp_helper.dart';
 import '../../core/widgets/animated_widgets.dart';
 import '../../data/models/order_ui_model.dart';
 import '../../l10n/app_localizations.dart';
-import '../manager/orders/orders_cubit.dart';
-import '../manager/orders/orders_state.dart';
 import '../widgets/order_details/order_details_cancel_button.dart';
 import '../widgets/order_details/order_details_items_card.dart';
 import '../widgets/order_details/order_details_payment_card.dart';
@@ -24,12 +22,20 @@ class OrderDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
 
-    return BlocBuilder<OrdersCubit, OrdersState>(
-      builder: (context, state) {
-        final currentOrder = state.orders.firstWhere(
-          (o) => o.orderId == order.orderId,
-          orElse: () => order,
-        );
+    return StreamBuilder<DocumentSnapshot>(
+      stream: FirebaseFirestore.instance
+          .collection('orders')
+          .doc(order.orderId)
+          .snapshots(),
+      builder: (context, snapshot) {
+        OrderUiModel currentOrder = order;
+
+        if (snapshot.hasData && snapshot.data!.exists) {
+          final data = snapshot.data!.data() as Map<String, dynamic>?;
+          if (data != null) {
+            currentOrder = OrderUiModel.fromJson(data);
+          }
+        }
 
         final canCancel = currentOrder.status == OrderStatus.received;
 
