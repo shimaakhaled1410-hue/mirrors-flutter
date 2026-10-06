@@ -13,21 +13,6 @@ class AdminOrderFiltersBar extends StatelessWidget {
     required this.onFilterSelected,
   });
 
-  String _getStatusName(OrderStatus status, AppLocalizations l10n) {
-    switch (status) {
-      case OrderStatus.received:
-        return l10n.statusReceived;
-      case OrderStatus.preparing:
-        return l10n.statusPreparing;
-      case OrderStatus.shipping:
-        return l10n.statusShipping;
-      case OrderStatus.delivered:
-        return l10n.statusDelivered;
-      case OrderStatus.cancelled:
-        return l10n.statusCancelled;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
@@ -47,7 +32,7 @@ class AdminOrderFiltersBar extends StatelessWidget {
             return Padding(
               padding: const EdgeInsets.only(right: 8),
               child: ChoiceChip(
-                label: Text(_getStatusName(status, l10n)),
+                label: Text(status.localizedName(l10n)),
                 selected: selectedFilter == status,
                 selectedColor: AppColors.primary.withValues(alpha: 0.15),
                 onSelected: (val) => onFilterSelected(val ? status : null),

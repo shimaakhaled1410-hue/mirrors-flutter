@@ -169,5 +169,7 @@
   "statusUpdateFailed": "Failed to update status",
   "cm": "cm",
   "egp": "EGP",
-  "senderWalletLabel": "Sender wallet number"
+  "senderWalletLabel": "Sender wallet number",
+  "statusDepositConfirmed": "Deposit Confirmed",
+  "confirmDepositAction": "Confirm Deposit Receipt"
 }

@@ -14,59 +14,69 @@ class AdminStatusSheet extends StatelessWidget {
     required this.onStatusSelected,
   });
 
-  String _getStatusName(OrderStatus status, AppLocalizations l10n) {
-    switch (status) {
-      case OrderStatus.received:
-        return l10n.statusReceived;
-      case OrderStatus.preparing:
-        return l10n.statusPreparing;
-      case OrderStatus.shipping:
-        return l10n.statusShipping;
-      case OrderStatus.delivered:
-        return l10n.statusDelivered;
-      case OrderStatus.cancelled:
-        return l10n.statusCancelled;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-      decoration: BoxDecoration(
-        color: isDark ? AppColors.darkSurface : AppColors.lightSurface,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            '${l10n.changeStatus} (#${order.orderId})',
-            textAlign: TextAlign.center,
-            style: AppStyles.bold18(context),
-          ),
-          const SizedBox(height: 16),
-          ...OrderStatus.values.map((status) {
-            final isSelected = order.status == status;
-            return ListTile(
-              title: Text(
-                _getStatusName(status, l10n),
-                style: TextStyle(
-                  fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                  color: isSelected ? AppColors.accent : null,
+    return Material(
+      color: isDark ? AppColors.darkSurface : AppColors.lightSurface,
+      borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+      child: SafeArea(
+        top: false,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 40,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+                  borderRadius: BorderRadius.circular(2),
                 ),
               ),
-              trailing: isSelected
-                  ? const Icon(Icons.check_circle_rounded, color: AppColors.accent)
-                  : null,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-              onTap: () => onStatusSelected(status),
-            );
-          }),
-        ],
+              const SizedBox(height: 16),
+              Text(
+                '${l10n.changeStatus} (#${order.orderId})',
+                textAlign: TextAlign.center,
+                style: AppStyles.bold18(context),
+              ),
+              const SizedBox(height: 16),
+              ...OrderStatus.values.map((status) {
+                final isSelected = order.status == status;
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 6),
+                  child: ListTile(
+                    dense: true,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    tileColor: isSelected
+                        ? AppColors.primary.withValues(alpha: 0.1)
+                        : Colors.transparent,
+                    title: Text(
+                      status.localizedName(l10n),
+                      style: TextStyle(
+                        fontWeight:
+                            isSelected ? FontWeight.bold : FontWeight.normal,
+                        color: isSelected ? AppColors.accent : null,
+                      ),
+                    ),
+                    trailing: isSelected
+                        ? const Icon(
+                            Icons.check_circle_rounded,
+                            color: AppColors.accent,
+                          )
+                        : null,
+                    onTap: () => onStatusSelected(status),
+                  ),
+                );
+              }),
+            ],
+          ),
+        ),
       ),
     );
   }

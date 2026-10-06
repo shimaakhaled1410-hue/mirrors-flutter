@@ -18,6 +18,7 @@ class OrderProgressStepper extends StatelessWidget {
 
     final steps = [
       {'title': l10n.orderReceived, 'icon': Icons.receipt_long_rounded},
+      {'title': l10n.statusDepositConfirmed, 'icon': Icons.price_check_rounded},
       {'title': l10n.orderPreparing, 'icon': Icons.inventory_rounded},
       {'title': l10n.orderShipping, 'icon': Icons.local_shipping_rounded},
       {'title': l10n.orderDelivered, 'icon': Icons.check_circle_rounded},
@@ -25,7 +26,7 @@ class OrderProgressStepper extends StatelessWidget {
 
     Widget line(bool active) {
       return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 4),
+        padding: const EdgeInsets.symmetric(horizontal: 2),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 450),
           curve: Curves.easeOutCubic,
@@ -57,15 +58,15 @@ class OrderProgressStepper extends StatelessWidget {
                   AnimatedContainer(
                     duration: const Duration(milliseconds: 400),
                     curve: Curves.easeOutCubic,
-                    width: 34,
-                    height: 34,
+                    width: 30,
+                    height: 30,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: isCompleted
                           ? (isCurrent ? AppColors.accent : doneColor)
                           : (isDark
-                                ? AppColors.darkBackground
-                                : AppColors.lightBackground),
+                              ? AppColors.darkBackground
+                              : AppColors.lightBackground),
                       border: Border.all(
                         color: isCompleted ? AppColors.accent : idleColor,
                         width: 1.5,
@@ -74,20 +75,20 @@ class OrderProgressStepper extends StatelessWidget {
                           ? [
                               BoxShadow(
                                 color: AppColors.accent.withValues(alpha: 0.45),
-                                blurRadius: 14,
-                                spreadRadius: 2,
+                                blurRadius: 12,
+                                spreadRadius: 1,
                               ),
                             ]
                           : const [],
                     ),
                     child: Icon(
                       step['icon'] as IconData,
-                      size: 16,
+                      size: 14,
                       color: isCompleted
                           ? Colors.white
                           : (isDark
-                                ? AppColors.darkTextSecondary
-                                : AppColors.lightTextSecondary),
+                              ? AppColors.darkTextSecondary
+                              : AppColors.lightTextSecondary),
                     ),
                   ),
                   Expanded(
@@ -97,17 +98,16 @@ class OrderProgressStepper extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 6),
               Text(
                 step['title'] as String,
                 textAlign: TextAlign.center,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: isCurrent
-                    ? AppStyles.semiBold16(
-                        context,
-                      ).copyWith(fontSize: 10, color: AppColors.accent)
-                    : AppStyles.regular12(context).copyWith(fontSize: 10),
+                    ? AppStyles.semiBold16(context)
+                        .copyWith(fontSize: 9, color: AppColors.accent)
+                    : AppStyles.regular12(context).copyWith(fontSize: 9),
               ),
             ],
           ),

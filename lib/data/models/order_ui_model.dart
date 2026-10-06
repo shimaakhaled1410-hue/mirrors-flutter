@@ -1,21 +1,40 @@
+import '../../l10n/app_localizations.dart';
 import 'cart_item_model.dart';
 
 enum OrderStatus {
   received(0),
-  preparing(1),
-  shipping(2),
-  delivered(3),
+  depositConfirmed(1),
+  preparing(2),
+  shipping(3),
+  delivered(4),
   cancelled(-1);
 
   final int step;
   const OrderStatus(this.step);
 
+  String localizedName(AppLocalizations l10n) {
+    switch (this) {
+      case OrderStatus.received:
+        return l10n.statusReceived;
+      case OrderStatus.depositConfirmed:
+        return l10n.statusDepositConfirmed;
+      case OrderStatus.preparing:
+        return l10n.statusPreparing;
+      case OrderStatus.shipping:
+        return l10n.statusShipping;
+      case OrderStatus.delivered:
+        return l10n.statusDelivered;
+      case OrderStatus.cancelled:
+        return l10n.statusCancelled;
+    }
+  }
+
   String toJson() => name;
 
   static OrderStatus fromJson(String? json) => OrderStatus.values.firstWhere(
-        (e) => e.name == json,
-        orElse: () => OrderStatus.received,
-      );
+    (e) => e.name == json,
+    orElse: () => OrderStatus.received,
+  );
 }
 
 class OrderUiModel {
@@ -90,31 +109,33 @@ class OrderUiModel {
   }
 
   Map<String, dynamic> toJson() => {
-        'orderId': orderId,
-        'date': date,
-        'totalItems': totalItems,
-        'totalPrice': totalPrice,
-        'depositAmount': depositAmount,
-        'remainingAmount': remainingAmount,
-        'status': status.toJson(),
-        if (customerName != null) 'customerName': customerName,
-        if (phoneNumber != null) 'phoneNumber': phoneNumber,
-        if (address != null) 'address': address,
-        if (paymentMethod != null) 'paymentMethod': paymentMethod,
-        if (senderWalletNumber != null) 'senderWalletNumber': senderWalletNumber,
-        if (notes != null) 'notes': notes,
-        'items': items.map((e) => e.toJson()).toList(),
-        'createdAtMillis': createdAtMillis ?? DateTime.now().millisecondsSinceEpoch,
-      };
+    'orderId': orderId,
+    'date': date,
+    'totalItems': totalItems,
+    'totalPrice': totalPrice,
+    'depositAmount': depositAmount,
+    'remainingAmount': remainingAmount,
+    'status': status.toJson(),
+    if (customerName != null) 'customerName': customerName,
+    if (phoneNumber != null) 'phoneNumber': phoneNumber,
+    if (address != null) 'address': address,
+    if (paymentMethod != null) 'paymentMethod': paymentMethod,
+    if (senderWalletNumber != null) 'senderWalletNumber': senderWalletNumber,
+    if (notes != null) 'notes': notes,
+    'items': items.map((e) => e.toJson()).toList(),
+    'createdAtMillis': createdAtMillis ?? DateTime.now().millisecondsSinceEpoch,
+  };
 
   factory OrderUiModel.fromJson(Map<String, dynamic> json) {
-    final parsedItems = (json['items'] as List<dynamic>?)
+    final parsedItems =
+        (json['items'] as List<dynamic>?)
             ?.map((e) => CartItemModel.fromJson(e as Map<String, dynamic>))
             .toList() ??
         const [];
 
     final rawTotalItems = (json['totalItems'] as num?)?.toInt();
-    final computedTotalItems = rawTotalItems ??
+    final computedTotalItems =
+        rawTotalItems ??
         parsedItems.fold<int>(0, (sum, item) => sum + item.quantity);
 
     return OrderUiModel(
@@ -136,33 +157,3 @@ class OrderUiModel {
     );
   }
 }
-
-const List<OrderUiModel> kDummyOrders = [
-  OrderUiModel(
-    orderId: '1042',
-    date: '2026-09-26',
-    totalItems: 12,
-    totalPrice: 1080,
-    depositAmount: 540,
-    remainingAmount: 540,
-    status: OrderStatus.preparing,
-  ),
-  OrderUiModel(
-    orderId: '1035',
-    date: '2026-09-20',
-    totalItems: 2,
-    totalPrice: 270,
-    depositAmount: 135,
-    remainingAmount: 135,
-    status: OrderStatus.delivered,
-  ),
-  OrderUiModel(
-    orderId: '1019',
-    date: '2026-09-12',
-    totalItems: 24,
-    totalPrice: 1920,
-    depositAmount: 960,
-    remainingAmount: 960,
-    status: OrderStatus.delivered,
-  ),
-];

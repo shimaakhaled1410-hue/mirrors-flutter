@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mirrors_app/core/constants/app_storage_keys.dart';
@@ -12,7 +13,7 @@ class OrdersCubit extends Cubit<OrdersState> {
   final OrdersFirestoreService _firestoreService;
 
   OrdersCubit(this._prefs, this._firestoreService)
-      : super(const OrdersState(orders: [])) {
+    : super(const OrdersState(orders: [])) {
     _loadSavedOrders();
   }
 
@@ -22,8 +23,7 @@ class OrdersCubit extends Cubit<OrdersState> {
       try {
         final List<dynamic> decoded = jsonDecode(rawJson);
         final loadedOrders = decoded
-            .map((item) =>
-                OrderUiModel.fromJson(item as Map<String, dynamic>))
+            .map((item) => OrderUiModel.fromJson(item as Map<String, dynamic>))
             .toList();
         emit(state.copyWith(orders: loadedOrders));
       } catch (_) {}
@@ -93,5 +93,26 @@ class OrdersCubit extends Cubit<OrdersState> {
     try {
       await _firestoreService.submitOrder(newOrder);
     } catch (_) {}
+  }
+
+  StreamSubscription<List<OrderUiModel>>? _ordersSubscription;
+
+  void startListeningToCustomerOrders(String phone) {
+    if (phone.isEmpty) return;
+    _ordersSubscription?.cancel();
+    _ordersSubscription = _firestoreService.getOrdersByPhoneStream(phone).listen(
+      (firestoreOrders) {
+        if (firestoreOrders.isNotEmpty) {
+          emit(state.copyWith(orders: firestoreOrders));
+          _saveOrders(firestoreOrders);
+        }
+      },
+    );
+  }
+
+  @override
+  Future<void> close() {
+    _ordersSubscription?.cancel();
+    return super.close();
   }
 }

@@ -408,4 +408,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get statusUpdateFailed => 'فشل تحديث الحالة';
+
+  @override
+  String get statusDepositConfirmed => 'تم تأكيد العربون';
+
+  @override
+  String get confirmDepositAction => 'تأكيد استلام العربون';
 }

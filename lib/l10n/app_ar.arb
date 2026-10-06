@@ -169,5 +169,7 @@
   "statusUpdateFailed": "فشل تحديث الحالة",
   "cm": "سم",
   "egp": "ج.م",
-  "senderWalletLabel": "رقم المحفظة المحول منها"
+  "senderWalletLabel": "رقم المحفظة المحول منها",
+  "statusDepositConfirmed": "تم تأكيد العربون",
+  "confirmDepositAction": "تأكيد استلام العربون"
 }

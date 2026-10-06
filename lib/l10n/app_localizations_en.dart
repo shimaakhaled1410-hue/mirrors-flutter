@@ -408,4 +408,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get statusUpdateFailed => 'Failed to update status';
+
+  @override
+  String get statusDepositConfirmed => 'Deposit Confirmed';
+
+  @override
+  String get confirmDepositAction => 'Confirm Deposit Receipt';
 }

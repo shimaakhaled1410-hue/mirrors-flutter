@@ -853,6 +853,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Failed to update status'**
   String get statusUpdateFailed;
+
+  /// No description provided for @statusDepositConfirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Deposit Confirmed'**
+  String get statusDepositConfirmed;
+
+  /// No description provided for @confirmDepositAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Deposit Receipt'**
+  String get confirmDepositAction;
 }
 
 class _AppLocalizationsDelegate

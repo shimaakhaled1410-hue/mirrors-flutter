@@ -9,10 +9,11 @@ import '../../l10n/app_localizations.dart';
 import '../manager/orders/orders_cubit.dart';
 import '../manager/orders/orders_state.dart';
 import '../widgets/order_details/order_details_cancel_button.dart';
-import '../widgets/order_details/order_details_info_row.dart';
 import '../widgets/order_details/order_details_items_card.dart';
+import '../widgets/order_details/order_details_payment_card.dart';
 import '../widgets/order_details/order_details_shipping_card.dart';
-import '../widgets/orders/order_progress_stepper.dart';
+import '../widgets/order_details/order_details_status_card.dart';
+import '../widgets/order_details/order_details_totals_card.dart';
 
 class OrderDetailsView extends StatelessWidget {
   final OrderUiModel order;
@@ -22,10 +23,6 @@ class OrderDetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final surface = isDark ? AppColors.darkSurface : AppColors.lightSurface;
-    final border = isDark ? AppColors.darkBorder : AppColors.lightBorder;
-    final bg = isDark ? AppColors.darkBackground : AppColors.lightBackground;
 
     return BlocBuilder<OrdersCubit, OrdersState>(
       builder: (context, state) {
@@ -34,7 +31,6 @@ class OrderDetailsView extends StatelessWidget {
           orElse: () => order,
         );
 
-        final isCancelled = currentOrder.status == OrderStatus.cancelled;
         final canCancel = currentOrder.status == OrderStatus.received;
 
         return Scaffold(
@@ -48,58 +44,7 @@ class OrderDetailsView extends StatelessWidget {
             children: [
               FadeSlideIn(
                 index: 0,
-                child: Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: surface,
-                    borderRadius: BorderRadius.circular(24),
-                    border: Border.all(color: border),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            isCancelled
-                                ? l10n.statusCancelled
-                                : l10n.orderTrackingTitle,
-                            style: AppStyles.semiBold16(context).copyWith(
-                              color: isCancelled ? Colors.red : null,
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 4),
-                            decoration: BoxDecoration(
-                              color: bg,
-                              borderRadius: BorderRadius.circular(20),
-                              border: Border.all(color: border),
-                            ),
-                            child: Text(
-                              currentOrder.date,
-                              style: AppStyles.regular12(context),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      if (!isCancelled)
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 16, horizontal: 4),
-                          decoration: BoxDecoration(
-                            color: bg,
-                            borderRadius: BorderRadius.circular(16),
-                            border: Border.all(color: border),
-                          ),
-                          child: OrderProgressStepper(
-                              currentStatus: currentOrder.status),
-                        ),
-                    ],
-                  ),
-                ),
+                child: OrderDetailsStatusCard(order: currentOrder),
               ),
               const SizedBox(height: 16),
               FadeSlideIn(
@@ -109,43 +54,7 @@ class OrderDetailsView extends StatelessWidget {
               const SizedBox(height: 16),
               FadeSlideIn(
                 index: 2,
-                child: Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: surface,
-                    borderRadius: BorderRadius.circular(24),
-                    border: Border.all(color: border),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          const Icon(Icons.account_balance_wallet_outlined,
-                              color: AppColors.accent, size: 20),
-                          const SizedBox(width: 8),
-                          Text(
-                            l10n.depositAndPaymentDetails,
-                            style: AppStyles.semiBold16(context),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 14),
-                      OrderDetailsInfoRow(
-                        label: l10n.paymentMethod,
-                        value: currentOrder.paymentMethod ?? l10n.vodafoneCash,
-                      ),
-                      if (currentOrder.senderWalletNumber != null &&
-                          currentOrder.senderWalletNumber!.isNotEmpty) ...[
-                        const Divider(height: 16),
-                        OrderDetailsInfoRow(
-                          label: l10n.senderWalletLabel,
-                          value: currentOrder.senderWalletNumber!,
-                        ),
-                      ],
-                    ],
-                  ),
-                ),
+                child: OrderDetailsPaymentCard(order: currentOrder),
               ),
               const SizedBox(height: 16),
               if (currentOrder.items.isNotEmpty) ...[
@@ -157,57 +66,7 @@ class OrderDetailsView extends StatelessWidget {
               ],
               FadeSlideIn(
                 index: 4,
-                child: Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: surface,
-                    borderRadius: BorderRadius.circular(24),
-                    border: Border.all(color: border),
-                  ),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(l10n.total,
-                              style: AppStyles.semiBold16(context)),
-                          Text(
-                            '${currentOrder.totalPrice.toInt()} ${l10n.egp}',
-                            style: AppStyles.bold16(context),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(l10n.depositPaidLabel,
-                              style: AppStyles.regular14(context)),
-                          Text(
-                            '${currentOrder.depositAmount.toInt()} ${l10n.egp}',
-                            style: AppStyles.bold16Accent,
-                          ),
-                        ],
-                      ),
-                      const Divider(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            l10n.remainingOnDelivery,
-                            style: AppStyles.semiBold16(context)
-                                .copyWith(color: Colors.green),
-                          ),
-                          Text(
-                            '${currentOrder.remainingAmount.toInt()} ${l10n.egp}',
-                            style: AppStyles.bold18(context)
-                                .copyWith(color: Colors.green),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
+                child: OrderDetailsTotalsCard(order: currentOrder),
               ),
               const SizedBox(height: 20),
               FadeSlideIn(
