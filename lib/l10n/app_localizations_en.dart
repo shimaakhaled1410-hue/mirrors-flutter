@@ -351,4 +351,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get orderCreatedSuccess => 'Order placed successfully';
+
+  @override
+  String get adminAccess => 'Admin Access';
+
+  @override
+  String get adminPinPrompt => 'Enter admin PIN to continue';
+
+  @override
+  String get invalidPin => 'Invalid PIN code';
+
+  @override
+  String get confirm => 'Confirm';
+
+  @override
+  String get cancel => 'Cancel';
 }

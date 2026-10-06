@@ -145,5 +145,10 @@
   "filterWithShelf": "مرايا برَف",
   "mirrorWithShelf": "مرآة بإطار مع رف زجاجي",
   "undo": "تراجع",
-  "orderCreatedSuccess": "تم تسجيل طلبك بنجاح"
+  "orderCreatedSuccess": "تم تسجيل طلبك بنجاح",
+  "adminAccess": "دخول الإدارة",
+  "adminPinPrompt": "أدخل رمز PIN للمتابعة",
+  "invalidPin": "رمز PIN غير صحيح",
+  "confirm": "تأكيد",
+  "cancel": "إلغاء"
 }

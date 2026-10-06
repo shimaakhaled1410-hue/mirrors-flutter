@@ -145,5 +145,10 @@
   "filterWithShelf": "With Shelf",
   "mirrorWithShelf": "Framed Mirror with Shelf",
   "undo": "Undo",
-  "orderCreatedSuccess": "Order placed successfully"
+  "orderCreatedSuccess": "Order placed successfully",
+  "adminAccess": "Admin Access",
+  "adminPinPrompt": "Enter admin PIN to continue",
+  "invalidPin": "Invalid PIN code",
+  "confirm": "Confirm",
+  "cancel": "Cancel"
 }

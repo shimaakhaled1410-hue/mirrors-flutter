@@ -739,6 +739,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Order placed successfully'**
   String get orderCreatedSuccess;
+
+  /// No description provided for @adminAccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Admin Access'**
+  String get adminAccess;
+
+  /// No description provided for @adminPinPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter admin PIN to continue'**
+  String get adminPinPrompt;
+
+  /// No description provided for @invalidPin.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid PIN code'**
+  String get invalidPin;
+
+  /// No description provided for @confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get confirm;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
 }
 
 class _AppLocalizationsDelegate

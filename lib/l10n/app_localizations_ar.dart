@@ -351,4 +351,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get orderCreatedSuccess => 'تم تسجيل طلبك بنجاح';
+
+  @override
+  String get adminAccess => 'دخول الإدارة';
+
+  @override
+  String get adminPinPrompt => 'أدخل رمز PIN للمتابعة';
+
+  @override
+  String get invalidPin => 'رمز PIN غير صحيح';
+
+  @override
+  String get confirm => 'تأكيد';
+
+  @override
+  String get cancel => 'إلغاء';
 }
