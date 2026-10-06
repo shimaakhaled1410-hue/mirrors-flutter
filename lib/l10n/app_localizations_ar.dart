@@ -72,7 +72,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get piecesCount => 'قطع';
 
   @override
-  String get orderNumber => 'طلب رقم #';
+  String get orderNumber => 'طلب رقم ‎#';
 
   @override
   String get orderReceived => 'تم الاستلام';

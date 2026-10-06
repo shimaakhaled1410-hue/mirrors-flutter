@@ -21,7 +21,7 @@
   "unitWholesalePrice": "سعر القطعة جملة",
   "totalPrice": "الإجمالي",
   "piecesCount": "قطع",
-  "orderNumber": "طلب رقم #",
+  "orderNumber": "طلب رقم \u200E#",
   "orderReceived": "تم الاستلام",
   "orderPreparing": "تجهيز وتغليف",
   "orderShipping": "مع الشحن",
