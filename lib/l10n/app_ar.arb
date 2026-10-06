@@ -165,5 +165,9 @@
   "statusShipping": "مع المندوب",
   "statusDelivered": "تم التسليم",
   "statusCancelled": "ملغي",
-  "itemsSummary": "المنتجات المطلوبة"
+  "itemsSummary": "المنتجات المطلوبة",
+  "statusUpdateFailed": "فشل تحديث الحالة",
+  "cm": "سم",
+  "egp": "ج.م",
+  "senderWalletLabel": "رقم المحفظة المحول منها"
 }

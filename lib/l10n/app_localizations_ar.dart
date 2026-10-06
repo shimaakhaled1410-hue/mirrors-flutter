@@ -200,7 +200,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get copyTooltip => 'نسخ الرقم';
 
   @override
-  String get senderWalletLabel => 'رقم المحفظة التي قمت بالتحويل منها';
+  String get senderWalletLabel => 'رقم المحفظة المحول منها';
 
   @override
   String get senderWalletValidation =>
@@ -405,4 +405,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get itemsSummary => 'المنتجات المطلوبة';
+
+  @override
+  String get statusUpdateFailed => 'فشل تحديث الحالة';
 }

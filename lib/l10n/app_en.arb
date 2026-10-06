@@ -165,5 +165,9 @@
   "statusShipping": "Out for Delivery",
   "statusDelivered": "Delivered",
   "statusCancelled": "Cancelled",
-  "itemsSummary": "Order Items"
+  "itemsSummary": "Order Items",
+  "statusUpdateFailed": "Failed to update status",
+  "cm": "cm",
+  "egp": "EGP",
+  "senderWalletLabel": "Sender wallet number"
 }

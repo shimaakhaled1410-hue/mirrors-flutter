@@ -43,19 +43,28 @@ class _AdminOrdersViewState extends State<AdminOrdersView> {
 
   void _showChangeStatusSheet(BuildContext context, OrderUiModel order) {
     final l10n = AppLocalizations.of(context)!;
+
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (_) => AdminStatusSheet(
+      builder: (sheetContext) => AdminStatusSheet(
         order: order,
         onStatusSelected: (newStatus) async {
-          context.pop();
-          await _firestoreService.updateOrderStatus(order.orderId, newStatus);
-          if (mounted) {
+          sheetContext.pop();
+
+          try {
+            await _firestoreService.updateOrderStatus(order.orderId, newStatus);
+            if (!mounted) return;
             AppSnackBar.showSuccess(
-              context,
+              this.context,
               message: l10n.statusUpdatedSuccess,
+            );
+          } catch (_) {
+            if (!mounted) return;
+            AppSnackBar.showError(
+              this.context,
+              message: l10n.statusUpdateFailed,
             );
           }
         },

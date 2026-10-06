@@ -479,7 +479,7 @@ abstract class AppLocalizations {
   /// No description provided for @senderWalletLabel.
   ///
   /// In en, this message translates to:
-  /// **'Wallet number transferred from'**
+  /// **'Sender wallet number'**
   String get senderWalletLabel;
 
   /// No description provided for @senderWalletValidation.
@@ -847,6 +847,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Order Items'**
   String get itemsSummary;
+
+  /// No description provided for @statusUpdateFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to update status'**
+  String get statusUpdateFailed;
 }
 
 class _AppLocalizationsDelegate

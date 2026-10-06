@@ -58,7 +58,10 @@ class AdminOrderCard extends StatelessWidget {
                 Text('#${order.orderId}', style: AppStyles.bold16(context)),
                 const SizedBox(width: 8),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 4,
+                  ),
                   decoration: BoxDecoration(
                     color: AppColors.accent.withValues(alpha: 0.15),
                     borderRadius: BorderRadius.circular(8),
@@ -73,18 +76,25 @@ class AdminOrderCard extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
-                if (order.phoneNumber != null && order.phoneNumber!.isNotEmpty) ...[
+                if (order.phoneNumber != null &&
+                    order.phoneNumber!.isNotEmpty) ...[
                   IconButton.filledTonal(
                     onPressed: onCall,
                     icon: const Icon(Icons.phone_rounded, size: 16),
-                    constraints: const BoxConstraints(minWidth: 36, minHeight: 36),
+                    constraints: const BoxConstraints(
+                      minWidth: 36,
+                      minHeight: 36,
+                    ),
                     padding: EdgeInsets.zero,
                   ),
                   const SizedBox(width: 6),
                   IconButton.filledTonal(
                     onPressed: onWhatsApp,
                     icon: const Icon(Icons.chat_bubble_rounded, size: 16),
-                    constraints: const BoxConstraints(minWidth: 36, minHeight: 36),
+                    constraints: const BoxConstraints(
+                      minWidth: 36,
+                      minHeight: 36,
+                    ),
                     padding: EdgeInsets.zero,
                   ),
                 ],
@@ -105,53 +115,63 @@ class AdminOrderCard extends StatelessWidget {
                 order.senderWalletNumber!.isNotEmpty) ...[
               const SizedBox(height: 4),
               Text(
-                'رقم المحفظة المحول منها: ${order.senderWalletNumber}',
-                style: AppStyles.regular12(context).copyWith(color: AppColors.accent),
+                '${l10n.senderWalletLabel}: ${order.senderWalletNumber}',
+                style: AppStyles.regular12(
+                  context,
+                ).copyWith(color: AppColors.accent),
               ),
             ],
 
             // Items List
-           // Items List
             if (order.items.isNotEmpty) ...[
               const SizedBox(height: 12),
               const Divider(height: 1),
               const SizedBox(height: 10),
               Text(l10n.itemsSummary, style: AppStyles.semiBold12(context)),
               const SizedBox(height: 6),
-              ...order.items.map((item) => Padding(
-                    padding: const EdgeInsets.only(bottom: 4),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.circle, size: 6, color: AppColors.accent),
-                        const SizedBox(width: 6),
-                        Expanded(
-                          child: Text(
-                            '${item.product.dimensions} سم × ${item.quantity}',
-                            style: AppStyles.regular12(context),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
+              ...order.items.map(
+                (item) => Padding(
+                  padding: const EdgeInsets.only(bottom: 4),
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.circle,
+                        size: 6,
+                        color: AppColors.accent,
+                      ),
+                      const SizedBox(width: 6),
+                      Expanded(
+                        child: Text(
+                          '${item.product.dimensions} ${l10n.cm} × ${item.quantity}',
+                          style: AppStyles.regular12(context),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        Text(
-                          '${item.totalPrice.toInt()} ج.م',
-                          style: AppStyles.semiBold12(context),
-                        ),
-                      ],
-                    ),
-                  )),
+                      ),
+                      Text(
+                        '${item.totalPrice.toInt()} ${l10n.egp}',
+                        style: AppStyles.semiBold12(context),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ],
+
             const SizedBox(height: 12),
             const Divider(height: 1),
             const SizedBox(height: 12),
 
-            // Financial Summary Badges (Fixes Overflow)
+            // Financial Summary Badges
             Row(
               children: [
                 Expanded(
                   child: Container(
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: isDark ? AppColors.darkBackground : AppColors.lightBackground,
+                      color: isDark
+                          ? AppColors.darkBackground
+                          : AppColors.lightBackground,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Column(
@@ -163,7 +183,7 @@ class AdminOrderCard extends StatelessWidget {
                         ),
                         const SizedBox(height: 2),
                         Text(
-                          '${order.depositAmount.toInt()} ج.م',
+                          '${order.depositAmount.toInt()} ${l10n.egp}',
                           style: AppStyles.bold14(context),
                         ),
                       ],
@@ -175,7 +195,9 @@ class AdminOrderCard extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: isDark ? AppColors.darkBackground : AppColors.lightBackground,
+                      color: isDark
+                          ? AppColors.darkBackground
+                          : AppColors.lightBackground,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Column(
@@ -187,8 +209,10 @@ class AdminOrderCard extends StatelessWidget {
                         ),
                         const SizedBox(height: 2),
                         Text(
-                          '${order.remainingAmount.toInt()} ج.م',
-                          style: AppStyles.bold14(context).copyWith(color: AppColors.primary),
+                          '${order.remainingAmount.toInt()} ${l10n.egp}',
+                          style: AppStyles.bold14(
+                            context,
+                          ).copyWith(color: AppColors.primary),
                         ),
                       ],
                     ),
@@ -206,7 +230,9 @@ class AdminOrderCard extends StatelessWidget {
                 icon: const Icon(Icons.edit_note_rounded, size: 18),
                 label: Text(l10n.changeStatus),
                 style: OutlinedButton.styleFrom(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                   padding: const EdgeInsets.symmetric(vertical: 12),
                 ),
               ),

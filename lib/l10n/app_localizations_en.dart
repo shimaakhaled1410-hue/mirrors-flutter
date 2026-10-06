@@ -200,7 +200,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get copyTooltip => 'Copy number';
 
   @override
-  String get senderWalletLabel => 'Wallet number transferred from';
+  String get senderWalletLabel => 'Sender wallet number';
 
   @override
   String get senderWalletValidation =>
@@ -405,4 +405,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get itemsSummary => 'Order Items';
+
+  @override
+  String get statusUpdateFailed => 'Failed to update status';
 }
