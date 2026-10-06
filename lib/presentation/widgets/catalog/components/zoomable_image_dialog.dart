@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ZoomableImageDialog extends StatelessWidget {
   final String imagePath;
@@ -47,7 +48,7 @@ class ZoomableImageDialog extends StatelessWidget {
                 shape: const CircleBorder(),
               ),
               icon: const Icon(Icons.close_rounded, color: Colors.white, size: 24),
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed: () => context.pop(),
             ),
           ),
         ],

@@ -57,7 +57,7 @@ class CheckoutSuccessDialog extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 12),
               ),
               onPressed: () {
-                Navigator.of(context).pop();
+                context.pop();
                 context.go(AppRoutes.mainLayout);
               },
               child: Text(

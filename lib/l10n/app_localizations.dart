@@ -727,6 +727,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Framed Mirror with Shelf'**
   String get mirrorWithShelf;
+
+  /// No description provided for @undo.
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get undo;
+
+  /// No description provided for @orderCreatedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Order placed successfully'**
+  String get orderCreatedSuccess;
 }
 
 class _AppLocalizationsDelegate

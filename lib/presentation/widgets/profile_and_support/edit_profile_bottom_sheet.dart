@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/constants/app_storage_keys.dart';
 import '../../../../core/utils/app_colors.dart';
@@ -50,7 +51,7 @@ class _EditProfileBottomSheetState extends State<EditProfileBottomSheet> {
     widget.onSaved();
 
     if (!mounted) return;
-    Navigator.of(context).pop();
+    context.pop();
 
     final l10n = AppLocalizations.of(context)!;
     ScaffoldMessenger.of(context).showSnackBar(

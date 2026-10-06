@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mirrors_app/core/constants/app_storage_keys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../core/routing/app_routes.dart';
 import '../../core/utils/app_colors.dart';
+import '../../core/utils/app_snack_bar.dart';
 import '../../core/utils/app_styles.dart';
 import '../../core/widgets/animated_widgets.dart';
 import '../../l10n/app_localizations.dart';
@@ -13,7 +16,6 @@ import '../manager/orders/orders_cubit.dart';
 import '../widgets/checkout/checkout_deposit_section.dart';
 import '../widgets/checkout/checkout_financial_summary.dart';
 import '../widgets/checkout/checkout_shipping_section.dart';
-import '../widgets/checkout/checkout_success_dialog.dart';
 
 class CheckoutView extends StatefulWidget {
   const CheckoutView({super.key});
@@ -33,6 +35,7 @@ class _CheckoutViewState extends State<CheckoutView> {
 
   static const double _shippingFee = 50.0;
   late final String _storeWalletNumber;
+
   @override
   void initState() {
     super.initState();
@@ -73,7 +76,7 @@ class _CheckoutViewState extends State<CheckoutView> {
     super.dispose();
   }
 
- Future<void> _onConfirmOrder(BuildContext context, CartState cartState) async {
+  Future<void> _onConfirmOrder(BuildContext context, CartState cartState) async {
     FocusScope.of(context).unfocus();
     if (!_formKey.currentState!.validate()) return;
 
@@ -90,7 +93,6 @@ class _CheckoutViewState extends State<CheckoutView> {
         ? null
         : _notesController.text.trim();
 
-    // Persist default shipping info for future checkouts
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(AppStorageKeys.customerName, customerName);
     await prefs.setString(AppStorageKeys.customerPhone, phoneNumber);
@@ -98,8 +100,10 @@ class _CheckoutViewState extends State<CheckoutView> {
 
     if (!context.mounted) return;
 
+    final cachedItems = List.of(cartState.items);
+
     context.read<OrdersCubit>().placeOrder(
-          items: cartState.items,
+          items: cachedItems,
           totalPrice: total,
           depositAmount: depositPaid,
           remainingAmount: remaining,
@@ -113,10 +117,15 @@ class _CheckoutViewState extends State<CheckoutView> {
 
     context.read<CartCubit>().clearCart();
 
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (_) => const CheckoutSuccessDialog(),
+    context.go(AppRoutes.mainLayout);
+
+    AppSnackBar.showSuccess(
+      context,
+      message: l10n.orderCreatedSuccess,
+      actionLabel: l10n.undo,
+      onAction: () {
+        // Option to undo order action
+      },
     );
   }
 

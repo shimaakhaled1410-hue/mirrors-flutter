@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_styles.dart';
 import '../../../../data/models/order_ui_model.dart';
@@ -31,7 +32,7 @@ class OrderDetailsCancelButton extends StatelessWidget {
         ),
         actions: [
           TextButton(
-            onPressed: () => Navigator.of(dialogContext).pop(),
+            onPressed: () => dialogContext.pop(),
             child: Text(
               l10n.keepOrderButton,
               style: AppStyles.medium14(dialogContext),
@@ -46,7 +47,7 @@ class OrderDetailsCancelButton extends StatelessWidget {
               ),
             ),
             onPressed: () {
-              Navigator.of(dialogContext).pop();
+              dialogContext.pop();
               context.read<OrdersCubit>().cancelOrder(order.orderId);
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(

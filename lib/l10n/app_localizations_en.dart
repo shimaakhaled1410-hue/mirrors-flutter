@@ -345,4 +345,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mirrorWithShelf => 'Framed Mirror with Shelf';
+
+  @override
+  String get undo => 'Undo';
+
+  @override
+  String get orderCreatedSuccess => 'Order placed successfully';
 }

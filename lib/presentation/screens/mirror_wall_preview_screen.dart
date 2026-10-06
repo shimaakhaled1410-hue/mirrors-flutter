@@ -2,6 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mirrors_app/l10n/app_localizations.dart';
 import 'package:mirrors_app/presentation/manager/cart/cart_cubit.dart';
 import 'package:mirrors_app/presentation/widgets/wall_preview/preview_bottom_card.dart';
@@ -79,7 +80,7 @@ class _MirrorWallPreviewScreenState extends State<MirrorWallPreviewScreen> {
 
   void _handleAddToCart(AppLocalizations l10n) {
     context.read<CartCubit>().addRetailItem(widget.mirror);
-    Navigator.pop(context);
+    context.pop();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('${widget.mirror.dimensions} - ${l10n.addToCart}'),
@@ -136,7 +137,7 @@ class _MirrorWallPreviewScreenState extends State<MirrorWallPreviewScreen> {
                 right: 16,
                 child: PreviewTopBar(
                   dimensionsText: '${widget.mirror.dimensions} ${l10n.cm}',
-                  onBack: () => Navigator.pop(context),
+                  onBack: () => context.pop(),
                 ),
               ),
               Positioned(

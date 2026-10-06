@@ -345,4 +345,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get mirrorWithShelf => 'مرآة بإطار مع رف زجاجي';
+
+  @override
+  String get undo => 'تراجع';
+
+  @override
+  String get orderCreatedSuccess => 'تم تسجيل طلبك بنجاح';
 }

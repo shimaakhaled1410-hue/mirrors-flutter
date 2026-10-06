@@ -143,5 +143,7 @@
   "filterStandard": "Standard",
   "filterSpecialSizes": "Special Sizes",
   "filterWithShelf": "With Shelf",
-  "mirrorWithShelf": "Framed Mirror with Shelf"
+  "mirrorWithShelf": "Framed Mirror with Shelf",
+  "undo": "Undo",
+  "orderCreatedSuccess": "Order placed successfully"
 }

@@ -143,5 +143,7 @@
   "filterStandard": "المقاسات العادية",
   "filterSpecialSizes": "مقاسات خاصة",
   "filterWithShelf": "مرايا برَف",
-  "mirrorWithShelf": "مرآة بإطار مع رف زجاجي"
+  "mirrorWithShelf": "مرآة بإطار مع رف زجاجي",
+  "undo": "تراجع",
+  "orderCreatedSuccess": "تم تسجيل طلبك بنجاح"
 }
