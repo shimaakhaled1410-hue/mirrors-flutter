@@ -817,6 +817,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No orders yet'**
   String get noOrdersYet;
+
+  /// No description provided for @statusReceived.
+  ///
+  /// In en, this message translates to:
+  /// **'New Order'**
+  String get statusReceived;
+
+  /// No description provided for @statusPreparing.
+  ///
+  /// In en, this message translates to:
+  /// **'Preparing'**
+  String get statusPreparing;
+
+  /// No description provided for @statusShipping.
+  ///
+  /// In en, this message translates to:
+  /// **'Out for Delivery'**
+  String get statusShipping;
+
+  /// No description provided for @statusDelivered.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivered'**
+  String get statusDelivered;
+
+  /// No description provided for @itemsSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Items'**
+  String get itemsSummary;
 }
 
 class _AppLocalizationsDelegate

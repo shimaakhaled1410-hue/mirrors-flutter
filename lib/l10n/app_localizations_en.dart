@@ -390,4 +390,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noOrdersYet => 'No orders yet';
+
+  @override
+  String get statusReceived => 'New Order';
+
+  @override
+  String get statusPreparing => 'Preparing';
+
+  @override
+  String get statusShipping => 'Out for Delivery';
+
+  @override
+  String get statusDelivered => 'Delivered';
+
+  @override
+  String get itemsSummary => 'Order Items';
 }

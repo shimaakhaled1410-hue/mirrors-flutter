@@ -159,5 +159,11 @@
   "whatsappClient": "WhatsApp",
   "depositPaidLabel": "Deposit Paid",
   "remainingToPay": "Remaining",
-  "noOrdersYet": "No orders yet"
+  "noOrdersYet": "No orders yet",
+  "statusReceived": "New Order",
+  "statusPreparing": "Preparing",
+  "statusShipping": "Out for Delivery",
+  "statusDelivered": "Delivered",
+  "statusCancelled": "Cancelled",
+  "itemsSummary": "Order Items"
 }

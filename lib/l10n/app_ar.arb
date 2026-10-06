@@ -159,5 +159,11 @@
   "whatsappClient": "واتساب",
   "depositPaidLabel": "العربون المدفوع",
   "remainingToPay": "المتبقي عند الاستلام",
-  "noOrdersYet": "لا توجد طلبات حتى الآن"
+  "noOrdersYet": "لا توجد طلبات حتى الآن",
+  "statusReceived": "طلب جديد",
+  "statusPreparing": "جاري التجهيز",
+  "statusShipping": "مع المندوب",
+  "statusDelivered": "تم التسليم",
+  "statusCancelled": "ملغي",
+  "itemsSummary": "المنتجات المطلوبة"
 }

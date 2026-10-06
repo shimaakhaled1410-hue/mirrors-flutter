@@ -390,4 +390,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get noOrdersYet => 'لا توجد طلبات حتى الآن';
+
+  @override
+  String get statusReceived => 'طلب جديد';
+
+  @override
+  String get statusPreparing => 'جاري التجهيز';
+
+  @override
+  String get statusShipping => 'مع المندوب';
+
+  @override
+  String get statusDelivered => 'تم التسليم';
+
+  @override
+  String get itemsSummary => 'المنتجات المطلوبة';
 }

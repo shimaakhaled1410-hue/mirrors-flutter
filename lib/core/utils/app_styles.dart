@@ -53,6 +53,11 @@ class AppStyles {
         : AppColors.darkTextSecondary,
   );
 
+  static TextStyle semiBold12(BuildContext context) => GoogleFonts.cairo(
+    fontSize: 12,
+    fontWeight: FontWeight.w600,
+    color: Theme.of(context).colorScheme.onSurface,
+  );
   static TextStyle regular12(BuildContext context) => GoogleFonts.cairo(
     fontSize: 12,
     fontWeight: FontWeight.normal,
