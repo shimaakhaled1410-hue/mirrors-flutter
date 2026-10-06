@@ -302,12 +302,6 @@ abstract class AppLocalizations {
   /// **'Use sturdy wall anchors for hanging rope-framed mirrors.'**
   String get safetyTip3;
 
-  /// No description provided for @contactSupport.
-  ///
-  /// In en, this message translates to:
-  /// **'Contact Support'**
-  String get contactSupport;
-
   /// No description provided for @appSettings.
   ///
   /// In en, this message translates to:
@@ -479,7 +473,7 @@ abstract class AppLocalizations {
   /// No description provided for @senderWalletLabel.
   ///
   /// In en, this message translates to:
-  /// **'Sender wallet number'**
+  /// **'Wallet number transferred from'**
   String get senderWalletLabel;
 
   /// No description provided for @senderWalletValidation.
@@ -569,7 +563,7 @@ abstract class AppLocalizations {
   /// No description provided for @depositPaidLabel.
   ///
   /// In en, this message translates to:
-  /// **'Deposit Paid'**
+  /// **'Paid deposit:'**
   String get depositPaidLabel;
 
   /// No description provided for @deliveryNotes.
@@ -583,6 +577,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Quantity'**
   String get quantity;
+
+  /// No description provided for @contactSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact Support'**
+  String get contactSupport;
 
   /// No description provided for @whatsappError.
   ///
@@ -740,89 +740,17 @@ abstract class AppLocalizations {
   /// **'Order placed successfully'**
   String get orderCreatedSuccess;
 
-  /// No description provided for @adminAccess.
-  ///
-  /// In en, this message translates to:
-  /// **'Admin Access'**
-  String get adminAccess;
-
-  /// No description provided for @adminPinPrompt.
-  ///
-  /// In en, this message translates to:
-  /// **'Enter admin PIN to continue'**
-  String get adminPinPrompt;
-
-  /// No description provided for @invalidPin.
-  ///
-  /// In en, this message translates to:
-  /// **'Invalid PIN code'**
-  String get invalidPin;
-
-  /// No description provided for @confirm.
-  ///
-  /// In en, this message translates to:
-  /// **'Confirm'**
-  String get confirm;
-
-  /// No description provided for @cancel.
-  ///
-  /// In en, this message translates to:
-  /// **'Cancel'**
-  String get cancel;
-
-  /// No description provided for @adminOrdersTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Orders Management'**
-  String get adminOrdersTitle;
-
-  /// No description provided for @allOrders.
-  ///
-  /// In en, this message translates to:
-  /// **'All'**
-  String get allOrders;
-
-  /// No description provided for @changeStatus.
-  ///
-  /// In en, this message translates to:
-  /// **'Change Status'**
-  String get changeStatus;
-
-  /// No description provided for @statusUpdatedSuccess.
-  ///
-  /// In en, this message translates to:
-  /// **'Order status updated successfully'**
-  String get statusUpdatedSuccess;
-
-  /// No description provided for @callClient.
-  ///
-  /// In en, this message translates to:
-  /// **'Call'**
-  String get callClient;
-
-  /// No description provided for @whatsappClient.
-  ///
-  /// In en, this message translates to:
-  /// **'WhatsApp'**
-  String get whatsappClient;
-
-  /// No description provided for @remainingToPay.
-  ///
-  /// In en, this message translates to:
-  /// **'Remaining'**
-  String get remainingToPay;
-
-  /// No description provided for @noOrdersYet.
-  ///
-  /// In en, this message translates to:
-  /// **'No orders yet'**
-  String get noOrdersYet;
-
   /// No description provided for @statusReceived.
   ///
   /// In en, this message translates to:
   /// **'New Order'**
   String get statusReceived;
+
+  /// No description provided for @statusDepositConfirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Deposit Confirmed'**
+  String get statusDepositConfirmed;
 
   /// No description provided for @statusPreparing.
   ///
@@ -841,30 +769,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Delivered'**
   String get statusDelivered;
-
-  /// No description provided for @itemsSummary.
-  ///
-  /// In en, this message translates to:
-  /// **'Order Items'**
-  String get itemsSummary;
-
-  /// No description provided for @statusUpdateFailed.
-  ///
-  /// In en, this message translates to:
-  /// **'Failed to update status'**
-  String get statusUpdateFailed;
-
-  /// No description provided for @statusDepositConfirmed.
-  ///
-  /// In en, this message translates to:
-  /// **'Deposit Confirmed'**
-  String get statusDepositConfirmed;
-
-  /// No description provided for @confirmDepositAction.
-  ///
-  /// In en, this message translates to:
-  /// **'Confirm Deposit Receipt'**
-  String get confirmDepositAction;
 }
 
 class _AppLocalizationsDelegate

@@ -113,9 +113,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Use sturdy wall anchors for hanging rope-framed mirrors.';
 
   @override
-  String get contactSupport => 'Contact Support';
-
-  @override
   String get appSettings => 'Settings';
 
   @override
@@ -200,7 +197,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get copyTooltip => 'Copy number';
 
   @override
-  String get senderWalletLabel => 'Sender wallet number';
+  String get senderWalletLabel => 'Wallet number transferred from';
 
   @override
   String get senderWalletValidation =>
@@ -257,13 +254,16 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get depositPaidLabel => 'Deposit Paid';
+  String get depositPaidLabel => 'Paid deposit:';
 
   @override
   String get deliveryNotes => 'Notes';
 
   @override
   String get quantity => 'Quantity';
+
+  @override
+  String get contactSupport => 'Contact Support';
 
   @override
   String get whatsappError =>
@@ -353,46 +353,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get orderCreatedSuccess => 'Order placed successfully';
 
   @override
-  String get adminAccess => 'Admin Access';
-
-  @override
-  String get adminPinPrompt => 'Enter admin PIN to continue';
-
-  @override
-  String get invalidPin => 'Invalid PIN code';
-
-  @override
-  String get confirm => 'Confirm';
-
-  @override
-  String get cancel => 'Cancel';
-
-  @override
-  String get adminOrdersTitle => 'Orders Management';
-
-  @override
-  String get allOrders => 'All';
-
-  @override
-  String get changeStatus => 'Change Status';
-
-  @override
-  String get statusUpdatedSuccess => 'Order status updated successfully';
-
-  @override
-  String get callClient => 'Call';
-
-  @override
-  String get whatsappClient => 'WhatsApp';
-
-  @override
-  String get remainingToPay => 'Remaining';
-
-  @override
-  String get noOrdersYet => 'No orders yet';
-
-  @override
   String get statusReceived => 'New Order';
+
+  @override
+  String get statusDepositConfirmed => 'Deposit Confirmed';
 
   @override
   String get statusPreparing => 'Preparing';
@@ -402,16 +366,4 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get statusDelivered => 'Delivered';
-
-  @override
-  String get itemsSummary => 'Order Items';
-
-  @override
-  String get statusUpdateFailed => 'Failed to update status';
-
-  @override
-  String get statusDepositConfirmed => 'Deposit Confirmed';
-
-  @override
-  String get confirmDepositAction => 'Confirm Deposit Receipt';
 }

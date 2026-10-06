@@ -113,9 +113,6 @@ class AppLocalizationsAr extends AppLocalizations {
       'استخدم خطافات حائط متينة ومناسبة لتعليق مرايات الخيط.';
 
   @override
-  String get contactSupport => 'تواصل مع الدعم الفني';
-
-  @override
   String get appSettings => 'الإعدادات';
 
   @override
@@ -200,7 +197,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get copyTooltip => 'نسخ الرقم';
 
   @override
-  String get senderWalletLabel => 'رقم المحفظة المحول منها';
+  String get senderWalletLabel => 'رقم المحفظة التي قمت بالتحويل منها';
 
   @override
   String get senderWalletValidation =>
@@ -257,13 +254,16 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get depositPaidLabel => 'العربون المدفوع';
+  String get depositPaidLabel => 'العربون المدفوع:';
 
   @override
   String get deliveryNotes => 'ملاحظات';
 
   @override
   String get quantity => 'الكمية';
+
+  @override
+  String get contactSupport => 'تواصل مع الدعم الفني';
 
   @override
   String get whatsappError =>
@@ -353,46 +353,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get orderCreatedSuccess => 'تم تسجيل طلبك بنجاح';
 
   @override
-  String get adminAccess => 'دخول الإدارة';
-
-  @override
-  String get adminPinPrompt => 'أدخل رمز PIN للمتابعة';
-
-  @override
-  String get invalidPin => 'رمز PIN غير صحيح';
-
-  @override
-  String get confirm => 'تأكيد';
-
-  @override
-  String get cancel => 'إلغاء';
-
-  @override
-  String get adminOrdersTitle => 'إدارة الطلبات';
-
-  @override
-  String get allOrders => 'الكل';
-
-  @override
-  String get changeStatus => 'تغيير الحالة';
-
-  @override
-  String get statusUpdatedSuccess => 'تم تحديث حالة الطلب بنجاح';
-
-  @override
-  String get callClient => 'اتصال';
-
-  @override
-  String get whatsappClient => 'واتساب';
-
-  @override
-  String get remainingToPay => 'المتبقي عند الاستلام';
-
-  @override
-  String get noOrdersYet => 'لا توجد طلبات حتى الآن';
-
-  @override
   String get statusReceived => 'طلب جديد';
+
+  @override
+  String get statusDepositConfirmed => 'تم تأكيد العربون';
 
   @override
   String get statusPreparing => 'جاري التجهيز';
@@ -402,16 +366,4 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get statusDelivered => 'تم التسليم';
-
-  @override
-  String get itemsSummary => 'المنتجات المطلوبة';
-
-  @override
-  String get statusUpdateFailed => 'فشل تحديث الحالة';
-
-  @override
-  String get statusDepositConfirmed => 'تم تأكيد العربون';
-
-  @override
-  String get confirmDepositAction => 'تأكيد استلام العربون';
 }
