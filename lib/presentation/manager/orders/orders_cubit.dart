@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:math';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mirrors_app/core/constants/app_storage_keys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,7 +14,7 @@ class OrdersCubit extends Cubit<OrdersState> {
   final OrdersFirestoreService _firestoreService;
 
   OrdersCubit(this._prefs, this._firestoreService)
-    : super(const OrdersState(orders: [])) {
+      : super(const OrdersState(orders: [])) {
     _loadSavedOrders();
   }
 
@@ -35,6 +36,13 @@ class OrdersCubit extends Cubit<OrdersState> {
     await _prefs.setString(AppStorageKeys.savedOrders, rawJson);
   }
 
+  String _generateUniqueOrderId() {
+    final now = DateTime.now();
+    final timeSegment = now.millisecondsSinceEpoch.toString().substring(8);
+    final randomDigits = (100 + Random().nextInt(900)).toString();
+    return '$timeSegment$randomDigits';
+  }
+
   Future<void> cancelOrder(String orderId) async {
     final updatedOrders = state.orders.map((order) {
       if (order.orderId == orderId) {
@@ -51,7 +59,7 @@ class OrdersCubit extends Cubit<OrdersState> {
     } catch (_) {}
   }
 
-  Future<void> placeOrder({
+  Future<OrderUiModel> placeOrder({
     required List<CartItemModel> items,
     required double totalPrice,
     required double depositAmount,
@@ -60,13 +68,26 @@ class OrdersCubit extends Cubit<OrdersState> {
     required String phoneNumber,
     required String address,
     required String paymentMethod,
-    required String senderWalletNumber,
+    String? senderWalletNumber,
     String? notes,
   }) async {
     final now = DateTime.now();
     final formattedDate =
         '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}';
-    final generatedId = (1050 + state.orders.length).toString();
+    
+    final generatedId = _generateUniqueOrderId();
+
+    final cleanPhone = phoneNumber.trim();
+
+    if (cleanPhone.isNotEmpty) {
+      await _prefs.setString(AppStorageKeys.customerPhone, cleanPhone);
+    }
+    if (customerName.trim().isNotEmpty) {
+      await _prefs.setString(AppStorageKeys.customerName, customerName.trim());
+    }
+    if (address.trim().isNotEmpty) {
+      await _prefs.setString(AppStorageKeys.customerAddress, address.trim());
+    }
 
     final newOrder = OrderUiModel(
       orderId: generatedId,
@@ -76,12 +97,12 @@ class OrdersCubit extends Cubit<OrdersState> {
       depositAmount: depositAmount,
       remainingAmount: remainingAmount,
       status: OrderStatus.received,
-      customerName: customerName,
-      phoneNumber: phoneNumber,
-      address: address,
+      customerName: customerName.trim(),
+      phoneNumber: cleanPhone,
+      address: address.trim(),
       paymentMethod: paymentMethod,
-      senderWalletNumber: senderWalletNumber,
-      notes: notes,
+      senderWalletNumber: senderWalletNumber?.trim(),
+      notes: notes?.trim(),
       items: items,
       createdAtMillis: now.millisecondsSinceEpoch,
     );
@@ -93,6 +114,8 @@ class OrdersCubit extends Cubit<OrdersState> {
     try {
       await _firestoreService.submitOrder(newOrder);
     } catch (_) {}
+
+    return newOrder;
   }
 
   StreamSubscription<List<OrderUiModel>>? _ordersSubscription;
