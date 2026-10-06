@@ -150,5 +150,14 @@
   "adminPinPrompt": "Enter admin PIN to continue",
   "invalidPin": "Invalid PIN code",
   "confirm": "Confirm",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "adminOrdersTitle": "Orders Management",
+  "allOrders": "All",
+  "changeStatus": "Change Status",
+  "statusUpdatedSuccess": "Order status updated successfully",
+  "callClient": "Call",
+  "whatsappClient": "WhatsApp",
+  "depositPaidLabel": "Deposit Paid",
+  "remainingToPay": "Remaining",
+  "noOrdersYet": "No orders yet"
 }

@@ -257,7 +257,7 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get depositPaidLabel => 'العربون المدفوع:';
+  String get depositPaidLabel => 'العربون المدفوع';
 
   @override
   String get deliveryNotes => 'ملاحظات';
@@ -366,4 +366,28 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get cancel => 'إلغاء';
+
+  @override
+  String get adminOrdersTitle => 'إدارة الطلبات';
+
+  @override
+  String get allOrders => 'الكل';
+
+  @override
+  String get changeStatus => 'تغيير الحالة';
+
+  @override
+  String get statusUpdatedSuccess => 'تم تحديث حالة الطلب بنجاح';
+
+  @override
+  String get callClient => 'اتصال';
+
+  @override
+  String get whatsappClient => 'واتساب';
+
+  @override
+  String get remainingToPay => 'المتبقي عند الاستلام';
+
+  @override
+  String get noOrdersYet => 'لا توجد طلبات حتى الآن';
 }

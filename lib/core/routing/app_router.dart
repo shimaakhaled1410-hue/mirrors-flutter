@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:mirrors_app/data/models/mirror_ui_model.dart';
 import 'package:mirrors_app/data/models/order_ui_model.dart';
+import 'package:mirrors_app/presentation/screens/admin_orders_view.dart';
 import 'package:mirrors_app/presentation/screens/mirror_wall_preview_screen.dart';
 import 'package:mirrors_app/presentation/screens/order_details_view.dart';
 import '../../presentation/screens/cart_view.dart';
@@ -39,6 +40,10 @@ class AppRouter {
           final mirror = state.extra as MirrorUiModel;
           return MirrorWallPreviewScreen(mirror: mirror);
         },
+      ),
+      GoRoute(
+        path: AppRoutes.adminOrders,
+        builder: (context, state) => const AdminOrdersView(),
       ),
     ],
   );

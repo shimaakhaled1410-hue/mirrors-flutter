@@ -257,7 +257,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get depositPaidLabel => 'Paid deposit:';
+  String get depositPaidLabel => 'Deposit Paid';
 
   @override
   String get deliveryNotes => 'Notes';
@@ -366,4 +366,28 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cancel => 'Cancel';
+
+  @override
+  String get adminOrdersTitle => 'Orders Management';
+
+  @override
+  String get allOrders => 'All';
+
+  @override
+  String get changeStatus => 'Change Status';
+
+  @override
+  String get statusUpdatedSuccess => 'Order status updated successfully';
+
+  @override
+  String get callClient => 'Call';
+
+  @override
+  String get whatsappClient => 'WhatsApp';
+
+  @override
+  String get remainingToPay => 'Remaining';
+
+  @override
+  String get noOrdersYet => 'No orders yet';
 }

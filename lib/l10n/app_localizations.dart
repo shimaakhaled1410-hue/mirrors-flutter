@@ -569,7 +569,7 @@ abstract class AppLocalizations {
   /// No description provided for @depositPaidLabel.
   ///
   /// In en, this message translates to:
-  /// **'Paid deposit:'**
+  /// **'Deposit Paid'**
   String get depositPaidLabel;
 
   /// No description provided for @deliveryNotes.
@@ -769,6 +769,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cancel'**
   String get cancel;
+
+  /// No description provided for @adminOrdersTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Orders Management'**
+  String get adminOrdersTitle;
+
+  /// No description provided for @allOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get allOrders;
+
+  /// No description provided for @changeStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Change Status'**
+  String get changeStatus;
+
+  /// No description provided for @statusUpdatedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Order status updated successfully'**
+  String get statusUpdatedSuccess;
+
+  /// No description provided for @callClient.
+  ///
+  /// In en, this message translates to:
+  /// **'Call'**
+  String get callClient;
+
+  /// No description provided for @whatsappClient.
+  ///
+  /// In en, this message translates to:
+  /// **'WhatsApp'**
+  String get whatsappClient;
+
+  /// No description provided for @remainingToPay.
+  ///
+  /// In en, this message translates to:
+  /// **'Remaining'**
+  String get remainingToPay;
+
+  /// No description provided for @noOrdersYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No orders yet'**
+  String get noOrdersYet;
 }
 
 class _AppLocalizationsDelegate

@@ -150,5 +150,14 @@
   "adminPinPrompt": "أدخل رمز PIN للمتابعة",
   "invalidPin": "رمز PIN غير صحيح",
   "confirm": "تأكيد",
-  "cancel": "إلغاء"
+  "cancel": "إلغاء",
+  "adminOrdersTitle": "إدارة الطلبات",
+  "allOrders": "الكل",
+  "changeStatus": "تغيير الحالة",
+  "statusUpdatedSuccess": "تم تحديث حالة الطلب بنجاح",
+  "callClient": "اتصال",
+  "whatsappClient": "واتساب",
+  "depositPaidLabel": "العربون المدفوع",
+  "remainingToPay": "المتبقي عند الاستلام",
+  "noOrdersYet": "لا توجد طلبات حتى الآن"
 }
