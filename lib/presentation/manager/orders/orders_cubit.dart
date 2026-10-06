@@ -4,12 +4,15 @@ import 'package:mirrors_app/core/constants/app_storage_keys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../data/models/cart_item_model.dart';
 import '../../../data/models/order_ui_model.dart';
+import '../../../data/services/orders_firestore_service.dart';
 import 'orders_state.dart';
 
 class OrdersCubit extends Cubit<OrdersState> {
   final SharedPreferences _prefs;
+  final OrdersFirestoreService _firestoreService;
 
-  OrdersCubit(this._prefs) : super(const OrdersState(orders: [])) {
+  OrdersCubit(this._prefs, this._firestoreService)
+      : super(const OrdersState(orders: [])) {
     _loadSavedOrders();
   }
 
@@ -18,11 +21,12 @@ class OrdersCubit extends Cubit<OrdersState> {
     if (rawJson != null && rawJson.isNotEmpty) {
       try {
         final List<dynamic> decoded = jsonDecode(rawJson);
-        final loadedOrders =
-            decoded.map((item) => OrderUiModel.fromJson(item as Map<String, dynamic>)).toList();
+        final loadedOrders = decoded
+            .map((item) =>
+                OrderUiModel.fromJson(item as Map<String, dynamic>))
+            .toList();
         emit(state.copyWith(orders: loadedOrders));
-      } catch (_) {
-      }
+      } catch (_) {}
     }
   }
 
@@ -30,7 +34,8 @@ class OrdersCubit extends Cubit<OrdersState> {
     final rawJson = jsonEncode(orders.map((o) => o.toJson()).toList());
     await _prefs.setString(AppStorageKeys.savedOrders, rawJson);
   }
-void cancelOrder(String orderId) {
+
+  Future<void> cancelOrder(String orderId) async {
     final updatedOrders = state.orders.map((order) {
       if (order.orderId == orderId) {
         return order.copyWith(status: OrderStatus.cancelled);
@@ -39,9 +44,14 @@ void cancelOrder(String orderId) {
     }).toList();
 
     emit(state.copyWith(orders: updatedOrders));
-    _saveOrders(updatedOrders);
+    await _saveOrders(updatedOrders);
+
+    try {
+      await _firestoreService.updateOrderStatus(orderId, OrderStatus.cancelled);
+    } catch (_) {}
   }
-  void placeOrder({
+
+  Future<void> placeOrder({
     required List<CartItemModel> items,
     required double totalPrice,
     required double depositAmount,
@@ -52,7 +62,7 @@ void cancelOrder(String orderId) {
     required String paymentMethod,
     required String senderWalletNumber,
     String? notes,
-  }) {
+  }) async {
     final now = DateTime.now();
     final formattedDate =
         '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}';
@@ -73,10 +83,15 @@ void cancelOrder(String orderId) {
       senderWalletNumber: senderWalletNumber,
       notes: notes,
       items: items,
+      createdAtMillis: now.millisecondsSinceEpoch,
     );
 
     final updatedOrders = [newOrder, ...state.orders];
     emit(state.copyWith(orders: updatedOrders));
-    _saveOrders(updatedOrders);
+    await _saveOrders(updatedOrders);
+
+    try {
+      await _firestoreService.submitOrder(newOrder);
+    } catch (_) {}
   }
 }

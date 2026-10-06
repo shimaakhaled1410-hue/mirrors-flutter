@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:mirrors_app/data/services/orders_firestore_service.dart';
 import 'package:mirrors_app/firebase_options.dart';
 import 'package:mirrors_app/presentation/manager/orders/orders_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -28,7 +29,7 @@ void main() async {
         providers: [
           BlocProvider(create: (_) => AppSettingsCubit(prefs)),
           BlocProvider(create: (_) => CartCubit()),
-          BlocProvider(create: (_) => OrdersCubit(prefs)),
+          BlocProvider(create: (_) => OrdersCubit(prefs, OrdersFirestoreService())),
         ],
         child: const MirrorsApp(),
       ),
