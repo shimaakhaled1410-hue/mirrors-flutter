@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "614529458726",
+    "project_id": "mirrors-store",
+    "storage_bucket": "mirrors-store.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:614529458726:android:a27f5e197f98dfcfb17ce7",
+        "android_client_info": {
+          "package_name": "com.example.mirrors_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZw6cZOMAGPyXBVWO6q3lELxPcxg9sgZk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

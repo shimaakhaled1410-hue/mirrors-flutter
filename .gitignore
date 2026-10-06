@@ -46,3 +46,8 @@ app.*.map.json
 
 
 .env
+
+# FlutterFire generated / local files
+.firebase/
+firebase-debug.log
+firestore-debug.log
