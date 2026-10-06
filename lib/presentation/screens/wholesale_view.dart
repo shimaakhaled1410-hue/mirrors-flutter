@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mirrors_app/core/utils/app_snack_bar.dart';
 import 'package:mirrors_app/core/widgets/animated_widgets.dart';
 import 'package:mirrors_app/l10n/app_localizations.dart';
 
@@ -22,8 +23,10 @@ class _WholesaleViewState extends State<WholesaleView> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final filteredMirrors = kDummyMirrors
-        .where((mirror) =>
-            mirror.category == _selectedCategory && !mirror.isRetailOnly)
+        .where(
+          (mirror) =>
+              mirror.category == _selectedCategory && !mirror.isRetailOnly,
+        )
         .toList();
 
     return Column(
@@ -56,19 +59,14 @@ class _WholesaleViewState extends State<WholesaleView> {
                 child: WholesaleProductCard(
                   mirror: mirror,
                   onAddToCart: (tier, totalPrice) {
-                    context
-                        .read<CartCubit>()
-                        .addWholesaleBatch(mirror, tier.quantity);
-
-                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
+                    context.read<CartCubit>().addWholesaleBatch(
+                      mirror,
+                      tier.quantity,
+                    );
+                    AppSnackBar.showSuccess(
+                      context,
+                      message:
                           '${mirror.dimensions} ${l10n.cm} • ${tier.quantity} ${l10n.piecesCount} (${totalPrice.toInt()} ${l10n.egp})',
-                        ),
-                        duration: const Duration(seconds: 1),
-                        behavior: SnackBarBehavior.floating,
-                      ),
                     );
                   },
                 ),

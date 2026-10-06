@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mirrors_app/core/utils/app_snack_bar.dart';
 import 'package:mirrors_app/l10n/app_localizations.dart';
 import 'package:mirrors_app/presentation/manager/cart/cart_cubit.dart';
 import 'package:mirrors_app/presentation/widgets/wall_preview/preview_bottom_card.dart';
@@ -11,7 +12,6 @@ import 'package:mirrors_app/presentation/widgets/wall_preview/preview_mirror_ove
 import 'package:mirrors_app/presentation/widgets/wall_preview/preview_top_bar.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../../../data/models/mirror_ui_model.dart';
-
 
 class MirrorWallPreviewScreen extends StatefulWidget {
   final MirrorUiModel mirror;
@@ -81,11 +81,11 @@ class _MirrorWallPreviewScreenState extends State<MirrorWallPreviewScreen> {
   void _handleAddToCart(AppLocalizations l10n) {
     context.read<CartCubit>().addRetailItem(widget.mirror);
     context.pop();
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('${widget.mirror.dimensions} - ${l10n.addToCart}'),
-        behavior: SnackBarBehavior.floating,
-      ),
+    context.read<CartCubit>().addRetailItem(widget.mirror);
+    context.pop();
+    AppSnackBar.showSuccess(
+      context,
+      message: '${widget.mirror.dimensions} - ${l10n.addToCart}',
     );
   }
 

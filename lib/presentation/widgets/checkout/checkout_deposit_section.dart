@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mirrors_app/core/utils/app_snack_bar.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_styles.dart';
 import '../../../../core/widgets/app_text_field.dart';
@@ -96,11 +97,11 @@ class CheckoutDepositSection extends StatelessWidget {
                   tooltip: l10n.copyTooltip,
                   onPressed: () {
                     Clipboard.setData(ClipboardData(text: storeWalletNumber));
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(l10n.copiedSuccessfully),
-                        duration: const Duration(seconds: 1),
-                      ),
+                    AppSnackBar.show(
+                      context,
+                      message: l10n.copiedSuccessfully,
+                      icon: Icons.copy_rounded,
+                      duration: const Duration(seconds: 1),
                     );
                   },
                 ),

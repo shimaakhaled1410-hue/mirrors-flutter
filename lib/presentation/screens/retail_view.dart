@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mirrors_app/core/routing/app_routes.dart';
+import 'package:mirrors_app/core/utils/app_snack_bar.dart';
 import 'package:mirrors_app/core/widgets/animated_widgets.dart';
 import 'package:mirrors_app/l10n/app_localizations.dart';
 import 'package:mirrors_app/presentation/manager/cart/cart_cubit.dart';
@@ -84,15 +85,10 @@ class _RetailViewState extends State<RetailView> {
                   mirror: mirror,
                   onAddToCart: () {
                     context.read<CartCubit>().addRetailItem(mirror);
-                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
+                    AppSnackBar.showSuccess(
+                      context,
+                      message:
                           '${mirror.dimensions} ${l10n.cm} - ${l10n.addToCart}',
-                        ),
-                        duration: const Duration(seconds: 1),
-                        behavior: SnackBarBehavior.floating,
-                      ),
                     );
                   },
                   onPreview: () {

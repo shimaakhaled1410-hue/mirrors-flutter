@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mirrors_app/core/utils/app_snack_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/constants/app_storage_keys.dart';
 import '../../../../core/utils/app_colors.dart';
@@ -30,8 +31,7 @@ class _EditProfileBottomSheetState extends State<EditProfileBottomSheet> {
   Future<void> _loadSavedData() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
-      _nameController.text =
-          prefs.getString(AppStorageKeys.customerName) ?? '';
+      _nameController.text = prefs.getString(AppStorageKeys.customerName) ?? '';
       _phoneController.text =
           prefs.getString(AppStorageKeys.customerPhone) ?? '';
       _addressController.text =
@@ -42,11 +42,17 @@ class _EditProfileBottomSheetState extends State<EditProfileBottomSheet> {
   Future<void> _saveData() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(
-        AppStorageKeys.customerName, _nameController.text.trim());
+      AppStorageKeys.customerName,
+      _nameController.text.trim(),
+    );
     await prefs.setString(
-        AppStorageKeys.customerPhone, _phoneController.text.trim());
+      AppStorageKeys.customerPhone,
+      _phoneController.text.trim(),
+    );
     await prefs.setString(
-        AppStorageKeys.customerAddress, _addressController.text.trim());
+      AppStorageKeys.customerAddress,
+      _addressController.text.trim(),
+    );
 
     widget.onSaved();
 
@@ -54,13 +60,7 @@ class _EditProfileBottomSheetState extends State<EditProfileBottomSheet> {
     context.pop();
 
     final l10n = AppLocalizations.of(context)!;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(l10n.infoSavedSuccess),
-        duration: const Duration(seconds: 2),
-        behavior: SnackBarBehavior.floating,
-      ),
-    );
+    AppSnackBar.showSuccess(context, message: l10n.infoSavedSuccess);
   }
 
   @override
@@ -98,10 +98,7 @@ class _EditProfileBottomSheetState extends State<EditProfileBottomSheet> {
             ),
           ),
           const SizedBox(height: 18),
-          Text(
-            l10n.editProfileTitle,
-            style: AppStyles.semiBold16(context),
-          ),
+          Text(l10n.editProfileTitle, style: AppStyles.semiBold16(context)),
           const SizedBox(height: 18),
           AppTextField(
             controller: _nameController,
@@ -146,8 +143,9 @@ class _EditProfileBottomSheetState extends State<EditProfileBottomSheet> {
               onPressed: _saveData,
               child: Text(
                 l10n.saveChanges,
-                style: AppStyles.semiBold16(context)
-                    .copyWith(color: Colors.white, fontSize: 14),
+                style: AppStyles.semiBold16(
+                  context,
+                ).copyWith(color: Colors.white, fontSize: 14),
               ),
             ),
           ),

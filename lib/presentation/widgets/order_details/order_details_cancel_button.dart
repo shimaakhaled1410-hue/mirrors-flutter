@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mirrors_app/core/utils/app_snack_bar.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_styles.dart';
 import '../../../../data/models/order_ui_model.dart';
@@ -19,8 +20,9 @@ class OrderDetailsCancelButton extends StatelessWidget {
     showDialog(
       context: context,
       builder: (dialogContext) => AlertDialog(
-        backgroundColor:
-            isDark ? AppColors.darkSurface : AppColors.lightSurface,
+        backgroundColor: isDark
+            ? AppColors.darkSurface
+            : AppColors.lightSurface,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
         title: Text(
           l10n.cancelOrderDialogTitle(order.orderId),
@@ -49,19 +51,17 @@ class OrderDetailsCancelButton extends StatelessWidget {
             onPressed: () {
               dialogContext.pop();
               context.read<OrdersCubit>().cancelOrder(order.orderId);
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(l10n.orderCancelledSnackbar),
-                  behavior: SnackBarBehavior.floating,
-                ),
+              AppSnackBar.show(
+                context,
+                message: l10n.orderCancelledSnackbar,
+                icon: Icons.cancel_outlined,
               );
             },
             child: Text(
               l10n.confirmCancelButton,
-              style: AppStyles.semiBold16(dialogContext).copyWith(
-                fontSize: 13,
-                color: Colors.white,
-              ),
+              style: AppStyles.semiBold16(
+                dialogContext,
+              ).copyWith(fontSize: 13, color: Colors.white),
             ),
           ),
         ],
@@ -84,10 +84,9 @@ class OrderDetailsCancelButton extends StatelessWidget {
       icon: const Icon(Icons.cancel_outlined, size: 20),
       label: Text(
         l10n.cancelOrder,
-        style: AppStyles.semiBold16(context).copyWith(
-          fontSize: 14,
-          color: Colors.red.shade400,
-        ),
+        style: AppStyles.semiBold16(
+          context,
+        ).copyWith(fontSize: 14, color: Colors.red.shade400),
       ),
     );
   }
