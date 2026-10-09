@@ -66,11 +66,9 @@ class OrdersCubit extends Cubit<OrdersState> {
     _ordersSubscription = _firestoreService
         .getOrdersByUserIdStream(_deviceId)
         .listen((firestoreOrders) {
-          if (firestoreOrders.isNotEmpty) {
-            emit(state.copyWith(orders: firestoreOrders));
-            _saveOrders(firestoreOrders);
-          }
-        });
+      emit(state.copyWith(orders: firestoreOrders));
+      _saveOrders(firestoreOrders);
+    });
   }
 
   Future<void> cancelOrder(String orderId) async {
