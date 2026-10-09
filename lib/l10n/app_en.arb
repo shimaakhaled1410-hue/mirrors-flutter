@@ -149,5 +149,9 @@
   "statusDepositConfirmed": "Deposit Confirmed",
   "statusPreparing": "Preparing",
   "statusShipping": "Out for Delivery",
-  "statusDelivered": "Delivered"
+  "statusDelivered": "Delivered",
+  "orderCancelledRefundNote": "If you paid a deposit, it will be refunded to your wallet shortly.",
+  "@orderCancelledRefundNote": {
+    "description": "Refund assurance note shown when order is cancelled"
+  }
 }

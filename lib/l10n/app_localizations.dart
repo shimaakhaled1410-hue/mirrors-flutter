@@ -769,6 +769,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Delivered'**
   String get statusDelivered;
+
+  /// Refund assurance note shown when order is cancelled
+  ///
+  /// In en, this message translates to:
+  /// **'If you paid a deposit, it will be refunded to your wallet shortly.'**
+  String get orderCancelledRefundNote;
 }
 
 class _AppLocalizationsDelegate

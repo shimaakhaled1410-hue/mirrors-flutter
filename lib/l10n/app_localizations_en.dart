@@ -366,4 +366,8 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get statusDelivered => 'Delivered';
+
+  @override
+  String get orderCancelledRefundNote =>
+      'If you paid a deposit, it will be refunded to your wallet shortly.';
 }

@@ -85,19 +85,40 @@ class OrderDetailsStatusCard extends StatelessWidget {
                 ),
               ),
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Icon(
-                    Icons.info_outline_rounded,
-                    color: Color(0xFFCF1322),
-                    size: 20,
+                  const Padding(
+                    padding: EdgeInsets.only(top: 2),
+                    child: Icon(
+                      Icons.info_outline_rounded,
+                      color: Color(0xFFCF1322),
+                      size: 20,
+                    ),
                   ),
                   const SizedBox(width: 10),
                   Expanded(
-                    child: Text(
-                      l10n.statusCancelled,
-                      style: AppStyles.medium14(
-                        context,
-                      ).copyWith(color: const Color(0xFFCF1322), fontSize: 13),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          l10n.statusCancelled,
+                          style: AppStyles.semiBold16(context).copyWith(
+                            color: const Color(0xFFCF1322),
+                            fontSize: 13,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          l10n.orderCancelledRefundNote,
+                          style: AppStyles.regular12(context).copyWith(
+                            color: isDark
+                                ? AppColors.darkTextSecondary
+                                : const Color(0xFF595959),
+                            fontSize: 12,
+                            height: 1.4,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],

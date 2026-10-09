@@ -366,4 +366,8 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get statusDelivered => 'تم التسليم';
+
+  @override
+  String get orderCancelledRefundNote =>
+      'إذا قمت بدفع عربون، فسيتم استرداد المبلغ إلى محفظتك في أقرب وقت.';
 }

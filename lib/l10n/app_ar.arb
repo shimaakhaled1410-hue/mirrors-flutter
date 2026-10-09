@@ -149,5 +149,6 @@
   "statusDepositConfirmed": "تم تأكيد العربون",
   "statusPreparing": "جاري التجهيز",
   "statusShipping": "مع المندوب",
-  "statusDelivered": "تم التسليم"
+  "statusDelivered": "تم التسليم",
+  "orderCancelledRefundNote": "إذا قمت بدفع عربون، فسيتم استرداد المبلغ إلى محفظتك في أقرب وقت."
 }
