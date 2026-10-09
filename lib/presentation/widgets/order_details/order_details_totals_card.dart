@@ -13,6 +13,11 @@ class OrderDetailsTotalsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final isCancelled = order.status == OrderStatus.cancelled;
+    final isDelivered = order.status == OrderStatus.delivered;
+    final secondary = isDark
+        ? AppColors.darkTextSecondary
+        : AppColors.lightTextSecondary;
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -31,7 +36,10 @@ class OrderDetailsTotalsCard extends StatelessWidget {
               Text(l10n.total, style: AppStyles.semiBold16(context)),
               Text(
                 '${order.totalPrice.toInt()} ${l10n.egp}',
-                style: AppStyles.bold16(context),
+                style: AppStyles.bold16(context).copyWith(
+                  decoration: isCancelled ? TextDecoration.lineThrough : null,
+                  color: isCancelled ? secondary : null,
+                ),
               ),
             ],
           ),
@@ -42,7 +50,9 @@ class OrderDetailsTotalsCard extends StatelessWidget {
               Text(l10n.depositPaidLabel, style: AppStyles.regular14(context)),
               Text(
                 '${order.depositAmount.toInt()} ${l10n.egp}',
-                style: AppStyles.bold16Accent,
+                style: AppStyles.bold16Accent.copyWith(
+                  color: isCancelled ? secondary : null,
+                ),
               ),
             ],
           ),
@@ -52,11 +62,23 @@ class OrderDetailsTotalsCard extends StatelessWidget {
             children: [
               Text(
                 l10n.remainingOnDelivery,
-                style: AppStyles.semiBold16(context).copyWith(color: Colors.green),
+                style: AppStyles.semiBold16(context).copyWith(
+                  color: isCancelled
+                      ? secondary
+                      : (isDelivered ? const Color(0xFF389E0D) : Colors.green),
+                ),
               ),
               Text(
-                '${order.remainingAmount.toInt()} ${l10n.egp}',
-                style: AppStyles.bold18(context).copyWith(color: Colors.green),
+                isCancelled
+                    ? '0 ${l10n.egp}'
+                    : (isDelivered
+                        ? '0 ${l10n.egp}'
+                        : '${order.remainingAmount.toInt()} ${l10n.egp}'),
+                style: AppStyles.bold18(context).copyWith(
+                  color: isCancelled
+                      ? secondary
+                      : (isDelivered ? const Color(0xFF389E0D) : Colors.green),
+                ),
               ),
             ],
           ),
