@@ -32,13 +32,14 @@ enum OrderStatus {
   String toJson() => name;
 
   static OrderStatus fromJson(String? json) => OrderStatus.values.firstWhere(
-    (e) => e.name == json,
-    orElse: () => OrderStatus.received,
-  );
+        (e) => e.name == json,
+        orElse: () => OrderStatus.received,
+      );
 }
 
 class OrderUiModel {
   final String orderId;
+  final String? userId;
   final String date;
   final int totalItems;
   final double totalPrice;
@@ -56,6 +57,7 @@ class OrderUiModel {
 
   const OrderUiModel({
     required this.orderId,
+    this.userId,
     required this.date,
     required this.totalItems,
     required this.totalPrice,
@@ -74,6 +76,7 @@ class OrderUiModel {
 
   OrderUiModel copyWith({
     String? orderId,
+    String? userId,
     String? date,
     int? totalItems,
     double? totalPrice,
@@ -91,6 +94,7 @@ class OrderUiModel {
   }) {
     return OrderUiModel(
       orderId: orderId ?? this.orderId,
+      userId: userId ?? this.userId,
       date: date ?? this.date,
       totalItems: totalItems ?? this.totalItems,
       totalPrice: totalPrice ?? this.totalPrice,
@@ -109,37 +113,39 @@ class OrderUiModel {
   }
 
   Map<String, dynamic> toJson() => {
-    'orderId': orderId,
-    'date': date,
-    'totalItems': totalItems,
-    'totalPrice': totalPrice,
-    'depositAmount': depositAmount,
-    'remainingAmount': remainingAmount,
-    'status': status.toJson(),
-    if (customerName != null) 'customerName': customerName,
-    if (phoneNumber != null) 'phoneNumber': phoneNumber,
-    if (address != null) 'address': address,
-    if (paymentMethod != null) 'paymentMethod': paymentMethod,
-    if (senderWalletNumber != null) 'senderWalletNumber': senderWalletNumber,
-    if (notes != null) 'notes': notes,
-    'items': items.map((e) => e.toJson()).toList(),
-    'createdAtMillis': createdAtMillis ?? DateTime.now().millisecondsSinceEpoch,
-  };
+        'orderId': orderId,
+        if (userId != null) 'userId': userId,
+        'date': date,
+        'totalItems': totalItems,
+        'totalPrice': totalPrice,
+        'depositAmount': depositAmount,
+        'remainingAmount': remainingAmount,
+        'status': status.toJson(),
+        if (customerName != null) 'customerName': customerName,
+        if (phoneNumber != null) 'phoneNumber': phoneNumber,
+        if (address != null) 'address': address,
+        if (paymentMethod != null) 'paymentMethod': paymentMethod,
+        if (senderWalletNumber != null)
+          'senderWalletNumber': senderWalletNumber,
+        if (notes != null) 'notes': notes,
+        'items': items.map((e) => e.toJson()).toList(),
+        'createdAtMillis':
+            createdAtMillis ?? DateTime.now().millisecondsSinceEpoch,
+      };
 
   factory OrderUiModel.fromJson(Map<String, dynamic> json) {
-    final parsedItems =
-        (json['items'] as List<dynamic>?)
+    final parsedItems = (json['items'] as List<dynamic>?)
             ?.map((e) => CartItemModel.fromJson(e as Map<String, dynamic>))
             .toList() ??
         const [];
 
     final rawTotalItems = (json['totalItems'] as num?)?.toInt();
-    final computedTotalItems =
-        rawTotalItems ??
+    final computedTotalItems = rawTotalItems ??
         parsedItems.fold<int>(0, (sum, item) => sum + item.quantity);
 
     return OrderUiModel(
       orderId: json['orderId']?.toString() ?? '',
+      userId: json['userId'] as String?,
       date: json['date'] as String? ?? '',
       totalItems: computedTotalItems,
       totalPrice: (json['totalPrice'] as num?)?.toDouble() ?? 0.0,

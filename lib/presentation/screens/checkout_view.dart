@@ -102,7 +102,7 @@ class _CheckoutViewState extends State<CheckoutView> {
 
     final cachedItems = List.of(cartState.items);
 
-    context.read<OrdersCubit>().placeOrder(
+    await context.read<OrdersCubit>().placeOrder(
           items: cachedItems,
           totalPrice: total,
           depositAmount: depositPaid,
@@ -115,6 +115,8 @@ class _CheckoutViewState extends State<CheckoutView> {
           notes: notes,
         );
 
+    if (!context.mounted) return;
+
     context.read<CartCubit>().clearCart();
 
     context.go(AppRoutes.mainLayout);
@@ -123,9 +125,7 @@ class _CheckoutViewState extends State<CheckoutView> {
       context,
       message: l10n.orderCreatedSuccess,
       actionLabel: l10n.undo,
-      onAction: () {
-        // Option to undo order action
-      },
+      onAction: () {},
     );
   }
 

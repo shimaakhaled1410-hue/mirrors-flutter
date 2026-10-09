@@ -8,4 +8,5 @@ class AppStorageKeys {
   static const String customerPhone = 'customer_phone';
   static const String customerAddress = 'customer_address';
   static const String cartStorageKey = 'k_saved_cart_items';
+  static const String deviceGuestId = 'device_guest_id';
 }

@@ -1,22 +1,40 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mirrors_app/core/constants/app_storage_keys.dart';
+import 'package:mirrors_app/data/models/cart_item_model.dart';
+import 'package:mirrors_app/data/models/order_ui_model.dart';
+import 'package:mirrors_app/data/services/orders_firestore_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../../data/models/cart_item_model.dart';
-import '../../../data/models/order_ui_model.dart';
-import '../../../data/services/orders_firestore_service.dart';
+
 import 'orders_state.dart';
 
 class OrdersCubit extends Cubit<OrdersState> {
   final SharedPreferences _prefs;
   final OrdersFirestoreService _firestoreService;
+  StreamSubscription<List<OrderUiModel>>? _ordersSubscription;
+  late final String _deviceId;
 
   OrdersCubit(this._prefs, this._firestoreService)
-      : super(const OrdersState(orders: [])) {
+    : super(const OrdersState(orders: [])) {
+    _initDeviceGuestId();
     _loadSavedOrders();
+    startListeningToDeviceOrders();
   }
+
+  void _initDeviceGuestId() {
+    String? id = _prefs.getString(AppStorageKeys.deviceGuestId);
+    if (id == null || id.isEmpty) {
+      final randomSegment = Random().nextInt(999999).toString().padLeft(6, '0');
+      id = 'dev_${DateTime.now().millisecondsSinceEpoch}_$randomSegment';
+      _prefs.setString(AppStorageKeys.deviceGuestId, id);
+    }
+    _deviceId = id;
+  }
+
+  String get deviceId => _deviceId;
 
   void _loadSavedOrders() {
     final rawJson = _prefs.getString(AppStorageKeys.savedOrders);
@@ -41,6 +59,18 @@ class OrdersCubit extends Cubit<OrdersState> {
     final timeSegment = now.millisecondsSinceEpoch.toString().substring(8);
     final randomDigits = (100 + Random().nextInt(900)).toString();
     return '$timeSegment$randomDigits';
+  }
+
+  void startListeningToDeviceOrders() {
+    _ordersSubscription?.cancel();
+    _ordersSubscription = _firestoreService
+        .getOrdersByUserIdStream(_deviceId)
+        .listen((firestoreOrders) {
+          if (firestoreOrders.isNotEmpty) {
+            emit(state.copyWith(orders: firestoreOrders));
+            _saveOrders(firestoreOrders);
+          }
+        });
   }
 
   Future<void> cancelOrder(String orderId) async {
@@ -74,9 +104,8 @@ class OrdersCubit extends Cubit<OrdersState> {
     final now = DateTime.now();
     final formattedDate =
         '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}';
-    
-    final generatedId = _generateUniqueOrderId();
 
+    final generatedId = _generateUniqueOrderId();
     final cleanPhone = phoneNumber.trim();
 
     if (cleanPhone.isNotEmpty) {
@@ -91,6 +120,7 @@ class OrdersCubit extends Cubit<OrdersState> {
 
     final newOrder = OrderUiModel(
       orderId: generatedId,
+      userId: _deviceId,
       date: formattedDate,
       totalItems: items.fold(0, (sum, item) => sum + item.quantity),
       totalPrice: totalPrice,
@@ -116,21 +146,6 @@ class OrdersCubit extends Cubit<OrdersState> {
     } catch (_) {}
 
     return newOrder;
-  }
-
-  StreamSubscription<List<OrderUiModel>>? _ordersSubscription;
-
-  void startListeningToCustomerOrders(String phone) {
-    if (phone.isEmpty) return;
-    _ordersSubscription?.cancel();
-    _ordersSubscription = _firestoreService.getOrdersByPhoneStream(phone).listen(
-      (firestoreOrders) {
-        if (firestoreOrders.isNotEmpty) {
-          emit(state.copyWith(orders: firestoreOrders));
-          _saveOrders(firestoreOrders);
-        }
-      },
-    );
   }
 
   @override
