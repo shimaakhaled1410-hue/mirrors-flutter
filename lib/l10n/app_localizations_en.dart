@@ -377,4 +377,11 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get deliveryTimelineDesc =>
       'Preparation takes 2 to 3 days, and your order will be delivered within 24 hours of dispatch.';
+
+  @override
+  String get cancellationPolicyTitle => 'Cancellation & Refund Policy';
+
+  @override
+  String get cancellationPolicyDesc =>
+      'You can cancel within 2 days before courier dispatch for a full deposit refund. Once dispatched, shipping fees will be deducted if cancelled.';
 }

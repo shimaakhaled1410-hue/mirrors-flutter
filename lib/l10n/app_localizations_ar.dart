@@ -377,4 +377,11 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get deliveryTimelineDesc =>
       'يتم تجهيز وتغليف الطلب خلال 2 إلى 3 أيام عمل، والتسليم خلال 24 ساعة من خروجه مع المندوب.';
+
+  @override
+  String get cancellationPolicyTitle => 'سياسة الإلغاء واسترداد العربون';
+
+  @override
+  String get cancellationPolicyDesc =>
+      'يمكنك إلغاء الطلب واسترداد العربون كاملاً خلال يومين قبل تسليمه للمندوب. في حال خروج الطلب للشحن، يتم خصم قيمة مصاريف الشحن.';
 }

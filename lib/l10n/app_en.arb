@@ -161,5 +161,7 @@
   "deliveryTimelineDesc": "Preparation takes 2 to 3 days, and your order will be delivered within 24 hours of dispatch.",
   "@deliveryTimelineDesc": {
     "description": "Description of estimated delivery timeline"
-  }
+  },
+  "cancellationPolicyTitle": "Cancellation & Refund Policy",
+  "cancellationPolicyDesc": "You can cancel within 2 days before courier dispatch for a full deposit refund. Once dispatched, shipping fees will be deducted if cancelled."
 }

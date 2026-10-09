@@ -787,6 +787,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Preparation takes 2 to 3 days, and your order will be delivered within 24 hours of dispatch.'**
   String get deliveryTimelineDesc;
+
+  /// No description provided for @cancellationPolicyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancellation & Refund Policy'**
+  String get cancellationPolicyTitle;
+
+  /// No description provided for @cancellationPolicyDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'You can cancel within 2 days before courier dispatch for a full deposit refund. Once dispatched, shipping fees will be deducted if cancelled.'**
+  String get cancellationPolicyDesc;
 }
 
 class _AppLocalizationsDelegate
