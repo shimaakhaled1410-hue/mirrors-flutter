@@ -150,5 +150,7 @@
   "statusPreparing": "جاري التجهيز",
   "statusShipping": "مع المندوب",
   "statusDelivered": "تم التسليم",
-  "orderCancelledRefundNote": "إذا قمت بدفع عربون، فسيتم استرداد المبلغ إلى محفظتك في أقرب وقت."
+  "orderCancelledRefundNote": "إذا قمت بدفع عربون، فسيتم استرداد المبلغ إلى محفظتك في أقرب وقت.",
+  "deliveryTimelineTitle": "الموعد المتوقع للتوصيل",
+  "deliveryTimelineDesc": "يتم تجهيز وتغليف الطلب خلال 2 إلى 3 أيام عمل، والتسليم خلال 24 ساعة من خروجه مع المندوب."
 }

@@ -370,4 +370,11 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get orderCancelledRefundNote =>
       'If you paid a deposit, it will be refunded to your wallet shortly.';
+
+  @override
+  String get deliveryTimelineTitle => 'Estimated Delivery Time';
+
+  @override
+  String get deliveryTimelineDesc =>
+      'Preparation takes 2 to 3 days, and your order will be delivered within 24 hours of dispatch.';
 }

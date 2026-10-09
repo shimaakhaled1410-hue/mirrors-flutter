@@ -775,6 +775,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'If you paid a deposit, it will be refunded to your wallet shortly.'**
   String get orderCancelledRefundNote;
+
+  /// Title for estimated delivery timeline notice
+  ///
+  /// In en, this message translates to:
+  /// **'Estimated Delivery Time'**
+  String get deliveryTimelineTitle;
+
+  /// Description of estimated delivery timeline
+  ///
+  /// In en, this message translates to:
+  /// **'Preparation takes 2 to 3 days, and your order will be delivered within 24 hours of dispatch.'**
+  String get deliveryTimelineDesc;
 }
 
 class _AppLocalizationsDelegate

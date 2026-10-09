@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mirrors_app/core/common/delivery_timeline_notice.dart';
 import 'package:mirrors_app/core/constants/app_storage_keys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/routing/app_routes.dart';
@@ -208,9 +209,14 @@ class _CheckoutViewState extends State<CheckoutView> {
                     notesController: _notesController,
                   ),
                 ),
+                const SizedBox(height: 12),
+                const FadeSlideIn(
+                  index: 1,
+                  child: DeliveryTimelineNotice(),
+                ),
                 const SizedBox(height: 16),
                 FadeSlideIn(
-                  index: 1,
+                  index: 2,
                   child: CheckoutDepositSection(
                     storeWalletNumber: _storeWalletNumber,
                     senderWalletController: _senderWalletController,
@@ -221,7 +227,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                 ),
                 const SizedBox(height: 16),
                 FadeSlideIn(
-                  index: 2,
+                  index: 3,
                   child: ValueListenableBuilder<TextEditingValue>(
                     valueListenable: _depositController,
                     builder: (context, value, _) {
@@ -240,7 +246,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                 ),
                 const SizedBox(height: 24),
                 FadeSlideIn(
-                  index: 3,
+                  index: 4,
                   child: CheckoutSubmitButton(
                     onPressed: () => _onConfirmOrder(cartState),
                     label: l10n.confirmOrderButton,

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:mirrors_app/core/common/delivery_timeline_notice.dart';
 import '../../core/utils/app_colors.dart';
 import '../../core/utils/app_styles.dart';
 import '../../core/utils/whatsapp_helper.dart';
@@ -52,31 +53,39 @@ class OrderDetailsView extends StatelessWidget {
                 index: 0,
                 child: OrderDetailsStatusCard(order: currentOrder),
               ),
+              if (currentOrder.status != OrderStatus.cancelled &&
+                  currentOrder.status != OrderStatus.delivered) ...[
+                const SizedBox(height: 12),
+                const FadeSlideIn(
+                  index: 1,
+                  child: DeliveryTimelineNotice(),
+                ),
+              ],
               const SizedBox(height: 16),
               FadeSlideIn(
-                index: 1,
+                index: 2,
                 child: OrderDetailsShippingCard(order: currentOrder),
               ),
               const SizedBox(height: 16),
               FadeSlideIn(
-                index: 2,
+                index: 3,
                 child: OrderDetailsPaymentCard(order: currentOrder),
               ),
               const SizedBox(height: 16),
               if (currentOrder.items.isNotEmpty) ...[
                 FadeSlideIn(
-                  index: 3,
+                  index: 4,
                   child: OrderDetailsItemsCard(order: currentOrder),
                 ),
                 const SizedBox(height: 16),
               ],
               FadeSlideIn(
-                index: 4,
+                index: 5,
                 child: OrderDetailsTotalsCard(order: currentOrder),
               ),
               const SizedBox(height: 20),
               FadeSlideIn(
-                index: 5,
+                index: 6,
                 child: OutlinedButton.icon(
                   style: OutlinedButton.styleFrom(
                     foregroundColor: AppColors.accent,
@@ -107,7 +116,7 @@ class OrderDetailsView extends StatelessWidget {
               if (canCancel) ...[
                 const SizedBox(height: 12),
                 FadeSlideIn(
-                  index: 6,
+                  index: 7,
                   child: OrderDetailsCancelButton(order: currentOrder),
                 ),
               ],

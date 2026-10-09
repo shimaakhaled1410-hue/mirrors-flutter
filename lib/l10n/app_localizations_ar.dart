@@ -370,4 +370,11 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get orderCancelledRefundNote =>
       'إذا قمت بدفع عربون، فسيتم استرداد المبلغ إلى محفظتك في أقرب وقت.';
+
+  @override
+  String get deliveryTimelineTitle => 'الموعد المتوقع للتوصيل';
+
+  @override
+  String get deliveryTimelineDesc =>
+      'يتم تجهيز وتغليف الطلب خلال 2 إلى 3 أيام عمل، والتسليم خلال 24 ساعة من خروجه مع المندوب.';
 }
