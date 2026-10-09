@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../../core/utils/app_styles.dart';
 import '../../../data/models/order_ui_model.dart';
@@ -10,6 +11,15 @@ class OrderDetailsStatusCard extends StatelessWidget {
 
   const OrderDetailsStatusCard({super.key, required this.order});
 
+  String _formatOrderTime(BuildContext context) {
+    if (order.createdAtMillis == null) return '';
+    final localeCode = Localizations.localeOf(context).languageCode;
+    final dateTime = DateTime.fromMillisecondsSinceEpoch(
+      order.createdAtMillis!,
+    );
+    return DateFormat('hh:mm a', localeCode).format(dateTime);
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
@@ -18,6 +28,10 @@ class OrderDetailsStatusCard extends StatelessWidget {
     final isDelivered = order.status == OrderStatus.delivered;
     final bg = isDark ? AppColors.darkBackground : AppColors.lightBackground;
     final border = isDark ? AppColors.darkBorder : AppColors.lightBorder;
+    final secondary = isDark
+        ? AppColors.darkTextSecondary
+        : AppColors.lightTextSecondary;
+    final timeStr = _formatOrderTime(context);
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -64,7 +78,35 @@ class OrderDetailsStatusCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(color: border),
                 ),
-                child: Text(order.date, style: AppStyles.regular12(context)),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      order.date,
+                      style: AppStyles.regular12(
+                        context,
+                      ).copyWith(fontSize: 11),
+                    ),
+                    if (timeStr.isNotEmpty) ...[
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4),
+                        child: Text(
+                          '•',
+                          style: TextStyle(color: secondary, fontSize: 10),
+                        ),
+                      ),
+                      Text(
+                        timeStr,
+                        style: AppStyles.medium14(context).copyWith(
+                          color: isCancelled
+                              ? const Color(0xFFCF1322)
+                              : AppColors.accent,
+                          fontSize: 11,
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
               ),
             ],
           ),
