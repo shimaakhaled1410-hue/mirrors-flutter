@@ -6,8 +6,6 @@ import 'package:mirrors_app/core/constants/app_storage_keys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/routing/app_routes.dart';
 import '../../core/utils/app_colors.dart';
-import '../../core/utils/app_snack_bar.dart';
-import '../../core/utils/app_styles.dart';
 import '../../core/widgets/animated_widgets.dart';
 import '../../l10n/app_localizations.dart';
 import '../manager/cart/cart_cubit.dart';
@@ -16,6 +14,7 @@ import '../manager/orders/orders_cubit.dart';
 import '../widgets/checkout/checkout_deposit_section.dart';
 import '../widgets/checkout/checkout_financial_summary.dart';
 import '../widgets/checkout/checkout_shipping_section.dart';
+import '../widgets/checkout/checkout_submit_button.dart';
 
 class CheckoutView extends StatefulWidget {
   const CheckoutView({super.key});
@@ -76,11 +75,16 @@ class _CheckoutViewState extends State<CheckoutView> {
     super.dispose();
   }
 
-  Future<void> _onConfirmOrder(BuildContext context, CartState cartState) async {
-    FocusScope.of(context).unfocus();
+  Future<void> _onConfirmOrder(CartState cartState) async {
+    FocusManager.instance.primaryFocus?.unfocus();
     if (!_formKey.currentState!.validate()) return;
 
     final l10n = AppLocalizations.of(context)!;
+    final ordersCubit = context.read<OrdersCubit>();
+    final cartCubit = context.read<CartCubit>();
+    final messenger = ScaffoldMessenger.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     final total = cartState.subtotal + _shippingFee;
     final depositPaid = double.tryParse(_depositController.text) ?? 0.0;
     final remaining = (total - depositPaid).clamp(0.0, total);
@@ -98,35 +102,80 @@ class _CheckoutViewState extends State<CheckoutView> {
     await prefs.setString(AppStorageKeys.customerPhone, phoneNumber);
     await prefs.setString(AppStorageKeys.customerAddress, address);
 
-    if (!context.mounted) return;
+    if (!mounted) return;
 
     final cachedItems = List.of(cartState.items);
 
-    await context.read<OrdersCubit>().placeOrder(
-          items: cachedItems,
-          totalPrice: total,
-          depositAmount: depositPaid,
-          remainingAmount: remaining,
-          customerName: customerName,
-          phoneNumber: phoneNumber,
-          address: address,
-          paymentMethod: l10n.vodafoneCash,
-          senderWalletNumber: senderWalletNumber,
-          notes: notes,
-        );
-
-    if (!context.mounted) return;
-
-    context.read<CartCubit>().clearCart();
-
-    context.go(AppRoutes.mainLayout);
-
-    AppSnackBar.showSuccess(
-      context,
-      message: l10n.orderCreatedSuccess,
-      actionLabel: l10n.undo,
-      onAction: () {},
+    final newOrder = await ordersCubit.placeOrder(
+      items: cachedItems,
+      totalPrice: total,
+      depositAmount: depositPaid,
+      remainingAmount: remaining,
+      customerName: customerName,
+      phoneNumber: phoneNumber,
+      address: address,
+      paymentMethod: l10n.vodafoneCash,
+      senderWalletNumber: senderWalletNumber,
+      notes: notes,
     );
+
+    cartCubit.clearCart();
+
+    if (!mounted) return;
+
+    messenger.hideCurrentSnackBar();
+    messenger.showSnackBar(
+      SnackBar(
+        duration: const Duration(seconds: 4),
+        behavior: SnackBarBehavior.floating,
+        elevation: 6,
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        backgroundColor: isDark
+            ? AppColors.darkSurface
+            : AppColors.lightSurface,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+          side: BorderSide(
+            color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+          ),
+        ),
+        content: Row(
+          children: [
+            const Icon(
+              Icons.check_circle_rounded,
+              color: AppColors.accent,
+              size: 20,
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Text(
+                l10n.orderCreatedSuccess,
+                style: TextStyle(
+                  color: isDark
+                      ? AppColors.darkTextPrimary
+                      : AppColors.lightTextPrimary,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ],
+        ),
+        action: SnackBarAction(
+          label: l10n.undo,
+          textColor: AppColors.accent,
+          onPressed: () {
+            ordersCubit.cancelOrder(newOrder.orderId);
+          },
+        ),
+      ),
+    );
+
+    await Future.delayed(const Duration(milliseconds: 100));
+
+    if (!mounted) return;
+    context.go(AppRoutes.mainLayout);
   }
 
   @override
@@ -192,38 +241,9 @@ class _CheckoutViewState extends State<CheckoutView> {
                 const SizedBox(height: 24),
                 FadeSlideIn(
                   index: 3,
-                  child: PressableScale(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        gradient: AppColors.primaryGradient,
-                        borderRadius: BorderRadius.circular(16),
-                        boxShadow: [
-                          BoxShadow(
-                            color: AppColors.primary.withValues(alpha: 0.35),
-                            blurRadius: 14,
-                            offset: const Offset(0, 5),
-                          ),
-                        ],
-                      ),
-                      child: Material(
-                        type: MaterialType.transparency,
-                        child: InkWell(
-                          borderRadius: BorderRadius.circular(16),
-                          onTap: () => _onConfirmOrder(context, cartState),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 16),
-                            child: Center(
-                              child: Text(
-                                l10n.confirmOrderButton,
-                                style: AppStyles.semiBold16(
-                                  context,
-                                ).copyWith(color: Colors.white, fontSize: 15),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                  child: CheckoutSubmitButton(
+                    onPressed: () => _onConfirmOrder(cartState),
+                    label: l10n.confirmOrderButton,
                   ),
                 ),
                 const SizedBox(height: 32),
