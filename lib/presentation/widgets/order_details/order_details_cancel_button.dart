@@ -73,20 +73,20 @@ class OrderDetailsCancelButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
 
-    return OutlinedButton.icon(
-      style: OutlinedButton.styleFrom(
-        foregroundColor: Colors.red.shade400,
-        side: BorderSide(color: Colors.red.shade400.withValues(alpha: 0.5)),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        padding: const EdgeInsets.symmetric(vertical: 14),
-      ),
-      onPressed: () => _showCancelDialog(context),
-      icon: const Icon(Icons.cancel_outlined, size: 20),
-      label: Text(
-        l10n.cancelOrder,
-        style: AppStyles.semiBold16(
-          context,
-        ).copyWith(fontSize: 14, color: Colors.red.shade400),
+    return Center(
+      child: TextButton.icon(
+        style: TextButton.styleFrom(
+          foregroundColor: Colors.red.shade400,
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        ),
+        onPressed: () => _showCancelDialog(context),
+        icon: const Icon(Icons.cancel_outlined, size: 16),
+        label: Text(
+          l10n.cancelOrder,
+          style: AppStyles.regular14(
+            context,
+          ).copyWith(color: Colors.red.shade400, fontSize: 13),
+        ),
       ),
     );
   }

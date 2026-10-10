@@ -38,7 +38,11 @@ class OrderDetailsView extends StatelessWidget {
           }
         }
 
-        final canCancel = currentOrder.status == OrderStatus.received;
+        final canCancel =
+            (currentOrder.status == OrderStatus.received ||
+                currentOrder.status == OrderStatus.depositConfirmed ||
+                currentOrder.status == OrderStatus.preparing) &&
+            currentOrder.status != OrderStatus.cancelled;
 
         return Scaffold(
           appBar: AppBar(
@@ -56,10 +60,7 @@ class OrderDetailsView extends StatelessWidget {
               if (currentOrder.status != OrderStatus.cancelled &&
                   currentOrder.status != OrderStatus.delivered) ...[
                 const SizedBox(height: 12),
-                const FadeSlideIn(
-                  index: 1,
-                  child: DeliveryTimelineNotice(),
-                ),
+                const FadeSlideIn(index: 1, child: DeliveryTimelineNotice()),
               ],
               const SizedBox(height: 16),
               FadeSlideIn(
@@ -98,23 +99,23 @@ class OrderDetailsView extends StatelessWidget {
                   onPressed: () {
                     WhatsAppHelper.openChat(
                       context: context,
-                      customMessage:
-                          l10n.orderSupportMessage(currentOrder.orderId),
+                      customMessage: l10n.orderSupportMessage(
+                        currentOrder.orderId,
+                      ),
                       errorMessage: l10n.whatsappError,
                     );
                   },
                   icon: const Icon(Icons.chat_rounded, size: 20),
                   label: Text(
                     l10n.contactSupport,
-                    style: AppStyles.semiBold16(context).copyWith(
-                      fontSize: 14,
-                      color: AppColors.accent,
-                    ),
+                    style: AppStyles.semiBold16(
+                      context,
+                    ).copyWith(fontSize: 14, color: AppColors.accent),
                   ),
                 ),
               ),
               if (canCancel) ...[
-                const SizedBox(height: 12),
+                const SizedBox(height: 8),
                 FadeSlideIn(
                   index: 7,
                   child: OrderDetailsCancelButton(order: currentOrder),
