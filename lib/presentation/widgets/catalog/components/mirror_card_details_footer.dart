@@ -28,36 +28,31 @@ class MirrorCardDetailsFooter extends StatelessWidget {
             : l10n.adhesiveMirrors);
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(12, 6, 12, 12),
+      padding: const EdgeInsets.fromLTRB(12, 8, 12, 12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          Text(
+            title,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: AppStyles.semiBold14(context),
+          ),
+          const SizedBox(height: 2),
+          Row(
             children: [
+              Icon(Icons.straighten_rounded, size: 13, color: secondary),
+              const SizedBox(width: 4),
               Text(
-                title,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: AppStyles.semiBold14(context),
-              ),
-              const SizedBox(height: 2),
-              Row(
-                children: [
-                  Icon(Icons.straighten_rounded, size: 13, color: secondary),
-                  const SizedBox(width: 4),
-                  Text(
-                    '${mirror.dimensions} ${l10n.cm}',
-                    style: AppStyles.regular12(context).copyWith(
-                      color: secondary,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
+                '${mirror.dimensions} ${l10n.cm}',
+                style: AppStyles.regular12(context).copyWith(
+                  color: secondary,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ],
           ),
+          const Spacer(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

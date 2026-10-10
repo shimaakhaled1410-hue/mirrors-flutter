@@ -61,40 +61,53 @@ class _RetailViewState extends State<RetailView> {
         ],
         const SizedBox(height: 4),
         Expanded(
-          child: GridView.builder(
-            key: ValueKey('${_selectedCategory}_$_selectedSubCategory'),
-            physics: const BouncingScrollPhysics(),
-            padding: const EdgeInsets.only(
-              left: 16,
-              right: 16,
-              top: 8,
-              bottom: 100,
-            ),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 14,
-              mainAxisSpacing: 14,
-              childAspectRatio: 0.72,
-            ),
-            itemCount: filteredMirrors.length,
-            itemBuilder: (context, index) {
-              final mirror = filteredMirrors[index];
-              return FadeSlideIn(
-                index: index,
-                child: MirrorProductCard(
-                  mirror: mirror,
-                  onAddToCart: () {
-                    context.read<CartCubit>().addRetailItem(mirror);
-                    AppSnackBar.showSuccess(
-                      context,
-                      message:
-                          '${mirror.dimensions} ${l10n.cm} - ${l10n.addToCart}',
-                    );
-                  },
-                  onPreview: () {
-                    context.push(AppRoutes.mirrorWallPreview, extra: mirror);
-                  },
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final width = constraints.maxWidth;
+              final crossAxisCount = width >= 900
+                  ? 4
+                  : width >= 600
+                      ? 3
+                      : 2;
+
+              final childAspectRatio = width >= 600 ? 0.76 : 0.72;
+
+              return GridView.builder(
+                key: ValueKey('${_selectedCategory}_$_selectedSubCategory'),
+                physics: const BouncingScrollPhysics(),
+                padding: const EdgeInsets.only(
+                  left: 16,
+                  right: 16,
+                  top: 8,
+                  bottom: 100,
                 ),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: crossAxisCount,
+                  crossAxisSpacing: 14,
+                  mainAxisSpacing: 14,
+                  childAspectRatio: childAspectRatio,
+                ),
+                itemCount: filteredMirrors.length,
+                itemBuilder: (context, index) {
+                  final mirror = filteredMirrors[index];
+                  return FadeSlideIn(
+                    index: index,
+                    child: MirrorProductCard(
+                      mirror: mirror,
+                      onAddToCart: () {
+                        context.read<CartCubit>().addRetailItem(mirror);
+                        AppSnackBar.showSuccess(
+                          context,
+                          message:
+                              '${mirror.dimensions} ${l10n.cm} - ${l10n.addToCart}',
+                        );
+                      },
+                      onPreview: () {
+                        context.push(AppRoutes.mirrorWallPreview, extra: mirror);
+                      },
+                    ),
+                  );
+                },
               );
             },
           ),
