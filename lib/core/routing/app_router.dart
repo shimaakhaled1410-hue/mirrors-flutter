@@ -1,8 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mirrors_app/data/models/mirror_ui_model.dart';
 import 'package:mirrors_app/data/models/order_ui_model.dart';
 import 'package:mirrors_app/presentation/screens/mirror_wall_preview_screen.dart';
 import 'package:mirrors_app/presentation/screens/order_details_view.dart';
+import 'package:mirrors_app/presentation/splash_screen.dart';
 import '../../presentation/screens/cart_view.dart';
 import '../../presentation/screens/checkout_view.dart';
 import '../../presentation/screens/main_layout_view.dart';
@@ -12,11 +14,26 @@ class AppRouter {
   AppRouter._();
 
   static final GoRouter router = GoRouter(
-    initialLocation: AppRoutes.mainLayout,
+    initialLocation: AppRoutes.splash,
     routes: [
       GoRoute(
+        path: AppRoutes.splash,
+        builder: (context, state) => const SplashScreen(),
+      ),
+      GoRoute(
         path: AppRoutes.mainLayout,
-        builder: (context, state) => const MainLayoutView(),
+        // Fade in from the splash instead of sliding.
+        pageBuilder: (context, state) => CustomTransitionPage(
+          key: state.pageKey,
+          transitionDuration: const Duration(milliseconds: 500),
+          child: const MainLayoutView(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(
+              opacity: CurvedAnimation(parent: animation, curve: Curves.easeOut),
+              child: child,
+            );
+          },
+        ),
       ),
       GoRoute(
         path: AppRoutes.cart,
