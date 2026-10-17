@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:mirrors_app/core/utils/app_colors.dart';
 import 'package:mirrors_app/core/utils/app_snack_bar.dart';
 import 'package:mirrors_app/core/utils/app_styles.dart';
+import 'package:mirrors_app/core/utils/app_validators.dart';
 import 'package:mirrors_app/core/widgets/app_text_field.dart';
 import 'package:mirrors_app/l10n/app_localizations.dart';
 import 'package:mirrors_app/presentation/widgets/checkout/checkout_section_card.dart';
@@ -57,9 +58,15 @@ class CheckoutDepositSection extends StatelessWidget {
             icon: Icons.send_rounded,
             keyboardType: TextInputType.phone,
             textInputAction: TextInputAction.next,
-            validator: (v) => v == null || v.trim().isEmpty
-                ? l10n.senderWalletValidation
-                : null,
+            validator: (v) {
+              if (v == null || v.trim().isEmpty) {
+                return l10n.fieldRequired;
+              }
+              if (!AppValidators.isValidEgyptianPhone(v)) {
+                return l10n.invalidPhone;
+              }
+              return null;
+            },
           ),
           const SizedBox(height: 14),
           AppTextField(

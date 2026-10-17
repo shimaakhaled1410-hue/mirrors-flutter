@@ -399,7 +399,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get locatingCurrentPosition => 'جاري تحديد موقعك...';
 
   @override
-  String get setFromMap => 'تحديد من على الخريطة';
+  String get setFromMap => 'تحديد على الخريطة';
 
   @override
   String get enterManually => 'إدخال العنوان يدوياً';
