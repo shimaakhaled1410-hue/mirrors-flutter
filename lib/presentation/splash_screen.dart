@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:mirrors_app/core/routing/app_routes.dart';
 import 'package:mirrors_app/core/utils/app_colors.dart';
 import 'package:mirrors_app/core/utils/app_styles.dart';
-import 'package:mirrors_app/l10n/app_localizations.dart';
 
 /// Flutter splash that continues the native splash (same logo, same
 /// position, same background) and then adds a shine, sparkles and the title.
@@ -93,10 +92,21 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
+    // Follow the SYSTEM brightness (not the in-app theme) so this screen
+    // matches the native splash, which is chosen by the system too.
+    final isDark =
+        MediaQuery.platformBrightnessOf(context) == Brightness.dark;
+    final bg = isDark ? AppColors.primary : AppColors.lightBackground;
+    final glowColor = isDark ? AppColors.primaryLight : AppColors.accentSoft;
+    final titleColor = isDark ? Colors.white : AppColors.primary;
+    final subtitleColor = isDark ? AppColors.accentSoft : AppColors.accent;
+    final sparkleColor = isDark ? Colors.white : AppColors.accent;
+    final logoAsset = isDark
+        ? 'assets/images/splash_logo.png'
+        : 'assets/images/splash_logo_light.png';
 
     return Scaffold(
-      backgroundColor: AppColors.primary,
+      backgroundColor: bg,
       body: AnimatedBuilder(
         animation: _controller,
         builder: (context, _) {
@@ -110,10 +120,10 @@ class _SplashScreenState extends State<SplashScreen>
                       center: const Alignment(0, -0.15),
                       radius: 0.95,
                       colors: [
-                        AppColors.primaryLight.withValues(
-                          alpha: 0.5 * _glow.value,
+                        glowColor.withValues(
+                          alpha: (isDark ? 0.5 : 0.35) * _glow.value,
                         ),
-                        AppColors.primary,
+                        bg,
                       ],
                     ),
                   ),
@@ -130,7 +140,7 @@ class _SplashScreenState extends State<SplashScreen>
                     child: Stack(
                       children: [
                         Image.asset(
-                          'assets/images/splash_logo.png',
+                          logoAsset,
                           width: _logoSize,
                           height: _logoSize,
                           fit: BoxFit.contain,
@@ -141,7 +151,7 @@ class _SplashScreenState extends State<SplashScreen>
                         ),
                         CustomPaint(
                           size: const Size.square(_logoSize),
-                          painter: _SparklePainter(_sparkle.value),
+                          painter: _SparklePainter(_sparkle.value, sparkleColor),
                         ),
                       ],
                     ),
@@ -156,25 +166,12 @@ class _SplashScreenState extends State<SplashScreen>
                   opacity: _title.value,
                   child: Transform.translate(
                     offset: Offset(0, 14 * (1 - _title.value)),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          l10n.appTitle,
-                          style: AppStyles.bold20(context).copyWith(
-                            color: Colors.white,
-                            fontSize: 26,
-                          ),
-                        ),
-                        const SizedBox(height: 6),
-                        Text(
-                          'EL-SHAIMAA MUHAMADIYAH',
-                          style: AppStyles.regular12(context).copyWith(
-                            color: AppColors.accentSoft,
-                            letterSpacing: 2.5,
-                          ),
-                        ),
-                      ],
+                    child: Text(
+                      'SH&M Mirrors Store',
+                      style: AppStyles.bold20(context).copyWith(
+                        color: titleColor,
+                        fontSize: 26,
+                      ),
                     ),
                   ),
                 ),
@@ -195,10 +192,8 @@ class _SplashScreenState extends State<SplashScreen>
                           child: LinearProgressIndicator(
                             value: _progress.value,
                             minHeight: 3,
-                            backgroundColor: Colors.white.withValues(alpha: 0.12),
-                            valueColor: const AlwaysStoppedAnimation(
-                              AppColors.accentSoft,
-                            ),
+                            backgroundColor: titleColor.withValues(alpha: 0.12),
+                            valueColor: AlwaysStoppedAnimation(subtitleColor),
                           ),
                         ),
                       ),
@@ -285,7 +280,8 @@ class _ShinePainter extends CustomPainter {
 /// Three small four-point stars that twinkle around the mirror.
 class _SparklePainter extends CustomPainter {
   final double t;
-  _SparklePainter(this.t);
+  final Color color;
+  _SparklePainter(this.t, this.color);
 
   // (x, y) as fractions of the logo box, radius in logical px, start delay.
   static const _sparkles = [
@@ -312,12 +308,13 @@ class _SparklePainter extends CustomPainter {
       final intensity = math.sin(local * math.pi);
       final center = Offset(size.width * fx, size.height * fy);
       final paint = Paint()
-        ..color = Colors.white.withValues(alpha: 0.9 * intensity)
+        ..color = color.withValues(alpha: 0.9 * intensity)
         ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 0.6);
       canvas.drawPath(_star(center, radius * intensity), paint);
     }
   }
 
   @override
-  bool shouldRepaint(covariant _SparklePainter old) => old.t != t;
+  bool shouldRepaint(covariant _SparklePainter old) =>
+      old.t != t || old.color != color;
 }
