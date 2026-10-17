@@ -53,3 +53,5 @@ firebase-debug.log
 firestore-debug.log
 
 lib/firebase_options.dart
+
+lib/core/config/app_secrets.dart
