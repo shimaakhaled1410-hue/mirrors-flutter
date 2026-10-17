@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart' as geo;
 import 'package:geolocator/geolocator.dart';
-import '../../../core/utils/app_colors.dart';
-import '../../../core/utils/app_styles.dart';
-import '../../../l10n/app_localizations.dart';
+import 'package:mirrors_app/core/utils/app_colors.dart';
+import 'package:mirrors_app/core/utils/app_styles.dart';
+import 'package:mirrors_app/l10n/app_localizations.dart';
 
 enum LocationSelectionResultType {
   address,
@@ -12,14 +12,19 @@ enum LocationSelectionResultType {
 }
 
 class LocationSelectionSheet extends StatefulWidget {
-  const LocationSelectionSheet({super.key});
+  final bool showMapOption;
 
-  static Future<dynamic> show(BuildContext context) {
+  const LocationSelectionSheet({super.key, this.showMapOption = false});
+
+  static Future<dynamic> show(
+    BuildContext context, {
+    bool showMapOption = false,
+  }) {
     return showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (_) => const LocationSelectionSheet(),
+      builder: (_) => LocationSelectionSheet(showMapOption: showMapOption),
     );
   }
 
@@ -29,9 +34,6 @@ class LocationSelectionSheet extends StatefulWidget {
 
 class _LocationSelectionSheetState extends State<LocationSelectionSheet> {
   bool _isLoadingCurrentLocation = false;
-
-  // geocoding 5.x: the functions live on an instance, not at top level.
-  final geo.Geocoding _geocoding = geo.Geocoding();
 
   void _showMessage(String message) {
     if (!mounted) return;
@@ -68,7 +70,8 @@ class _LocationSelectionSheetState extends State<LocationSelectionSheet> {
         locationSettings: const LocationSettings(accuracy: LocationAccuracy.high),
       );
 
-      final placemarks = await _geocoding.placemarkFromCoordinates(
+      final geocoding = geo.Geocoding();
+      final placemarks = await geocoding.placemarkFromCoordinates(
         position.latitude,
         position.longitude,
       );
@@ -161,7 +164,6 @@ class _LocationSelectionSheetState extends State<LocationSelectionSheet> {
             ),
             const SizedBox(height: 24),
 
-            // Primary action: use current location.
             SizedBox(
               width: double.infinity,
               height: 50,
@@ -199,6 +201,7 @@ class _LocationSelectionSheetState extends State<LocationSelectionSheet> {
             ),
             const SizedBox(height: 12),
 
+            if (widget.showMapOption) ...[
             // Secondary action: pick on the map (tonal).
             SizedBox(
               width: double.infinity,
@@ -226,8 +229,8 @@ class _LocationSelectionSheetState extends State<LocationSelectionSheet> {
               ),
             ),
             const SizedBox(height: 12),
+            ],
 
-            // Tertiary action: type it manually.
             SizedBox(
               width: double.infinity,
               height: 50,

@@ -4,6 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mirrors_app/core/common/delivery_timeline_notice.dart';
 import 'package:mirrors_app/core/constants/app_storage_keys.dart';
+import 'package:mirrors_app/presentation/widgets/checkout/checkout_bottom_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/routing/app_routes.dart';
 import '../../core/utils/app_colors.dart';
@@ -15,7 +16,6 @@ import '../manager/orders/orders_cubit.dart';
 import '../widgets/checkout/checkout_deposit_section.dart';
 import '../widgets/checkout/checkout_financial_summary.dart';
 import '../widgets/checkout/checkout_shipping_section.dart';
-import '../widgets/checkout/checkout_submit_button.dart';
 
 class CheckoutView extends StatefulWidget {
   const CheckoutView({super.key});
@@ -36,13 +36,15 @@ class _CheckoutViewState extends State<CheckoutView> {
   static const double _shippingFee = 50.0;
   late final String _storeWalletNumber;
 
+  bool _isSubmitting = false;
+
   @override
   void initState() {
     super.initState();
     _storeWalletNumber = dotenv.env['WALLET_PHONE_NUMBER'] ?? '01012345678';
     final subtotal = context.read<CartCubit>().state.subtotal;
     final minDeposit = (subtotal + _shippingFee) * 0.50;
-    _depositController.text = minDeposit.toInt().toString();
+    _depositController.text = minDeposit.ceil().toString();
 
     _loadDefaultCustomerInfo();
   }
@@ -77,117 +79,133 @@ class _CheckoutViewState extends State<CheckoutView> {
   }
 
   Future<void> _onConfirmOrder(CartState cartState) async {
+    if (_isSubmitting) return;
     FocusManager.instance.primaryFocus?.unfocus();
     if (!_formKey.currentState!.validate()) return;
 
-    final l10n = AppLocalizations.of(context)!;
-    final ordersCubit = context.read<OrdersCubit>();
-    final cartCubit = context.read<CartCubit>();
-    final messenger = ScaffoldMessenger.of(context);
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    setState(() => _isSubmitting = true);
+    try {
+      final l10n = AppLocalizations.of(context)!;
+      final ordersCubit = context.read<OrdersCubit>();
+      final cartCubit = context.read<CartCubit>();
+      final messenger = ScaffoldMessenger.of(context);
+      final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    final total = cartState.subtotal + _shippingFee;
-    final depositPaid = double.tryParse(_depositController.text) ?? 0.0;
-    final remaining = (total - depositPaid).clamp(0.0, total);
+      final total = cartState.subtotal + _shippingFee;
+      final depositPaid = double.tryParse(_depositController.text) ?? 0.0;
+      final remaining = (total - depositPaid).clamp(0.0, total);
 
-    final customerName = _nameController.text.trim();
-    final phoneNumber = _phoneController.text.trim();
-    final address = _addressController.text.trim();
-    final senderWalletNumber = _senderWalletController.text.trim();
-    final notes = _notesController.text.trim().isEmpty
-        ? null
-        : _notesController.text.trim();
+      final customerName = _nameController.text.trim();
+      final phoneNumber = _phoneController.text.trim();
+      final address = _addressController.text.trim();
+      final senderWalletNumber = _senderWalletController.text.trim();
+      final notes = _notesController.text.trim().isEmpty
+          ? null
+          : _notesController.text.trim();
 
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(AppStorageKeys.customerName, customerName);
-    await prefs.setString(AppStorageKeys.customerPhone, phoneNumber);
-    await prefs.setString(AppStorageKeys.customerAddress, address);
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString(AppStorageKeys.customerName, customerName);
+      await prefs.setString(AppStorageKeys.customerPhone, phoneNumber);
+      await prefs.setString(AppStorageKeys.customerAddress, address);
 
-    if (!mounted) return;
+      if (!mounted) return;
 
-    final cachedItems = List.of(cartState.items);
+      final cachedItems = List.of(cartState.items);
 
-    final newOrder = await ordersCubit.placeOrder(
-      items: cachedItems,
-      totalPrice: total,
-      depositAmount: depositPaid,
-      remainingAmount: remaining,
-      customerName: customerName,
-      phoneNumber: phoneNumber,
-      address: address,
-      paymentMethod: l10n.vodafoneCash,
-      senderWalletNumber: senderWalletNumber,
-      notes: notes,
-    );
+      final newOrder = await ordersCubit.placeOrder(
+        items: cachedItems,
+        totalPrice: total,
+        depositAmount: depositPaid,
+        remainingAmount: remaining,
+        customerName: customerName,
+        phoneNumber: phoneNumber,
+        address: address,
+        paymentMethod: l10n.vodafoneCash,
+        senderWalletNumber: senderWalletNumber,
+        notes: notes,
+      );
 
-    cartCubit.clearCart();
+      cartCubit.clearCart();
 
-    if (!mounted) return;
+      if (!mounted) return;
 
-    messenger.hideCurrentSnackBar();
-    messenger.showSnackBar(
-      SnackBar(
-        duration: const Duration(seconds: 4),
-        behavior: SnackBarBehavior.floating,
-        elevation: 6,
-        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        backgroundColor: isDark
-            ? AppColors.darkSurface
-            : AppColors.lightSurface,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-          side: BorderSide(
-            color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
-          ),
-        ),
-        content: Row(
-          children: [
-            const Icon(
-              Icons.check_circle_rounded,
-              color: AppColors.accent,
-              size: 20,
+      messenger.hideCurrentSnackBar();
+      messenger.showSnackBar(
+        SnackBar(
+          duration: const Duration(seconds: 4),
+          behavior: SnackBarBehavior.floating,
+          elevation: 6,
+          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          backgroundColor: isDark
+              ? AppColors.darkSurface
+              : AppColors.lightSurface,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+            side: BorderSide(
+              color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
             ),
-            const SizedBox(width: 10),
-            Expanded(
-              child: Text(
-                l10n.orderCreatedSuccess,
-                style: TextStyle(
-                  color: isDark
-                      ? AppColors.darkTextPrimary
-                      : AppColors.lightTextPrimary,
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600,
+          ),
+          content: Row(
+            children: [
+              const Icon(
+                Icons.check_circle_rounded,
+                color: AppColors.accent,
+                size: 20,
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  l10n.orderCreatedSuccess,
+                  style: TextStyle(
+                    color: isDark
+                        ? AppColors.darkTextPrimary
+                        : AppColors.lightTextPrimary,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
+          action: SnackBarAction(
+            label: l10n.undo,
+            textColor: AppColors.accent,
+            onPressed: () {
+              ordersCubit.cancelOrder(newOrder.orderId);
+            },
+          ),
         ),
-        action: SnackBarAction(
-          label: l10n.undo,
-          textColor: AppColors.accent,
-          onPressed: () {
-            ordersCubit.cancelOrder(newOrder.orderId);
-          },
-        ),
-      ),
-    );
+      );
 
-    await Future.delayed(const Duration(milliseconds: 100));
+      await Future.delayed(const Duration(milliseconds: 100));
 
-    if (!mounted) return;
-    context.go(AppRoutes.mainLayout);
+      if (!mounted) return;
+      context.go(AppRoutes.mainLayout);
+    } finally {
+      if (mounted) setState(() => _isSubmitting = false);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final keyboardOpen = MediaQuery.viewInsetsOf(context).bottom > 0;
 
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.checkoutTitle),
         scrolledUnderElevation: 0,
       ),
+      bottomNavigationBar: keyboardOpen
+          ? null
+          : BlocBuilder<CartCubit, CartState>(
+              builder: (context, cartState) => CheckoutBottomBar(
+                total: cartState.subtotal + _shippingFee,
+                isLoading: _isSubmitting,
+                onPressed: () => _onConfirmOrder(cartState),
+              ),
+            ),
       body: BlocBuilder<CartCubit, CartState>(
         builder: (context, cartState) {
           final total = cartState.subtotal + _shippingFee;
@@ -210,10 +228,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                   ),
                 ),
                 const SizedBox(height: 12),
-                const FadeSlideIn(
-                  index: 1,
-                  child: DeliveryTimelineNotice(),
-                ),
+                const FadeSlideIn(index: 1, child: DeliveryTimelineNotice()),
                 const SizedBox(height: 16),
                 FadeSlideIn(
                   index: 2,
@@ -245,14 +260,6 @@ class _CheckoutViewState extends State<CheckoutView> {
                   ),
                 ),
                 const SizedBox(height: 24),
-                FadeSlideIn(
-                  index: 4,
-                  child: CheckoutSubmitButton(
-                    onPressed: () => _onConfirmOrder(cartState),
-                    label: l10n.confirmOrderButton,
-                  ),
-                ),
-                const SizedBox(height: 32),
               ],
             ),
           );

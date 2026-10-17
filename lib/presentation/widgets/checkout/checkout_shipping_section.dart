@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mirrors_app/core/utils/app_colors.dart';
 import 'package:mirrors_app/core/utils/app_validators.dart';
-import '../../../../core/utils/app_colors.dart';
-import '../../../../core/utils/app_styles.dart';
-import '../../../../core/widgets/app_text_field.dart';
-import '../../../../l10n/app_localizations.dart';
+import 'package:mirrors_app/core/widgets/app_text_field.dart';
+import 'package:mirrors_app/l10n/app_localizations.dart';
+import 'package:mirrors_app/presentation/widgets/checkout/checkout_section_card.dart';
+import 'package:mirrors_app/presentation/widgets/checkout/location_selection_sheet.dart';
 
 class CheckoutShippingSection extends StatelessWidget {
   final TextEditingController nameController;
@@ -19,35 +20,28 @@ class CheckoutShippingSection extends StatelessWidget {
     required this.notesController,
   });
 
+  Future<void> _pickLocation(BuildContext context) async {
+    FocusManager.instance.primaryFocus?.unfocus();
+    final result = await LocationSelectionSheet.show(context);
+
+    if (result is String && result.trim().isNotEmpty) {
+      addressController.value = TextEditingValue(
+        text: result,
+        selection: TextSelection.collapsed(offset: result.length),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final surface = isDark ? AppColors.darkSurface : AppColors.lightSurface;
-    final border = isDark ? AppColors.darkBorder : AppColors.lightBorder;
 
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: surface,
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: border),
-      ),
+    return CheckoutSectionCard(
+      icon: Icons.person_pin_circle_outlined,
+      title: l10n.shippingDetails,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              const Icon(
-                Icons.person_pin_circle_outlined,
-                color: AppColors.accent,
-                size: 20,
-              ),
-              const SizedBox(width: 8),
-              Text(l10n.shippingDetails, style: AppStyles.semiBold16(context)),
-            ],
-          ),
-          const SizedBox(height: 16),
           AppTextField(
             controller: nameController,
             label: l10n.fullName,
@@ -89,7 +83,20 @@ class CheckoutShippingSection extends StatelessWidget {
             validator: (v) =>
                 v == null || v.trim().isEmpty ? l10n.fieldRequired : null,
           ),
-          const SizedBox(height: 14),
+          const SizedBox(height: 6),
+          Align(
+            alignment: AlignmentDirectional.centerStart,
+            child: TextButton.icon(
+              onPressed: () => _pickLocation(context),
+              icon: const Icon(Icons.my_location_rounded, size: 18),
+              label: Text(l10n.useCurrentLocation),
+              style: TextButton.styleFrom(
+                foregroundColor: AppColors.accent,
+                visualDensity: VisualDensity.compact,
+              ),
+            ),
+          ),
+          const SizedBox(height: 8),
           AppTextField(
             controller: notesController,
             label: l10n.notesOptional,
