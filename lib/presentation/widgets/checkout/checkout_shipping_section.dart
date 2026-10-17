@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mirrors_app/core/utils/app_validators.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_styles.dart';
 import '../../../../core/widgets/app_text_field.dart';
@@ -66,8 +67,12 @@ class CheckoutShippingSection extends StatelessWidget {
             textInputAction: TextInputAction.next,
             autofillHints: const [AutofillHints.telephoneNumber],
             validator: (v) {
-              if (v == null || v.trim().isEmpty) return l10n.fieldRequired;
-              if (v.trim().length < 10) return l10n.invalidPhone;
+              if (v == null || v.trim().isEmpty) {
+                return l10n.fieldRequired;
+              }
+              if (!AppValidators.isValidEgyptianPhone(v)) {
+                return l10n.invalidPhone;
+              }
               return null;
             },
           ),
