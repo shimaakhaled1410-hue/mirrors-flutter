@@ -425,4 +425,22 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get pickOnMapTooltip => 'تحديد من الخريطة';
+
+  @override
+  String get searchPlaceHint => 'ابحث عن مكان';
+
+  @override
+  String get confirmLocation => 'تأكيد الموقع';
+
+  @override
+  String get fetchingAddress => 'جاري تحديد العنوان...';
+
+  @override
+  String get noResultsFound => 'لا توجد نتائج';
+
+  @override
+  String get mapTypeTooltip => 'نوع الخريطة';
+
+  @override
+  String get myLocationTooltip => 'موقعي';
 }

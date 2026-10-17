@@ -159,7 +159,7 @@
   "deliveryLocationSubtitle": "اختر الطريقة الأنسب لك لتحديد موقع استلام الطلب بدقة وسرعة.",
   "useCurrentLocation": "استخدام موقعي الحالي",
   "locatingCurrentPosition": "جاري تحديد موقعك...",
-  "setFromMap": "تحديد من على الخريطة",
+  "setFromMap": "تحديد على الخريطة",
   "enterManually": "إدخال العنوان يدوياً",
   "gpsDisabledError": "خدمة الموقع مغلقة، يرجى تفعيل الـ GPS.",
   "permissionDeniedError": "تم رفض صلاحية الوصول للموقع.",
@@ -167,5 +167,11 @@
   "unableToDetermineLocation": "تعذر تحديد الموقع الحالي.",
   "searchLocationHint": "ابحث عن اسم الشارع أو المنطقة...",
   "locatingAddress": "جاري تحديد العنوان...",
-  "pickOnMapTooltip": "تحديد من الخريطة"
+  "pickOnMapTooltip": "تحديد من الخريطة",
+  "searchPlaceHint": "ابحث عن مكان",
+  "confirmLocation": "تأكيد الموقع",
+  "fetchingAddress": "جاري تحديد العنوان...",
+  "noResultsFound": "لا توجد نتائج",
+  "mapTypeTooltip": "نوع الخريطة",
+  "myLocationTooltip": "موقعي"
 }

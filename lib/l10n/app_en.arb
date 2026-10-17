@@ -176,5 +176,11 @@
   "unableToDetermineLocation": "Unable to determine current location.",
   "searchLocationHint": "Search for street name or area...",
   "locatingAddress": "Locating address...",
-  "pickOnMapTooltip": "Select from map"
+  "pickOnMapTooltip": "Select from map",
+  "searchPlaceHint": "Search for a place",
+  "confirmLocation": "Confirm location",
+  "fetchingAddress": "Finding address...",
+  "noResultsFound": "No results found",
+  "mapTypeTooltip": "Map type",
+  "myLocationTooltip": "My location"
 }

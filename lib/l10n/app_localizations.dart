@@ -877,6 +877,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Select from map'**
   String get pickOnMapTooltip;
+
+  /// No description provided for @searchPlaceHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search for a place'**
+  String get searchPlaceHint;
+
+  /// No description provided for @confirmLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm location'**
+  String get confirmLocation;
+
+  /// No description provided for @fetchingAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Finding address...'**
+  String get fetchingAddress;
+
+  /// No description provided for @noResultsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No results found'**
+  String get noResultsFound;
+
+  /// No description provided for @mapTypeTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Map type'**
+  String get mapTypeTooltip;
+
+  /// No description provided for @myLocationTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'My location'**
+  String get myLocationTooltip;
 }
 
 class _AppLocalizationsDelegate

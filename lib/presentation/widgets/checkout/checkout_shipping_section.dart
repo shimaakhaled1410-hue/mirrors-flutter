@@ -3,6 +3,7 @@ import 'package:mirrors_app/core/utils/app_colors.dart';
 import 'package:mirrors_app/core/utils/app_validators.dart';
 import 'package:mirrors_app/core/widgets/app_text_field.dart';
 import 'package:mirrors_app/l10n/app_localizations.dart';
+import 'package:mirrors_app/presentation/screens/location_picker_screen.dart';
 import 'package:mirrors_app/presentation/widgets/checkout/checkout_section_card.dart';
 import 'package:mirrors_app/presentation/widgets/checkout/location_selection_sheet.dart';
 
@@ -22,8 +23,19 @@ class CheckoutShippingSection extends StatelessWidget {
 
   Future<void> _pickLocation(BuildContext context) async {
     FocusManager.instance.primaryFocus?.unfocus();
-    final result = await LocationSelectionSheet.show(context);
+    dynamic result = await LocationSelectionSheet.show(
+      context,
+      showMapOption: true,
+    );
 
+    // "Set from map" opens the map picker, which returns an address String.
+    if (result == LocationSelectionResultType.openMap) {
+      if (!context.mounted) return;
+      result = await LocationPickerScreen.open(context);
+    }
+
+    // A String is an address (from the device location or the map).
+    // "manual" (or dismissing) just leaves the field for typing.
     if (result is String && result.trim().isNotEmpty) {
       addressController.value = TextEditingValue(
         text: result,

@@ -5,11 +5,7 @@ import 'package:mirrors_app/core/utils/app_colors.dart';
 import 'package:mirrors_app/core/utils/app_styles.dart';
 import 'package:mirrors_app/l10n/app_localizations.dart';
 
-enum LocationSelectionResultType {
-  address,
-  openMap,
-  manual,
-}
+enum LocationSelectionResultType { address, openMap }
 
 class LocationSelectionSheet extends StatefulWidget {
   final bool showMapOption;
@@ -37,9 +33,9 @@ class _LocationSelectionSheetState extends State<LocationSelectionSheet> {
 
   void _showMessage(String message) {
     if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message)),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(message)));
   }
 
   Future<void> _handleCurrentLocation(AppLocalizations l10n) async {
@@ -67,7 +63,9 @@ class _LocationSelectionSheetState extends State<LocationSelectionSheet> {
       }
 
       final position = await Geolocator.getCurrentPosition(
-        locationSettings: const LocationSettings(accuracy: LocationAccuracy.high),
+        locationSettings: const LocationSettings(
+          accuracy: LocationAccuracy.high,
+        ),
       );
 
       final geocoding = geo.Geocoding();
@@ -84,16 +82,12 @@ class _LocationSelectionSheetState extends State<LocationSelectionSheet> {
       }
 
       final p = placemarks.first;
-      final addressParts = <String?>[
-        p.street,
-        p.subLocality,
-        p.locality,
-        p.administrativeArea,
-      ]
-          .whereType<String>()
-          .where((String e) => e.trim().isNotEmpty)
-          .toSet()
-          .toList();
+      final addressParts =
+          <String?>[p.street, p.subLocality, p.locality, p.administrativeArea]
+              .whereType<String>()
+              .where((String e) => e.trim().isNotEmpty)
+              .toSet()
+              .toList();
 
       Navigator.pop(context, addressParts.join(', '));
     } catch (_) {
@@ -111,8 +105,9 @@ class _LocationSelectionSheetState extends State<LocationSelectionSheet> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final scheme = Theme.of(context).colorScheme;
     final borderColor = isDark ? AppColors.darkBorder : AppColors.lightBorder;
-    final secondaryText =
-        isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary;
+    final secondaryText = isDark
+        ? AppColors.darkTextSecondary
+        : AppColors.lightTextSecondary;
 
     return Container(
       decoration: BoxDecoration(
@@ -157,10 +152,9 @@ class _LocationSelectionSheetState extends State<LocationSelectionSheet> {
             Text(
               l10n.deliveryLocationSubtitle,
               textAlign: TextAlign.center,
-              style: AppStyles.regular14(context).copyWith(
-                color: secondaryText,
-                height: 1.4,
-              ),
+              style: AppStyles.regular14(
+                context,
+              ).copyWith(color: secondaryText, height: 1.4),
             ),
             const SizedBox(height: 24),
 
@@ -171,7 +165,9 @@ class _LocationSelectionSheetState extends State<LocationSelectionSheet> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: scheme.primary,
                   foregroundColor: Colors.white,
-                  disabledBackgroundColor: scheme.primary.withValues(alpha: 0.6),
+                  disabledBackgroundColor: scheme.primary.withValues(
+                    alpha: 0.6,
+                  ),
                   disabledForegroundColor: Colors.white70,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
@@ -195,67 +191,49 @@ class _LocationSelectionSheetState extends State<LocationSelectionSheet> {
                   _isLoadingCurrentLocation
                       ? l10n.locatingCurrentPosition
                       : l10n.useCurrentLocation,
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),
                 ),
               ),
             ),
             const SizedBox(height: 12),
 
             if (widget.showMapOption) ...[
-            // Secondary action: pick on the map (tonal).
-            SizedBox(
-              width: double.infinity,
-              height: 50,
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: scheme.primary.withValues(alpha: 0.12),
-                  foregroundColor: scheme.primary,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
+              // Secondary action: pick on the map (tonal).
+              SizedBox(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: scheme.primary.withValues(alpha: 0.12),
+                    foregroundColor: scheme.primary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    elevation: 0,
                   ),
-                  elevation: 0,
-                ),
-                onPressed: _isLoadingCurrentLocation
-                    ? null
-                    : () => Navigator.pop(
+                  onPressed: _isLoadingCurrentLocation
+                      ? null
+                      : () => Navigator.pop(
                           context,
                           LocationSelectionResultType.openMap,
                         ),
-                icon: const Icon(Icons.map_outlined, size: 20),
-                label: Text(
-                  l10n.setFromMap,
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                ),
-              ),
-            ),
-            const SizedBox(height: 12),
-            ],
-
-            SizedBox(
-              width: double.infinity,
-              height: 50,
-              child: OutlinedButton.icon(
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: scheme.onSurface,
-                  side: BorderSide(color: borderColor),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
+                  icon: const Icon(Icons.map_outlined, size: 20),
+                  label: Text(
+                    l10n.setFromMap,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
                   ),
                 ),
-                onPressed: _isLoadingCurrentLocation
-                    ? null
-                    : () => Navigator.pop(
-                          context,
-                          LocationSelectionResultType.manual,
-                        ),
-                icon: const Icon(Icons.edit_location_alt_outlined, size: 20),
-                label: Text(
-                  l10n.enterManually,
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
-                ),
               ),
-            ),
-            const SizedBox(height: 12),
+              const SizedBox(height: 12),
+            ],
+
+          
           ],
         ),
       ),

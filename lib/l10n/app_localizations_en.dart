@@ -427,4 +427,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pickOnMapTooltip => 'Select from map';
+
+  @override
+  String get searchPlaceHint => 'Search for a place';
+
+  @override
+  String get confirmLocation => 'Confirm location';
+
+  @override
+  String get fetchingAddress => 'Finding address...';
+
+  @override
+  String get noResultsFound => 'No results found';
+
+  @override
+  String get mapTypeTooltip => 'Map type';
+
+  @override
+  String get myLocationTooltip => 'My location';
 }
