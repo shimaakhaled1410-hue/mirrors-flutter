@@ -1,9 +1,11 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mirrors_app/core/routing/app_routes.dart';
 import 'package:mirrors_app/core/utils/app_colors.dart';
 import 'package:mirrors_app/core/utils/app_styles.dart';
+import 'package:mirrors_app/presentation/manager/app_settings/app_settings_cubit.dart';
 
 /// Flutter splash that continues the native splash (same logo, same
 /// position, same background) and then adds a shine, sparkles and the title.
@@ -92,10 +94,15 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    // Follow the SYSTEM brightness (not the in-app theme) so this screen
-    // matches the native splash, which is chosen by the system too.
-    final isDark =
-        MediaQuery.platformBrightnessOf(context) == Brightness.dark;
+    // Follow the theme the user picked inside the app; "system" falls back
+    // to the device brightness. (The native splash can only follow the system.)
+    final themeMode = context.select((AppSettingsCubit c) => c.state.themeMode);
+    final isDark = switch (themeMode) {
+      ThemeMode.dark => true,
+      ThemeMode.light => false,
+      ThemeMode.system =>
+        MediaQuery.platformBrightnessOf(context) == Brightness.dark,
+    };
     final bg = isDark ? AppColors.primary : AppColors.lightBackground;
     final glowColor = isDark ? AppColors.primaryLight : AppColors.accentSoft;
     final titleColor = isDark ? Colors.white : AppColors.primary;
