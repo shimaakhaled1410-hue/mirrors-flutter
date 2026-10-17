@@ -384,4 +384,45 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get cancellationPolicyDesc =>
       'يمكنك إلغاء الطلب واسترداد العربون كاملاً خلال يومين قبل تسليمه للمندوب. في حال خروج الطلب للشحن، يتم خصم قيمة مصاريف الشحن.';
+
+  @override
+  String get deliveryLocationTitle => 'تحديد عنوان التوصيل';
+
+  @override
+  String get deliveryLocationSubtitle =>
+      'اختر الطريقة الأنسب لك لتحديد موقع استلام الطلب بدقة وسرعة.';
+
+  @override
+  String get useCurrentLocation => 'استخدام موقعي الحالي';
+
+  @override
+  String get locatingCurrentPosition => 'جاري تحديد موقعك...';
+
+  @override
+  String get setFromMap => 'تحديد من على الخريطة';
+
+  @override
+  String get enterManually => 'إدخال العنوان يدوياً';
+
+  @override
+  String get gpsDisabledError => 'خدمة الموقع مغلقة، يرجى تفعيل الـ GPS.';
+
+  @override
+  String get permissionDeniedError => 'تم رفض صلاحية الوصول للموقع.';
+
+  @override
+  String get permissionPermanentlyDeniedError =>
+      'صلاحية الموقع مرفوضة دائماً، يرجى تفعيلها من الإعدادات.';
+
+  @override
+  String get unableToDetermineLocation => 'تعذر تحديد الموقع الحالي.';
+
+  @override
+  String get searchLocationHint => 'ابحث عن اسم الشارع أو المنطقة...';
+
+  @override
+  String get locatingAddress => 'جاري تحديد العنوان...';
+
+  @override
+  String get pickOnMapTooltip => 'تحديد من الخريطة';
 }

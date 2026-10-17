@@ -154,5 +154,18 @@
   "deliveryTimelineTitle": "الموعد المتوقع للتوصيل",
   "deliveryTimelineDesc": "يتم تجهيز وتغليف الطلب خلال 2 إلى 3 أيام عمل، والتسليم خلال 24 ساعة من خروجه مع المندوب.",
   "cancellationPolicyTitle": "سياسة الإلغاء واسترداد العربون",
-  "cancellationPolicyDesc": "يمكنك إلغاء الطلب واسترداد العربون كاملاً خلال يومين قبل تسليمه للمندوب. في حال خروج الطلب للشحن، يتم خصم قيمة مصاريف الشحن."
+  "cancellationPolicyDesc": "يمكنك إلغاء الطلب واسترداد العربون كاملاً خلال يومين قبل تسليمه للمندوب. في حال خروج الطلب للشحن، يتم خصم قيمة مصاريف الشحن.",
+  "deliveryLocationTitle": "تحديد عنوان التوصيل",
+  "deliveryLocationSubtitle": "اختر الطريقة الأنسب لك لتحديد موقع استلام الطلب بدقة وسرعة.",
+  "useCurrentLocation": "استخدام موقعي الحالي",
+  "locatingCurrentPosition": "جاري تحديد موقعك...",
+  "setFromMap": "تحديد من على الخريطة",
+  "enterManually": "إدخال العنوان يدوياً",
+  "gpsDisabledError": "خدمة الموقع مغلقة، يرجى تفعيل الـ GPS.",
+  "permissionDeniedError": "تم رفض صلاحية الوصول للموقع.",
+  "permissionPermanentlyDeniedError": "صلاحية الموقع مرفوضة دائماً، يرجى تفعيلها من الإعدادات.",
+  "unableToDetermineLocation": "تعذر تحديد الموقع الحالي.",
+  "searchLocationHint": "ابحث عن اسم الشارع أو المنطقة...",
+  "locatingAddress": "جاري تحديد العنوان...",
+  "pickOnMapTooltip": "تحديد من الخريطة"
 }

@@ -163,5 +163,18 @@
     "description": "Description of estimated delivery timeline"
   },
   "cancellationPolicyTitle": "Cancellation & Refund Policy",
-  "cancellationPolicyDesc": "You can cancel within 2 days before courier dispatch for a full deposit refund. Once dispatched, shipping fees will be deducted if cancelled."
+  "cancellationPolicyDesc": "You can cancel within 2 days before courier dispatch for a full deposit refund. Once dispatched, shipping fees will be deducted if cancelled.",
+  "deliveryLocationTitle": "Delivery Addressa",
+  "deliveryLocationSubtitle": "Choose the most convenient way to set your delivery location accurately and quickly.",
+  "useCurrentLocation": "Use Current Location",
+  "locatingCurrentPosition": "Locating your position...",
+  "setFromMap": "Set From Map",
+  "enterManually": "Enter Address Manually",
+  "gpsDisabledError": "Location service is disabled. Please enable GPS.",
+  "permissionDeniedError": "Location permission was denied.",
+  "permissionPermanentlyDeniedError": "Location permission is permanently denied. Please enable it from settings.",
+  "unableToDetermineLocation": "Unable to determine current location.",
+  "searchLocationHint": "Search for street name or area...",
+  "locatingAddress": "Locating address...",
+  "pickOnMapTooltip": "Select from map"
 }

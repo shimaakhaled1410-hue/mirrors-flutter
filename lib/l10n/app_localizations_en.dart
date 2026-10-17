@@ -384,4 +384,47 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get cancellationPolicyDesc =>
       'You can cancel within 2 days before courier dispatch for a full deposit refund. Once dispatched, shipping fees will be deducted if cancelled.';
+
+  @override
+  String get deliveryLocationTitle => 'Delivery Addressa';
+
+  @override
+  String get deliveryLocationSubtitle =>
+      'Choose the most convenient way to set your delivery location accurately and quickly.';
+
+  @override
+  String get useCurrentLocation => 'Use Current Location';
+
+  @override
+  String get locatingCurrentPosition => 'Locating your position...';
+
+  @override
+  String get setFromMap => 'Set From Map';
+
+  @override
+  String get enterManually => 'Enter Address Manually';
+
+  @override
+  String get gpsDisabledError =>
+      'Location service is disabled. Please enable GPS.';
+
+  @override
+  String get permissionDeniedError => 'Location permission was denied.';
+
+  @override
+  String get permissionPermanentlyDeniedError =>
+      'Location permission is permanently denied. Please enable it from settings.';
+
+  @override
+  String get unableToDetermineLocation =>
+      'Unable to determine current location.';
+
+  @override
+  String get searchLocationHint => 'Search for street name or area...';
+
+  @override
+  String get locatingAddress => 'Locating address...';
+
+  @override
+  String get pickOnMapTooltip => 'Select from map';
 }

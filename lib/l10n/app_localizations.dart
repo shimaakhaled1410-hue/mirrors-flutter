@@ -799,6 +799,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You can cancel within 2 days before courier dispatch for a full deposit refund. Once dispatched, shipping fees will be deducted if cancelled.'**
   String get cancellationPolicyDesc;
+
+  /// No description provided for @deliveryLocationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery Addressa'**
+  String get deliveryLocationTitle;
+
+  /// No description provided for @deliveryLocationSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose the most convenient way to set your delivery location accurately and quickly.'**
+  String get deliveryLocationSubtitle;
+
+  /// No description provided for @useCurrentLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Use Current Location'**
+  String get useCurrentLocation;
+
+  /// No description provided for @locatingCurrentPosition.
+  ///
+  /// In en, this message translates to:
+  /// **'Locating your position...'**
+  String get locatingCurrentPosition;
+
+  /// No description provided for @setFromMap.
+  ///
+  /// In en, this message translates to:
+  /// **'Set From Map'**
+  String get setFromMap;
+
+  /// No description provided for @enterManually.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Address Manually'**
+  String get enterManually;
+
+  /// No description provided for @gpsDisabledError.
+  ///
+  /// In en, this message translates to:
+  /// **'Location service is disabled. Please enable GPS.'**
+  String get gpsDisabledError;
+
+  /// No description provided for @permissionDeniedError.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission was denied.'**
+  String get permissionDeniedError;
+
+  /// No description provided for @permissionPermanentlyDeniedError.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission is permanently denied. Please enable it from settings.'**
+  String get permissionPermanentlyDeniedError;
+
+  /// No description provided for @unableToDetermineLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to determine current location.'**
+  String get unableToDetermineLocation;
+
+  /// No description provided for @searchLocationHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search for street name or area...'**
+  String get searchLocationHint;
+
+  /// No description provided for @locatingAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Locating address...'**
+  String get locatingAddress;
+
+  /// No description provided for @pickOnMapTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Select from map'**
+  String get pickOnMapTooltip;
 }
 
 class _AppLocalizationsDelegate
