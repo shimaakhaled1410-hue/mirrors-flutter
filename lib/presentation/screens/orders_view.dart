@@ -10,7 +10,9 @@ import 'package:mirrors_app/presentation/manager/orders/orders_state.dart';
 import 'package:mirrors_app/presentation/widgets/orders/order_card.dart';
 
 class OrdersView extends StatelessWidget {
-  const OrdersView({super.key});
+  final VoidCallback? onBrowseCatalog;
+
+  const OrdersView({super.key, this.onBrowseCatalog});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,7 @@ class OrdersView extends StatelessWidget {
                   title: l10n.ordersEmptyTitle,
                   subtitle: l10n.ordersEmptySubtitle,
                   buttonText: l10n.browseCatalog,
-                  onButtonPressed: () => context.go(AppRoutes.mainLayout),
+                  onButtonPressed: onBrowseCatalog??(){},
                 )
               : ListView.builder(
                   key: const ValueKey('orders_list'),
