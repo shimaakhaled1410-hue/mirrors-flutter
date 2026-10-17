@@ -45,7 +45,7 @@ class MirrorsApp extends StatelessWidget {
     return BlocBuilder<AppSettingsCubit, AppSettingsState>(
       builder: (context, state) {
         return MaterialApp.router(
-          title: 'Mirrors App',
+          title: 'SH&M Mirrors Store',
           debugShowCheckedModeBanner: false,
           locale: state.locale,
           builder: DevicePreview.appBuilder,

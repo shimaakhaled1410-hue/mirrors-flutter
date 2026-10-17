@@ -9,7 +9,7 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get appTitle => 'Mirrors Store';
+  String get appTitle => 'SH&M Mirrors Store';
 
   @override
   String get welcomeMessage => 'Welcome to Mirrors App!';
